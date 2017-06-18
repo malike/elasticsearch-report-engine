@@ -1,3 +1,7 @@
-# kibana-report-engine
+# elastic-report-engine
 
-Kibana Plugin to generate reports using the report engine
+Plugin to generate Reports from ElasticSearch Queries.
+
+XPack Report Plugin didn't really meet my need
+
+
