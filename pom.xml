@@ -7,9 +7,8 @@
     <groupId>elasticsearch-report-engine</groupId>
     <artifactId>st.malike</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>Plugin: Report  Engine </name>
-    <description>A plugin to generate PDF reports  with ElasticSearch</description>
-
+    <name>Plugin: Report Engine</name>
+    <description>A plugin to generate PDF reports with ElasticSearch</description>
 
 
     <properties>
@@ -51,8 +50,6 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
-
-
 
 
     <build>
@@ -115,7 +112,7 @@
                     </assertions>
 
                     <listeners>
-                        <report-text />
+                        <report-text/>
                     </listeners>
                 </configuration>
 
