@@ -5,6 +5,7 @@ import org.elasticsearch.action.admin.cluster.node.info.NodesInfoResponse;
 import org.elasticsearch.plugins.Plugin;
 import org.elasticsearch.plugins.PluginInfo;
 import org.elasticsearch.test.ESIntegTestCase;
+import org.junit.Test;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -21,6 +22,7 @@ public class ElasticReportPluginTest extends ESIntegTestCase {
         return Collections.singleton(ElasticReportPlugin.class);
     }
 
+    @Test
     public void testPluginIsLoaded() throws Exception {
         NodesInfoResponse response = client().admin().cluster().prepareNodesInfo().setPlugins(true).get();
         for (NodeInfo nodeInfo : response.getNodes()) {
