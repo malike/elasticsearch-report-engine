@@ -1,39 +1,146 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package st.malike.elastic.report.engine;
 
-import org.elasticsearch.action.admin.cluster.node.info.NodeInfo;
-import org.elasticsearch.action.admin.cluster.node.info.NodesInfoResponse;
-import org.elasticsearch.plugins.Plugin;
-import org.elasticsearch.plugins.PluginInfo;
-import org.elasticsearch.test.ESIntegTestCase;
-import org.junit.Test;
+import com.google.gson.Gson;
+import static com.jayway.restassured.RestAssured.given;
+import org.codelibs.elasticsearch.runner.ElasticsearchClusterRunner;
+import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.common.settings.Settings;
+import org.elasticsearch.node.Node;
+import org.junit.*;
+import org.junit.runner.RunWith;
+import org.junit.runners.BlockJUnit4ClassRunner;
 
-import java.util.Collection;
-import java.util.Collections;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import org.hamcrest.Matchers;
+import static org.junit.Assert.*;
+import st.malike.elastic.report.engine.util.Enums;
 
-import static org.hamcrest.Matchers.is;
+@RunWith(BlockJUnit4ClassRunner.class)
+public class ElasticReportPluginTest {
 
-/**
- * malike_st.
- */
-public class ElasticReportPluginTest extends ESIntegTestCase {
+    private static Node node;
+    private static ElasticsearchClusterRunner runner;
+    private static final String CLUSTER_NAME = "REPORTDATA_CLUSTER";
+    private static final String CLUSTER_HOST_ADDRESS = "localhost:9201-9210";
+    private static final String INDEX = "reportindex";
+    private static final int DOC_SIZE = 100;
+    private static final String JASPER_TEMPLATE_FILE_LOCATION = "/";
+    private Map param;
 
-    @Override
-    protected Collection<Class<? extends Plugin>> nodePlugins() {
-        return Collections.singleton(ElasticReportPlugin.class);
+    @BeforeClass
+    public static void setUp() throws IOException {
+
+        runner = new ElasticsearchClusterRunner();
+
+        runner.onBuild(new ElasticsearchClusterRunner.Builder() {
+            @Override
+            public void build(final int number, final Settings.Builder settingsBuilder) {
+                settingsBuilder.put("http.cors.allow-origin", "*");
+                settingsBuilder.put("http.cors.enabled", true);
+                settingsBuilder.putArray("discovery.zen.ping.unicast.hosts", CLUSTER_HOST_ADDRESS);
+            }
+        }).build(ElasticsearchClusterRunner.newConfigs().clusterName(CLUSTER_NAME).numOfNode(1)
+                .pluginTypes("st.malike.elastic.report.engine.ElasticReportPlugin"));
+
+        runner.ensureYellow();
+
+        //setupup dummy data        
+        final String type = "reporttype";
+
+        // create an index
+        runner.createIndex(INDEX, (Settings) null);
+
+        // create documents
+        for (int i = 1; i <= DOC_SIZE; i++) {
+            runner.insert(INDEX, type, String.valueOf(i),
+                    "{"
+                    + "\"name\":\"Transaction " + i + "\","
+                    + "\"id\":" + i
+                    + "}");
+        }
+        runner.refresh();
+
+        SearchResponse searchResponse = runner.search(INDEX, type, null, null, 0, 10);
+        assertEquals(DOC_SIZE, searchResponse.getHits().getTotalHits());
+
+        node = runner.node();
+    }
+
+    @AfterClass
+    public static void tearDown() throws IOException {
+        runner.close();
+        runner.clean();
+    }
+
+    @Before
+    public void setUpTest() {
+
+        Map dummy = new HashMap();
+        dummy.put("firstName", "Sample");
+        dummy.put("lastName", "Name");
+        dummy.put("age", "15");
+
+        Map sort = new HashMap();
+        sort.put("id", "DESC");
+//        sort.put("name", "DESC");
+
+        param = new HashMap();
+        param.put("format", "PDF");
+        param.put("fileName", "TEST_REPORT");
+        param.put("index", INDEX);
+        param.put("template", JASPER_TEMPLATE_FILE_LOCATION);        
+        param.put("mapData", dummy);
+        param.put("from", 0);
+        param.put("size", DOC_SIZE + DOC_SIZE);
+        param.put("sort", sort);
     }
 
     @Test
-    public void testPluginIsLoaded() throws Exception {
-        NodesInfoResponse response = client().admin().cluster().prepareNodesInfo().setPlugins(true).get();
-        for (NodeInfo nodeInfo : response.getNodes()) {
-            boolean pluginFound = false;
-            for (PluginInfo pluginInfo : nodeInfo.getPlugins().getPluginInfos()) {
-                if (pluginInfo.getName().equals(ElasticReportPlugin.class.getName())) {
-                    pluginFound = true;
-                    break;
-                }
-            }
-            assertThat(pluginFound, is(true));
-        }
+    public void generateReport() {
+        given()
+                .log().all().contentType("application/json")
+                .body(new Gson().toJson(param))
+                .when()
+                .post("http://localhost:9201/_generate")
+                .then()
+                .statusCode(200)
+                .body("status", Matchers.is(true))
+                .body("message", Matchers.is(Enums.JSONResponseMessage.SUCCESS.toString()));
     }
+
+    @Test
+    public void generateReportMissingParam() {
+        param.remove("format");
+        given()
+                .log().all().contentType("application/json")
+                .body(new Gson().toJson(param))
+                .when()
+                .post("http://localhost:9201/_generate")
+                .then()
+                .statusCode(500)
+                .body("status", Matchers.is(false))
+                .body("message", Matchers.is(Enums.JSONResponseMessage.MISSING_PARAM.toString()));
+    }
+
+    @Test
+    public void generateReportTypeUnknown() {
+        param.put("format", "UNKNOWN");
+        given()
+                .log().all().contentType("application/json")
+                .body(new Gson().toJson(param))
+                .when()
+                .post("http://localhost:9201/_generate")
+                .then()
+                .statusCode(500)
+                .body("status", Matchers.is(false))
+                .body("message", Matchers.is(Enums.JSONResponseMessage.REPORT_FORMAT_UNKNOWN.toString()));
+    }
+
 }
