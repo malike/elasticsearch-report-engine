@@ -1,4 +1,4 @@
-package st.malike.elastic.report.engine.data;
+package st.malike.elastic.report.engine.util;
 
 import org.elasticsearch.common.xcontent.ToXContent;
 import org.elasticsearch.common.xcontent.XContentBuilder;
@@ -6,7 +6,7 @@ import org.elasticsearch.common.xcontent.XContentBuilder;
 import java.io.IOException;
 
 /**
- * malike_st.
+ * @author malike_st
  */
 public class JSONResponse implements ToXContent {
 
