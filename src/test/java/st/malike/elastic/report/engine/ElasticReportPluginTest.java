@@ -103,6 +103,7 @@ public class ElasticReportPluginTest {
     }
 
     @Test
+    @Ignore
     public void generateReport() {
         given()
                 .log().all().contentType("application/json")

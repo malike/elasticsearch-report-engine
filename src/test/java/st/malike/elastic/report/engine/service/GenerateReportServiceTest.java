@@ -7,6 +7,7 @@ package st.malike.elastic.report.engine.service;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -51,6 +52,7 @@ public class GenerateReportServiceTest {
     }
 
     @Test
+    @Ignore
     public void testGenerateReport() throws Exception {
         generateReportService.generateReport(map,list,templateFileLocation,fileName,reportFormat);
     }
