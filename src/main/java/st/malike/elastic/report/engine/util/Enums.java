@@ -13,6 +13,7 @@ import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import st.malike.elastic.report.engine.exception.JasperGenerationException;
+import st.malike.elastic.report.engine.exception.ReportFormatUnkownException;
 import st.malike.elastic.report.engine.exception.TemplateNotFoundException;
 import st.malike.elastic.report.engine.service.GenerateReportService;
 
@@ -34,6 +35,8 @@ public class Enums {
 
         /**
          *
+         * PDF Report
+         *
          */
         PDF {
 
@@ -41,13 +44,15 @@ public class Enums {
                     public File generate(Map dataMap, List dataList, String templateFileLocation, String fileName) {
                         try {
                             return new GenerateReportService().generateReport(dataMap, dataList, templateFileLocation, fileName, PDF);
-                        } catch (TemplateNotFoundException | JasperGenerationException ex) {
+                        } catch (TemplateNotFoundException | JasperGenerationException | ReportFormatUnkownException ex) {
                             Logger.getLogger(Enums.class.getName()).log(Level.SEVERE, null, ex);
                         }
                         return null;
                     }
                 },
         /**
+         *
+         * XLS Report
          *
          */
         XLS {
@@ -56,7 +61,7 @@ public class Enums {
                     public File generate(Map dataMap, List dataList, String templateFileLocation, String fileName) {
                         try {
                             return new GenerateReportService().generateReport(dataMap, dataList, templateFileLocation, fileName, XLS);
-                        } catch (TemplateNotFoundException | JasperGenerationException ex) {
+                        } catch (TemplateNotFoundException | JasperGenerationException | ReportFormatUnkownException ex) {
                             Logger.getLogger(Enums.class.getName()).log(Level.SEVERE, null, ex);
                         }
                         return null;

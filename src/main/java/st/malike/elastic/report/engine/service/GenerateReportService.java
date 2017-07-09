@@ -24,6 +24,7 @@ import net.sf.jasperreports.engine.export.JRXlsAbstractExporterParameter;
 import net.sf.jasperreports.engine.export.JRXlsExporter;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import org.apache.commons.io.IOUtils;
+import st.malike.elastic.report.engine.exception.ReportFormatUnkownException;
 import st.malike.elastic.report.engine.util.Enums.ReportFormat;
 import st.malike.elastic.report.engine.exception.JasperGenerationException;
 import st.malike.elastic.report.engine.exception.TemplateNotFoundException;
@@ -34,29 +35,36 @@ import st.malike.elastic.report.engine.exception.TemplateNotFoundException;
 public class GenerateReportService {
 
     public File generateReport(Map params, List data, String templateFileLocation, String fileName,
-            ReportFormat reportFormat) throws TemplateNotFoundException, JasperGenerationException {
+            ReportFormat reportFormat) throws TemplateNotFoundException, JasperGenerationException, ReportFormatUnkownException {
         try {
+            if(templateFileLocation ==null||templateFileLocation.trim().isEmpty()){
+                throw new TemplateNotFoundException("Template file not found");
+            }
+            if(reportFormat==null){
+                throw new ReportFormatUnkownException("Report format unknown");
+            }
             String generatedFileName = fileName + new Date().getTime() + "." + reportFormat.toString().toLowerCase();
             InputStream reportStream = new FileInputStream(new File(templateFileLocation));
             JasperDesign jd = JRXmlLoader.load(reportStream);
             JasperReport jr = JasperCompileManager.compileReport(jd);
             JasperPrint jp = JasperFillManager.fillReport(jr, params, getDatasource(data));
             byte[] dataInByte;
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             switch (reportFormat) {
                 case PDF:
-                    exportPdf(jp, baos, params);
+                    exportPdf(jp, byteArrayOutputStream, params);
                     break;
                 case XLS:
-                    exportXls(jp, baos, params);
+                    exportXls(jp, byteArrayOutputStream, params);
                     break;
                 default:
             }
-            if (baos.size() == 0) {
+            if (byteArrayOutputStream.size() == 0) {
                 return null;
             }
-            baos.flush();
-            dataInByte = baos.toByteArray();
+            byteArrayOutputStream.flush();
+            dataInByte = byteArrayOutputStream.toByteArray();
+            //write file to temp folder
             File reportFile = new File(System.getProperty("java.io.tmpdir") + File.separator + generatedFileName);
             FileOutputStream outputStream = new FileOutputStream(reportFile);
             IOUtils.write(dataInByte, outputStream);
