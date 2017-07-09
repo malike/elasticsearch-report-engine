@@ -1,8 +1,33 @@
 [![Build Status](https://travis-ci.org/malike/elasticsearch-report-engine.svg?branch=master)](https://travis-ci.org/malike/elasticsearch-report-engine)
 
-# Elastic Report Engine [PLUGIN]
+# ElasticSearch Report Engine
 
 Plugin to generate Reports from ElasticSearch Queries.
+
+## Basic Overview
+
+
+<br>
+
+
+<br>
+
+## Install
+
+<br>
+
+## Code Examples
+
+
+<br>
+
+## Response Codes
+
+<br>
+
+
+## License
+
 
 
 
