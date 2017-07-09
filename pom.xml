@@ -25,10 +25,11 @@
             <url>http://central.maven.org/maven2/</url>
         </repository>
         <repository>
-            <id>google-releasess</id>
-            <url>https://oss.sonatype.org/content/repositories/releases</url>
+            <id>jasper</id>
+        <url>http://jaspersoft.artifactoryonline.com/jaspersoft/jaspersoft-repo/</url>
         </repository>
     </repositories>
+
 
     <pluginRepositories>         
         <pluginRepository>
@@ -98,7 +99,7 @@
         <dependency>
             <groupId>net.sf.jasperreports</groupId>
             <artifactId>jasperreports-chart-themes</artifactId>
-            <version>4.5.0</version>
+            <version>5.1.0</version>
         </dependency>        
         <dependency>
             <groupId>net.sf.jasperreports</groupId>
