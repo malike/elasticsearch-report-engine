@@ -7,13 +7,10 @@ package st.malike.elastic.report.engine.service;
 
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.runners.MockitoJUnitRunner;
-import st.malike.elastic.report.engine.exception.ReportFormatUnkownException;
-import st.malike.elastic.report.engine.exception.TemplateNotFoundException;
 import st.malike.elastic.report.engine.util.Enums;
 
 import java.io.File;
@@ -21,6 +18,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import st.malike.elastic.report.engine.exception.ReportFormatUnkownException;
+import st.malike.elastic.report.engine.exception.TemplateNotFoundException;
 
 /**
  *
@@ -41,22 +40,41 @@ public class GenerateReportServiceTest {
     @Before
     public void setUp() throws Exception {
         map = new HashMap<>();
-        list= new LinkedList<>();
+        map.put("fullName", "Malike St");
+        map.put("email", "st.malike@gmail.com");
+
+        list = new LinkedList<>();
+        // create documents
+        for (int i = 1; i <= 10; i++) {
+            Map dataMap = new HashMap();
+            dataMap.put("id", i );
+            dataMap.put("description", "Item Number " + i);
+            list.add(dataMap);
+        }
+
         fileName = "RANDOM_REPORT";
-        templateFileName ="SampleTemplate.jrxml";
+        templateFileName = "SampleTemplate.jrxml";
         reportFormat = Enums.ReportFormat.PDF;
         ClassLoader classLoader = getClass().getClassLoader();
         File tempFile = new File(classLoader.getResource(templateFileName).getFile());
         templateFileLocation = tempFile.getAbsolutePath();
+        try {
+            File f = new File(System.getProperty("java.io.tmpdir") + File.separator + fileName);
+            if (f.exists() && !f.isDirectory()) {
+                f.delete();
+            }
+        } catch (Exception e) {
 
+        }
     }
 
     @Test
-    @Ignore
-    public void testGenerateReport() throws Exception {
-        generateReportService.generateReport(map,list,templateFileLocation,fileName,reportFormat);
+    public void testGeneratePDFReport() throws Exception {
+        generateReportService.generateReport(map, list, templateFileLocation, fileName, reportFormat);
+        File f = new File(System.getProperty("java.io.tmpdir") + File.separator + fileName + "." + reportFormat.toString().toLowerCase());
+        Assert.assertTrue(f.exists() && !f.isDirectory());
     }
-    
+
     @Test(expected = TemplateNotFoundException.class)
     public void testGenerateReportThrowsTemplateNotFoundException() throws Exception {
         generateReportService.generateReport(map,list,null,fileName,reportFormat);
@@ -66,6 +84,4 @@ public class GenerateReportServiceTest {
     public void testGenerateReportThrowsReportFormatUnknowException() throws Exception {
         generateReportService.generateReport(map,list,templateFileLocation,fileName,null);
     }
-
-
 }

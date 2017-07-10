@@ -37,13 +37,13 @@ public class GenerateReportService {
     public File generateReport(Map params, List data, String templateFileLocation, String fileName,
             ReportFormat reportFormat) throws TemplateNotFoundException, JasperGenerationException, ReportFormatUnkownException {
         try {
-            if(templateFileLocation ==null||templateFileLocation.trim().isEmpty()){
+            if (templateFileLocation == null || templateFileLocation.trim().isEmpty()) {
                 throw new TemplateNotFoundException("Template file not found");
             }
-            if(reportFormat==null){
+            if (reportFormat == null) {
                 throw new ReportFormatUnkownException("Report format unknown");
             }
-            String generatedFileName = fileName + new Date().getTime() + "." + reportFormat.toString().toLowerCase();
+            String generatedFileName = fileName + "." + reportFormat.toString().toLowerCase();
             InputStream reportStream = new FileInputStream(new File(templateFileLocation));
             JasperDesign jd = JRXmlLoader.load(reportStream);
             JasperReport jr = JasperCompileManager.compileReport(jd);

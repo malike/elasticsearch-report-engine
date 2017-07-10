@@ -7,6 +7,7 @@ package st.malike.elastic.report.engine;
 
 import com.google.gson.Gson;
 import static com.jayway.restassured.RestAssured.given;
+import java.io.File;
 import org.codelibs.elasticsearch.runner.ElasticsearchClusterRunner;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.common.settings.Settings;
@@ -31,7 +32,8 @@ public class ElasticReportPluginTest {
     private static final String CLUSTER_HOST_ADDRESS = "localhost:9201-9210";
     private static final String INDEX = "reportindex";
     private static final int DOC_SIZE = 100;
-    private static final String JASPER_TEMPLATE_FILE_LOCATION = "/";
+    private static String TEMPLATE_NAME = "SampleTemplate.jrxml";
+    private static String JASPER_TEMPLATE_FILE_LOCATION = "/";
     private Map param;
 
     @BeforeClass
@@ -61,7 +63,7 @@ public class ElasticReportPluginTest {
         for (int i = 1; i <= DOC_SIZE; i++) {
             runner.insert(INDEX, type, String.valueOf(i),
                     "{"
-                    + "\"name\":\"Transaction " + i + "\","
+                    + "\"description\":\"Transaction " + i + "\","
                     + "\"id\":" + i
                     + "}");
         }
@@ -83,19 +85,24 @@ public class ElasticReportPluginTest {
     public void setUpTest() {
 
         Map dummy = new HashMap();
-        dummy.put("firstName", "Sample");
-        dummy.put("lastName", "Name");
+        dummy.put("fullName", "Malike St");
+        dummy.put("email", "st.malike@gmail.com");
         dummy.put("age", "15");
 
         Map sort = new HashMap();
         sort.put("id", "DESC");
 //        sort.put("name", "DESC");
 
+        
+        ClassLoader classLoader = getClass().getClassLoader();
+        File tempFile = new File(classLoader.getResource(TEMPLATE_NAME).getFile());
+        JASPER_TEMPLATE_FILE_LOCATION = tempFile.getAbsolutePath();
+         
         param = new HashMap();
         param.put("format", "PDF");
         param.put("fileName", "TEST_REPORT");
         param.put("index", INDEX);
-        param.put("template", JASPER_TEMPLATE_FILE_LOCATION);        
+        param.put("template", JASPER_TEMPLATE_FILE_LOCATION);
         param.put("mapData", dummy);
         param.put("from", 0);
         param.put("size", DOC_SIZE + DOC_SIZE);
@@ -103,7 +110,6 @@ public class ElasticReportPluginTest {
     }
 
     @Test
-    @Ignore
     public void generateReport() {
         given()
                 .log().all().contentType("application/json")
