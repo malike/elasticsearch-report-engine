@@ -1,85 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="65bcb682-2dcc-49db-a32d-fd201bd751f6">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" >
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<style name="table">
-		<box>
-			<pen lineWidth="1.0" lineColor="#000000"/>
-		</box>
-	</style>
-	<style name="table_TH" mode="Opaque" backcolor="#FFBFBF">
-		<box>
-			<pen lineWidth="0.5" lineColor="#000000"/>
-		</box>
-	</style>
-	<style name="table_CH" mode="Opaque" backcolor="#FFE6E6">
-		<box>
-			<pen lineWidth="0.5" lineColor="#000000"/>
-		</box>
-	</style>
-	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
-		<box>
-			<pen lineWidth="0.5" lineColor="#000000"/>
-		</box>
-		<conditionalStyle>
-			<conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()%2==0)]]></conditionExpression>
-			<style backcolor="#FFF8F8"/>
-		</conditionalStyle>
-	</style>
-	<style name="table 1">
-		<box>
-			<pen lineWidth="1.0" lineColor="#FFFFFF"/>
-		</box>
-	</style>
-	<style name="table 1_TH" mode="Opaque" backcolor="#FFBFBF">
-		<box>
-			<pen lineWidth="0.5" lineColor="#FFFFFF"/>
-		</box>
-	</style>
-	<style name="table 1_CH" mode="Opaque" backcolor="#FFE6E6">
-		<box>
-			<pen lineWidth="0.5" lineColor="#FFFFFF"/>
-		</box>
-	</style>
-	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
-		<box>
-			<pen lineWidth="0.5" lineColor="#FFFFFF"/>
-		</box>
-		<conditionalStyle>
-			<conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()%2==0)]]></conditionExpression>
-			<style backcolor="#FFF8F8"/>
-		</conditionalStyle>
-	</style>
-	<style name="table 2">
-		<box>
-			<pen lineWidth="1.0" lineColor="#000000"/>
-		</box>
-	</style>
-	<style name="table 2_TH" mode="Opaque" backcolor="#F0F8FF">
-		<box>
-			<pen lineWidth="0.5" lineColor="#000000"/>
-		</box>
-	</style>
-	<style name="table 2_CH" mode="Opaque" backcolor="#BFE1FF">
-		<box>
-			<pen lineWidth="0.5" lineColor="#000000"/>
-		</box>
-	</style>
-	<style name="table 2_TD" mode="Opaque" backcolor="#FFFFFF">
-		<box>
-			<pen lineWidth="0.5" lineColor="#000000"/>
-		</box>
-	</style>
-	<style name="Zebra" mode="Transparent">
-		<conditionalStyle>
-			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 1]]></conditionExpression>
-			<style backcolor="#CAC5BB"/>
-		</conditionalStyle>
-	</style>
 	<parameter name="fullName" class="java.lang.String"/>
 	<parameter name="email" class="java.lang.String"/>
-	<field name="id" class="java.lang.String"/>
+	<field name="id" class="java.lang.Integer"/>
 	<field name="description" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
@@ -88,18 +14,18 @@
 		<band height="210" splitType="Stretch">
 			<elementGroup/>
 			<staticText>
-				<reportElement mode="Opaque" x="-20" y="82" width="595" height="47" backcolor="#2C6BA4" uuid="552ae6d5-734e-45dd-ade0-c090cc4b72ba"/>
+				<reportElement mode="Opaque" x="-20" y="82" width="595" height="47" backcolor="#2C6BA4" />
 				<text><![CDATA[]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="168" y="95" width="218" height="20" forecolor="#FFFFFF" uuid="992d6200-031c-4da6-a2f5-47091123c743"/>
-				<textElement>
+				<reportElement x="168" y="95" width="218" height="20" forecolor="#FFFFFF" />
+				<textElement textAlignment="Center">
 					<font size="14"/>
 				</textElement>
 				<text><![CDATA[Sample Template]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="0" y="145" width="260" height="20" forecolor="#2C6BA4" uuid="e4692609-a992-4c15-a9c4-f6d476c0ff4c"/>
+				<reportElement x="0" y="145" width="260" height="20" forecolor="#2C6BA4" />
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
@@ -110,21 +36,21 @@
 	<columnHeader>
 		<band height="88" splitType="Stretch">
 			<frame>
-				<reportElement mode="Opaque" x="-10" y="0" width="575" height="88" backcolor="#F2F1F0" uuid="11838fb0-145d-48c9-8bcd-c49f9a7c02b8"/>
+				<reportElement mode="Opaque" x="-10" y="0" width="575" height="88" backcolor="#F2F1F0" />
 				<frame>
-					<reportElement mode="Opaque" x="10" y="48" width="555" height="40" uuid="d9dd7b8e-c13c-45ec-83cf-b0276feb7024"/>
+					<reportElement mode="Opaque" x="0" y="48" width="575" height="40" />
 					<staticText>
-						<reportElement x="0" y="13" width="200" height="20" forecolor="#2C6BA4" uuid="80290bd2-5dea-44e7-afcd-d9a13dd6bade"/>
+						<reportElement x="10" y="13" width="200" height="20" forecolor="#2C6BA4" />
 						<box leftPadding="5"/>
-						<textElement>
+						<textElement textAlignment="Center">
 							<font size="10"/>
 						</textElement>
 						<text><![CDATA[ID]]></text>
 					</staticText>
 					<staticText>
-						<reportElement x="232" y="13" width="313" height="20" forecolor="#2C6BA4" uuid="d60fc7e6-c884-4283-b1ba-40f267bc523e"/>
+						<reportElement x="242" y="13" width="313" height="20" forecolor="#2C6BA4" />
 						<box leftPadding="5"/>
-						<textElement>
+						<textElement textAlignment="Center">
 							<font size="10"/>
 						</textElement>
 						<text><![CDATA[Description]]></text>
@@ -136,17 +62,17 @@
 	<detail>
 		<band height="37" splitType="Stretch">
 			<frame>
-				<reportElement mode="Opaque" x="-10" y="0" width="575" height="34" backcolor="#F2F1F0" uuid="d2a5571d-07ea-4f75-8129-af0b611cf96e"/>
+				<reportElement mode="Opaque" x="-10" y="0" width="575" height="34" backcolor="#F2F1F0" />
 				<frame>
-					<reportElement style="Zebra" mode="Opaque" x="10" y="0" width="555" height="34" uuid="6fc76ed7-e48b-46b7-81e2-93707e4d08c5"/>
+					<reportElement mode="Transparent" x="10" y="0" width="555" height="34" />
 					<textField pattern="" isBlankWhenNull="true">
-						<reportElement x="0" y="14" width="200" height="20" forecolor="#2C6BA4" uuid="47b41787-a8fd-44ea-bf96-7e5484e477fb"/>
-						<textElement textAlignment="Left"/>
+						<reportElement x="0" y="14" width="200" height="20" forecolor="#2C6BA4" />
+						<textElement textAlignment="Center"/>
 						<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
 					</textField>
 					<textField pattern="" isBlankWhenNull="true">
-						<reportElement x="232" y="14" width="313" height="20" forecolor="#2C6BA4" uuid="3a3011f2-e4df-4d21-a48b-4bd601b88a69"/>
-						<textElement textAlignment="Left"/>
+						<reportElement x="232" y="14" width="313" height="20" forecolor="#2C6BA4" />
+						<textElement textAlignment="Center"/>
 						<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
 					</textField>
 				</frame>
@@ -156,7 +82,7 @@
 	<columnFooter>
 		<band height="34" splitType="Stretch">
 			<frame>
-				<reportElement mode="Opaque" x="-10" y="0" width="575" height="34" backcolor="#F2F1F0" uuid="a4c53b52-9c4e-4e78-b441-7305847249a3"/>
+				<reportElement mode="Opaque" x="-10" y="0" width="575" height="34" backcolor="#F2F1F0" />
 			</frame>
 		</band>
 	</columnFooter>
