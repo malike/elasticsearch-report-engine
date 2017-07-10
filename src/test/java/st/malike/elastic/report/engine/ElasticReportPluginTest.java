@@ -91,7 +91,8 @@ public class ElasticReportPluginTest {
 
         Map sort = new HashMap();
         sort.put("id", "DESC");
-//        sort.put("name", "DESC");
+
+        String queryString= "{\"term\":{\"id\":20}}";
 
         
         ClassLoader classLoader = getClass().getClassLoader();
@@ -106,6 +107,7 @@ public class ElasticReportPluginTest {
         param.put("mapData", dummy);
         param.put("from", 0);
         param.put("size", DOC_SIZE + DOC_SIZE);
+        param.put("query", queryString);
         param.put("sort", sort);
     }
 

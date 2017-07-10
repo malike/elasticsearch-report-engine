@@ -3,6 +3,7 @@ package st.malike.elastic.report.engine;
 import org.elasticsearch.client.node.NodeClient;
 import org.elasticsearch.common.inject.Inject;
 import org.elasticsearch.common.settings.Settings;
+import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.rest.*;
 
 import java.io.IOException;
