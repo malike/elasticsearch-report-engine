@@ -10,6 +10,7 @@ Plugin to generate Reports from ElasticSearch Queries.
  - [License](#license)
 
 
+
 ## Overview
 
 
