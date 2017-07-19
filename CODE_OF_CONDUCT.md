@@ -1,5 +1,5 @@
 --- 
-layout: default 
+layout: jekyll-theme-cayman 
 ---  
 
 # Contributor Covenant Code of Conduct
