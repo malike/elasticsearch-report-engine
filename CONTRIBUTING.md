@@ -1,7 +1,8 @@
 --- 
 layout: jekyll-theme-cayman 
 ---  
-# Contributing
+
+# Contribting
 
 
 #### Where to start?
