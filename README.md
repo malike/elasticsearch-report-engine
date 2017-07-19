@@ -8,6 +8,7 @@ Plugin to generate Reports from ElasticSearch Queries.
     - [Request](#requests)
     - [Response](#response)
  - [Contribute](#contribute)
+ - [Code of Conduct](#code_of_conduct)
  - [License](#license)
 
 
@@ -29,13 +30,17 @@ Once this plugin is installed into elasticsearch search,it exposes the url http:
 ### Response
 
 
-<br>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 
 ## Contribute
 
 Contributions are always welcome!
 Please read the [contribution guidelines](CONTRIBUTING.md) first.
 
+## Code of Conduct
+
+Please read [this](CODE_OF_CONDUCT.md).
 
 ## License
 
