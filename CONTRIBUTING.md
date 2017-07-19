@@ -3,6 +3,10 @@ layout: default
 ---  
 
 # Contributing
+<p>&nbsp;</p>
+
+![FOSS](https://github.com/malike/malike.github.io/blob/master/images/foss.jpg?raw=true)
+
 
 
 #### Where to start?
@@ -27,8 +31,4 @@ layout: default
 
 
 <p>&nbsp;</p>
-<p>&nbsp;</p>
-
-![FOSS](https://github.com/malike/malike.github.io/blob/master/images/foss.jpg?raw=true)
-
 <p>&nbsp;</p>
