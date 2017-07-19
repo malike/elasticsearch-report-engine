@@ -1,8 +1,8 @@
 --- 
-layout: jekyll-theme-cayman 
+layout: jekyll-theme-cayman
 ---  
 
-# Contribting
+# Contributing
 
 
 #### Where to start?
@@ -31,3 +31,4 @@ layout: jekyll-theme-cayman
 
 ![FOSS](https://github.com/malike/malike.github.io/blob/master/images/foss.jpg?raw=true)
 
+<p>&nbsp;</p>
