@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.org/malike/elasticsearch-report-engine.svg?branch=master)](https://travis-ci.org/malike/elasticsearch-report-engine)
 
+[![Coverage Status](https://coveralls.io/repos/github/malike/elasticsearch-report-engine/badge.svg?branch=master)](https://coveralls.io/github/malike/elasticsearch-report-engine?branch=master)
+
 Plugin to generate Reports from ElasticSearch Queries.
 
   - [Basic Overview](#overview)
