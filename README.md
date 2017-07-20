@@ -25,9 +25,9 @@ Once this plugin is installed into elasticsearch search,it exposes the url http:
 
 ## Usage
 
-   #### Requests
+#### Requests
 
-   #### Response
+#### Response
 
 
 <p>&nbsp;</p>
