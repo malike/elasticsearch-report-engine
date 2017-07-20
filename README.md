@@ -7,9 +7,9 @@ Plugin to generate Reports from ElasticSearch Queries.
   - [Usage](#usage)
     - [Request](#requests)
     - [Response](#response)
- - [Contribute](#contribute)
- - [Code of Conduct](#code-of-conduct)
- - [License](#license)
+ - [Contribute](CONTRIBUTING.md)
+ - [Code of Conduct](CODE_OF_CONDUCT.md)
+ - [License](https://github.com/malike/elasticsearch-report-engine/blob/master/LICENSE)
 
 
 
