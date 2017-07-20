@@ -11,22 +11,19 @@ layout: default
 
 #### Where to start?
 
-1. Found a bug
-2. Fix a bug
-3. Implement a new feature
-
-* [TDD]() 
-
-
-#### Details
 ## 1. Found a bug
 
+
+
 ## 2. Fix a bug
+
+
 
 ## 3. Implement a new feature
 
 
-* TDD
+* [TDD]() 
+
 
 
 
