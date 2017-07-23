@@ -40,7 +40,7 @@ Response if successful would be a base64 encoded string
 
 ``
 
-Error 
+Error response include
 
 
 <p>&nbsp;</p>
