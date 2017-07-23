@@ -29,7 +29,15 @@ Once this plugin is installed into elasticsearch search,it exposes the url http:
 
 #### Requests
 
+After installing the plugin,
+
+``
+
+
 #### Response
+
+
+
 
 
 <p>&nbsp;</p>
