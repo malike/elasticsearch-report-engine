@@ -36,11 +36,11 @@ After installing the plugin,
 
 #### Response
 
-Response if successful would be a base64 encoded str
+Response if successful would be a base64 encoded string
 
 ``
 
-
+Error 
 
 
 <p>&nbsp;</p>
