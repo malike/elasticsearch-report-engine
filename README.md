@@ -36,6 +36,9 @@ After installing the plugin,
 
 #### Response
 
+Response if successful would be a base64 encoded str
+
+``
 
 
 
