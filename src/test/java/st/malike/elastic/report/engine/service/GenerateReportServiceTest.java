@@ -29,7 +29,9 @@ import st.malike.elastic.report.engine.exception.TemplateNotFoundException;
 public class GenerateReportServiceTest {
 
     @InjectMocks
-    GenerateReportService generateReportService;
+    GeneratePDFReport generatePDFReport;
+    @InjectMocks
+    GenerateCSVReport generateCSVReport;
     Map map;
     List list;
     String fileName;
@@ -47,7 +49,7 @@ public class GenerateReportServiceTest {
         // create documents
         for (int i = 1; i <= 10; i++) {
             Map dataMap = new HashMap();
-            dataMap.put("id", i );
+            dataMap.put("id", i);
             dataMap.put("description", "Item Number " + i);
             list.add(dataMap);
         }
@@ -70,18 +72,26 @@ public class GenerateReportServiceTest {
 
     @Test
     public void testGeneratePDFReport() throws Exception {
-        generateReportService.generateReport(map, list, templateFileLocation, fileName, reportFormat);
-        File f = new File(System.getProperty("java.io.tmpdir") + File.separator + fileName + "." + reportFormat.toString().toLowerCase());
+        generatePDFReport.generateReport(map, list, templateFileLocation, fileName, Enums.ReportFormat.PDF);
+        File f = new File(System.getProperty("java.io.tmpdir") + File.separator + fileName + "." + Enums.ReportFormat.PDF.toString().toLowerCase());
         Assert.assertTrue(f.exists() && !f.isDirectory());
     }
 
     @Test(expected = TemplateNotFoundException.class)
-    public void testGenerateReportThrowsTemplateNotFoundException() throws Exception {
-        generateReportService.generateReport(map,list,null,fileName,reportFormat);
+    public void testGeneratePDFReportThrowsTemplateNotFoundException() throws Exception {
+        generatePDFReport.generateReport(map, list, null, fileName, reportFormat);
     }
 
     @Test(expected = ReportFormatUnkownException.class)
     public void testGenerateReportThrowsReportFormatUnknowException() throws Exception {
-        generateReportService.generateReport(map,list,templateFileLocation,fileName,null);
+        generatePDFReport.generateReport(map, list, templateFileLocation, fileName, null);
     }
+
+    @Test
+    public void testGenerateCSVReport() throws Exception {
+        generateCSVReport.generateReport(map, list, templateFileLocation, fileName, Enums.ReportFormat.CSV);
+        File f = new File(System.getProperty("java.io.tmpdir") + File.separator + fileName + "." + Enums.ReportFormat.CSV.toString().toLowerCase());
+        Assert.assertTrue(f.exists() && !f.isDirectory());
+    }
+
 }

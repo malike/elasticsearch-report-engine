@@ -15,7 +15,8 @@ import org.elasticsearch.search.SearchHits;
 import st.malike.elastic.report.engine.exception.JasperGenerationException;
 import st.malike.elastic.report.engine.exception.ReportFormatUnkownException;
 import st.malike.elastic.report.engine.exception.TemplateNotFoundException;
-import st.malike.elastic.report.engine.service.GenerateReportService;
+import st.malike.elastic.report.engine.service.GenerateCSVReport;
+import st.malike.elastic.report.engine.service.GeneratePDFReport;
 
 /**
  * @author malike_st
@@ -43,7 +44,7 @@ public class Enums {
                     @Override
                     public File generate(Map dataMap, List dataList, String templateFileLocation, String fileName) {
                         try {
-                            return new GenerateReportService().generateReport(dataMap, dataList, templateFileLocation, fileName, PDF);
+                            return new GeneratePDFReport().generateReport(dataMap, dataList, templateFileLocation, fileName, PDF);
                         } catch (TemplateNotFoundException | JasperGenerationException | ReportFormatUnkownException ex) {
                             Logger.getLogger(Enums.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -55,12 +56,12 @@ public class Enums {
          * XLS Report
          *
          */
-        XLS {
+        CSV {
 
                     @Override
                     public File generate(Map dataMap, List dataList, String templateFileLocation, String fileName) {
                         try {
-                            return new GenerateReportService().generateReport(dataMap, dataList, templateFileLocation, fileName, XLS);
+                            return new GenerateCSVReport().generateReport(dataMap, dataList, templateFileLocation, fileName, CSV);
                         } catch (TemplateNotFoundException | JasperGenerationException | ReportFormatUnkownException ex) {
                             Logger.getLogger(Enums.class.getName()).log(Level.SEVERE, null, ex);
                         }
