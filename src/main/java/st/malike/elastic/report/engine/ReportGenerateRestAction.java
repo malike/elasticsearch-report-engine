@@ -84,7 +84,7 @@ public class ReportGenerateRestAction extends BaseRestHandler {
                 mapData = (Map) map.get("mapData");
             }
         }
-        if (format == null || templateLocation == null || index == null) {
+        if ((format == null || index == null) || (format.toLowerCase().equals("pdf") && templateLocation == null)) {
             return channel -> {
                 message.setStatus(false);
                 message.setCount(0L);
@@ -130,7 +130,7 @@ public class ReportGenerateRestAction extends BaseRestHandler {
                 }
             }
         }
-        
+
         prepareSearch.setSearchType(SearchType.DFS_QUERY_THEN_FETCH);
         if (query != null && !query.isEmpty()) {
             prepareSearch.setQuery(QueryBuilders.wrapperQuery(query));

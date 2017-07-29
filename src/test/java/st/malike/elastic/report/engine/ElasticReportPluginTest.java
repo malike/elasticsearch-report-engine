@@ -92,13 +92,12 @@ public class ElasticReportPluginTest {
         Map sort = new HashMap();
         sort.put("id", "DESC");
 
-        String queryString= "{\"term\":{\"id\":20}}";
+        String queryString = "{\"term\":{\"id\":20}}";
 
-        
         ClassLoader classLoader = getClass().getClassLoader();
         File tempFile = new File(classLoader.getResource(TEMPLATE_NAME).getFile());
         JASPER_TEMPLATE_FILE_LOCATION = tempFile.getAbsolutePath();
-         
+
         param = new HashMap();
         param.put("format", "PDF");
         param.put("fileName", "TEST_REPORT");
@@ -112,7 +111,24 @@ public class ElasticReportPluginTest {
     }
 
     @Test
-    public void generateReport() {
+    public void generateReportPDF() {
+        given()
+                .log().all().contentType("application/json")
+                .body(new Gson().toJson(param))
+                .when()
+                .post("http://localhost:9201/_generate")
+                .then()
+                .statusCode(200)
+                .body("status", Matchers.is(true))
+                .body("message", Matchers.is(Enums.JSONResponseMessage.SUCCESS.toString()));
+    }
+
+    @Test
+    public void generateReportCSV() {
+
+        param.put("format", "CSV");
+        param.remove("template");
+
         given()
                 .log().all().contentType("application/json")
                 .body(new Gson().toJson(param))

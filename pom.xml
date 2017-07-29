@@ -17,6 +17,24 @@
         <elasticsearch.version>5.4.1</elasticsearch.version>
         <log4j.version>2.8.2</log4j.version>
     </properties>
+    
+    <licenses>
+        <license>
+            <name>GNU General Public License v3.0</name>
+            <url>https://github.com/malike/elasticsearch-report-engine/blob/master/LICENSE</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    
+    
+    <developers>
+        <developer>
+            <email>st.malike@gmail.com</email>
+            <name>Malike</name>
+            <url>http://malike.github.io</url>
+            <id>malike</id>
+        </developer>
+    </developers>
 
     <repositories>
         <repository>
