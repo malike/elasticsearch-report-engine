@@ -53,7 +53,7 @@ public class GenerateResponseListener implements ActionListener<SearchResponse> 
             }
             message.setStatus(true);
             message.setCount(1L);
-            message.setData(generateData.getFormat().objectToBase64String(reportFile));
+            message.setData(generateData.getFormat().objectToBase64String(reportFile, generateData.getFormat()));
             message.setMessage(Enums.JSONResponseMessage.SUCCESS.toString());
             XContentBuilder builder = restChannel.newBuilder();
             builder.startObject();

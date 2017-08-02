@@ -3,6 +3,7 @@ package st.malike.elastic.report.engine.util;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -92,14 +93,18 @@ public class Enums {
         /**
          *
          * @param file
+         * @param reportFormat
          * @return
          * @throws java.io.IOException
          */
-        public String objectToBase64String(File file) throws IOException {
+        public Map objectToBase64String(File file, ReportFormat reportFormat) throws IOException {
             if (file == null) {
                 return null;
             }
-            return Base64.encodeBase64URLSafeString(Files.readAllBytes(file.toPath()));
+            Map data = new HashMap();
+            data.put("reportFormat", reportFormat.toString());
+            data.put("data", Base64.encodeBase64URLSafeString(Files.readAllBytes(file.toPath())));
+            return data;
         }
 
         /**
