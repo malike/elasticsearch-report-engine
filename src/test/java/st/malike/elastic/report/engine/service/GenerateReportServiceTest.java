@@ -29,6 +29,8 @@ import st.malike.elastic.report.engine.exception.TemplateNotFoundException;
 public class GenerateReportServiceTest {
 
     @InjectMocks
+    GenerateHTMLReport generateHTMLReport;
+    @InjectMocks
     GeneratePDFReport generatePDFReport;
     @InjectMocks
     GenerateCSVReport generateCSVReport;
@@ -74,6 +76,13 @@ public class GenerateReportServiceTest {
     public void testGeneratePDFReport() throws Exception {
         generatePDFReport.generateReport(map, list, templateFileLocation, fileName, Enums.ReportFormat.PDF);
         File f = new File(System.getProperty("java.io.tmpdir") + File.separator + fileName + "." + Enums.ReportFormat.PDF.toString().toLowerCase());
+        Assert.assertTrue(f.exists() && !f.isDirectory());
+    }
+
+    @Test
+    public void testGenerateHTMLReport() throws Exception {
+        generateHTMLReport.generateReport(map, list, templateFileLocation, fileName, Enums.ReportFormat.HTML);
+        File f = new File(System.getProperty("java.io.tmpdir") + File.separator + fileName + "." + Enums.ReportFormat.HTML.toString().toLowerCase());
         Assert.assertTrue(f.exists() && !f.isDirectory());
     }
 

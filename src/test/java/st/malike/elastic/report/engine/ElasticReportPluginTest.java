@@ -124,6 +124,22 @@ public class ElasticReportPluginTest {
     }
 
     @Test
+    public void generateReportHTML() {
+
+        param.put("format", "HTML");
+
+        given()
+                .log().all().contentType("application/json")
+                .body(new Gson().toJson(param))
+                .when()
+                .post("http://localhost:9201/_generate")
+                .then()
+                .statusCode(200)
+                .body("status", Matchers.is(true))
+                .body("message", Matchers.is(Enums.JSONResponseMessage.SUCCESS.toString()));
+    }
+
+    @Test
     public void generateReportCSV() {
 
         param.put("format", "CSV");

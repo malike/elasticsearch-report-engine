@@ -16,6 +16,7 @@ import st.malike.elastic.report.engine.exception.JasperGenerationException;
 import st.malike.elastic.report.engine.exception.ReportFormatUnkownException;
 import st.malike.elastic.report.engine.exception.TemplateNotFoundException;
 import st.malike.elastic.report.engine.service.GenerateCSVReport;
+import st.malike.elastic.report.engine.service.GenerateHTMLReport;
 import st.malike.elastic.report.engine.service.GeneratePDFReport;
 
 /**
@@ -53,7 +54,7 @@ public class Enums {
                 },
         /**
          *
-         * XLS Report
+         * CSV Report
          *
          */
         CSV {
@@ -62,6 +63,23 @@ public class Enums {
                     public File generate(Map dataMap, List dataList, String templateFileLocation, String fileName) {
                         try {
                             return new GenerateCSVReport().generateReport(dataMap, dataList, templateFileLocation, fileName, CSV);
+                        } catch (TemplateNotFoundException | JasperGenerationException | ReportFormatUnkownException ex) {
+                            Logger.getLogger(Enums.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        return null;
+                    }
+                },
+        /**
+         *
+         * HTML Report
+         *
+         */
+        HTML {
+
+                    @Override
+                    public File generate(Map dataMap, List dataList, String templateFileLocation, String fileName) {
+                        try {
+                            return new GenerateHTMLReport().generateReport(dataMap, dataList, templateFileLocation, fileName, HTML);
                         } catch (TemplateNotFoundException | JasperGenerationException | ReportFormatUnkownException ex) {
                             Logger.getLogger(Enums.class.getName()).log(Level.SEVERE, null, ex);
                         }
