@@ -16,7 +16,7 @@ Plugin to generate Reports from ElasticSearch Queries.
 
 
 ## Overview
-Once this plugin is installed into elasticsearch search,it exposes the url http://{cluster ip}:9200/_generate, you can run queries on your cluster with the right parameters it would return PDF or an XLS file. 
+Once this plugin is installed into elasticsearch search,it exposes the url http://{ip}:9200/_generate, you can run queries on your cluster with the right parameters it would return PDF,HTML or CSV file. 
 
 <br>
 
