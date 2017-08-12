@@ -9,6 +9,7 @@ Plugin to generate Reports from ElasticSearch Queries.
   - [Usage](#usage)
     - [Request](#requests)
     - [Response](#response)
+ - [Supported](#supported)   
  - [Contribute](CONTRIBUTING.md)
  - [Code of Conduct](CODE_OF_CONDUCT.md)
  - [License](https://github.com/malike/elasticsearch-report-engine/blob/master/LICENSE)
@@ -45,6 +46,16 @@ Error response include
 
 <p>&nbsp;</p>
 <p>&nbsp;</p>
+
+## Supported
+
+ElasticSearch versions supported by this plugin include :
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
 
 ## Contribute
 
