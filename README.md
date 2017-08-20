@@ -30,10 +30,9 @@ Once this plugin is installed into elasticsearch search,it exposes the url http:
 
 ## Usage
 
-#### PDF Report
+## i. PDF Report
 
      1. PDF Report
-
 
 
 
@@ -43,7 +42,7 @@ Once this plugin is installed into elasticsearch search,it exposes the url http:
  `` PDF Sample Response ``
 
 
-#### HTML Report
+## ii. HTML Report
 
      1. HTML Report
 
@@ -55,7 +54,7 @@ Once this plugin is installed into elasticsearch search,it exposes the url http:
  `` HTML Sample Response ``
 
 
- #### PDF Report
+ ## iii. CSV Report
 
       1. CSV Report
 
