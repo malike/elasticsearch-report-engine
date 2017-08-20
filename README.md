@@ -7,9 +7,9 @@ Plugin to generate Reports from ElasticSearch Queries.
   - [Basic Overview](#overview)
   - [Install](#install)
   - [Usage](#usage)
-    - [PDF](#pdf)
-    - [HTML](#html)
-    - [CSV](#csv)
+    - [PDF](#pdf_report)
+    - [HTML](#html_report)
+    - [CSV](#csv_report)
  - [Supported](#supported)   
  - [Download](#download)   
  - [Contribute](CONTRIBUTING.md)
@@ -30,7 +30,7 @@ Once this plugin is installed into elasticsearch search,it exposes the url http:
 
 ## Usage
 
-## i. PDF Report
+## PDF Report
 
      1. PDF Report
 
@@ -56,7 +56,7 @@ you pass the location of the jrxml and the query to fetch data from ElasticSearc
  `` PDF Sample Response ``
 
 
-## ii. HTML Report
+## HTML Report
 
      1. HTML Report
 
@@ -78,7 +78,7 @@ The generates [base64 encoded]() stream of the HTML report generated. There's al
  `` HTML Sample Response ``
 
 
- ## iii. CSV Report
+ ## CSV Report
 
       1. CSV Report
 
