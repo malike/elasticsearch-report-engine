@@ -7,9 +7,9 @@ Plugin to generate Reports from ElasticSearch Queries.
   - [Basic Overview](#overview)
   - [Install](#install)
   - [Usage](#usage)
-    - [PDF](#pdf)
-    - [HTML](#html)
-    - [CSV](#csv)
+    - [PDF](##pdf)
+    - [HTML](##html)
+    - [CSV](##csv)
  - [Supported](#supported)   
  - [Download](#download)   
  - [Contribute](CONTRIBUTING.md)
@@ -34,7 +34,8 @@ Once this plugin is installed into elasticsearch search,it exposes the url http:
 
      1. PDF Report
 
-After installing the plugin,
+
+
 
  `` PDF Sample Request ``
 
@@ -46,7 +47,7 @@ After installing the plugin,
 
      1. HTML Report
 
-This uses the [Jasper Report]() engine to generate PDF reports.
+
 
  `` HTML Sample Request ``
 
@@ -58,7 +59,7 @@ This uses the [Jasper Report]() engine to generate PDF reports.
 
       1. CSV Report
 
- After installing the plugin,
+
 
   `` CSV Sample Request ``
 
