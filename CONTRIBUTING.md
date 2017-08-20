@@ -7,22 +7,22 @@ layout: default
 
 ![FOSS](https://github.com/malike/malike.github.io/blob/master/images/foss.jpg?raw=true)
 
+## 1. [TDD]()
 
+## 2. Where to start?
 
-#### Where to start?
-
-## 1. Found a bug
-
-
-
-## 2. Fix a bug
+#### i. Found a bug
 
 
 
-## 3. Implement a new feature
+#### ii. Fix a bug
 
 
-* [TDD]() 
+
+#### iii. Implement a new feature
+
+
+
 
 
 

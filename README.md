@@ -7,8 +7,9 @@ Plugin to generate Reports from ElasticSearch Queries.
   - [Basic Overview](#overview)
   - [Install](#install)
   - [Usage](#usage)
-    - [Request](#requests)
-    - [Response](#response)
+    - [PDF](#pdf)
+    - [HTML](#html)
+    - [CSV](#csv)
  - [Supported](#supported)   
  - [Download](#download)   
  - [Contribute](CONTRIBUTING.md)
@@ -29,20 +30,41 @@ Once this plugin is installed into elasticsearch search,it exposes the url http:
 
 ## Usage
 
-#### Requests
+#### PDF Report
+
+     1. PDF Report
 
 After installing the plugin,
 
-``
+ `` PDF Sample Request ``
 
 
-#### Response
+ `` PDF Sample Response ``
 
-Response if successful would be a base64 encoded string
 
-``
+#### HTML Report
 
-Error response include
+     1. HTML Report
+
+This uses the [Jasper Report]() engine to generate PDF reports.
+
+ `` HTML Sample Request ``
+
+
+ `` HTML Sample Response ``
+
+
+ #### PDF Report
+
+      1. CSV Report
+
+ After installing the plugin,
+
+  `` CSV Sample Request ``
+
+
+  `` CSV Sample Response ``
+
 
 
 <p>&nbsp;</p>
@@ -53,23 +75,21 @@ Error response include
 ElasticSearch versions supported by this plugin include :
 
 | ElasticSearch Version | Comments |
-| --- | --- |
-| [5.0]() | Tested |
-| [5.0]() | Tested |
-| [2.4]() | |
+| --------------------- | -------- |
+| [5.5]()               | Tested   |
+| [5.0]()               | Tested   |
+| [2.4]()               | Tested   |
 
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 
 ## Download
 
-For prepackaged version:
-
 | ElasticSearch Version | Comments |
-| --- | --- |
-| 5.0 | [zip]() |
-| 5.0 | [zip]() |
-| 2.4 | [zip]() |
+| --------------------- | -------- |
+| [5.0]()               | [zip]()  |
+| [5.0]()               | [zip]()  |
+| [2.4]()               | [zip]()  |
 
 <p>&nbsp;</p>
 <p>&nbsp;</p>
