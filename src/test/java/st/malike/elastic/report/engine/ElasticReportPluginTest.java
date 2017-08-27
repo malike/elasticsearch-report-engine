@@ -140,6 +140,24 @@ public class ElasticReportPluginTest {
     }
 
     @Test
+    public void generateReportHTMLReturnAsPLAIN() {
+
+        param.put("format", "HTML");
+        param.put("returnAs", Generator.ReturnAs.PLAIN.toString());
+
+        given()
+                .log().all().contentType("application/json")
+                .body(new Gson().toJson(param))
+                .when()
+                .post("http://localhost:9201/_generate")
+                .then()
+                .statusCode(200)
+                .body("status", Matchers.is(true))
+                .body("data.data", Matchers.startsWith("<html"))
+                .body("message", Matchers.is(Generator.JSONResponseMessage.SUCCESS.toString()));
+    }
+
+    @Test
     public void generateReportCSV() {
 
         param.put("format", "CSV");
@@ -153,6 +171,25 @@ public class ElasticReportPluginTest {
                 .then()
                 .statusCode(200)
                 .body("status", Matchers.is(true))
+                .body("message", Matchers.is(Generator.JSONResponseMessage.SUCCESS.toString()));
+    }
+
+    @Test
+    public void generateReportCSVAsPLAIN() {
+
+        param.put("format", "CSV");
+        param.put("returnAs", Generator.ReturnAs.PLAIN.toString());
+        param.remove("template");
+
+        given()
+                .log().all().contentType("application/json")
+                .body(new Gson().toJson(param))
+                .when()
+                .post("http://localhost:9201/_generate")
+                .then()
+                .statusCode(200)
+                .body("status", Matchers.is(true))
+                .body("data.data", Matchers.contains(","))
                 .body("message", Matchers.is(Generator.JSONResponseMessage.SUCCESS.toString()));
     }
 
