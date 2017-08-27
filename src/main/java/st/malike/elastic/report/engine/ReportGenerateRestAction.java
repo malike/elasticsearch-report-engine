@@ -49,7 +49,7 @@ public class ReportGenerateRestAction extends BaseRestHandler {
 
         if (restRequest.content().length() > 0) {
             // Let's try to find the name from the body
-            Map<String, Object> map = XContentHelper.convertToMap(restRequest.content(), false).v2();
+            Map<String, Object> map = XContentHelper.convertToMap(restRequest.content(), false,null).v2();
             if (map.containsKey("query")) {
                 query = (String) map.get("query");
             }

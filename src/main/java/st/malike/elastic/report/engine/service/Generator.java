@@ -120,7 +120,7 @@ public class Generator {
             SearchHits hits = response.getHits();
             try {
                 for (SearchHit hit : hits) {
-                    Map<String, Object> sourceMap = hit.sourceAsMap();
+                    Map<String, Object> sourceMap = hit.getSourceAsMap();
                     data.add(sourceMap);
                 }
             } catch (Exception e) {
