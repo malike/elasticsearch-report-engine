@@ -56,7 +56,7 @@ public class GenerateResponseListener implements ActionListener<SearchResponse> 
             if(generateData.getReturnAs().equals(Generator.ReturnAs.BASE64_ENCODED)) {
                 message.setData(generateData.getFormat().objectToBase64String(reportFile, generateData.getFormat()));
             }else{
-                message.setData(generateData.getFormat().getContents(reportFile));
+                message.setData(generateData.getFormat().getContents(reportFile,generateData.getFormat()));
             }
             message.setMessage(Generator.JSONResponseMessage.SUCCESS.toString());
             XContentBuilder builder = restChannel.newBuilder();

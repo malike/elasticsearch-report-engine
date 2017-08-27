@@ -128,12 +128,20 @@ public class Generator {
             return data;
         }
 
-        public  String getContents(File reportFile) throws IOException {
+        public  Map getContents(File reportFile, ReportFormat reportFormat) throws IOException {
             if(reportFile ==null){
                 return null;
             }
+            if(reportFormat.equals(ReportFormat.PDF)){
+                //default to base64 if report type is PDF
+                return objectToBase64String(reportFile,reportFormat);
+            }
             byte[] reportFileEncoded = Files.readAllBytes(Paths.get(reportFile.getAbsolutePath()));
-            return new String(reportFileEncoded, StandardCharsets.UTF_8);
+            String report = new String(reportFileEncoded, StandardCharsets.UTF_8);
+            Map data = new HashMap();
+            data.put("reportFormat", reportFormat.toString());
+            data.put("data", report);
+            return data;
         }
     }
 
