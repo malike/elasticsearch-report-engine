@@ -189,7 +189,7 @@ public class ElasticReportPluginTest {
                 .then()
                 .statusCode(200)
                 .body("status", Matchers.is(true))
-                .body("data.data", Matchers.contains(","))
+                .body("data.data", Matchers.startsWith("description,"))
                 .body("message", Matchers.is(Generator.JSONResponseMessage.SUCCESS.toString()));
     }
 
