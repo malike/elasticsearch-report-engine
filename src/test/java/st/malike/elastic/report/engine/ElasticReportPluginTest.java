@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 import org.hamcrest.Matchers;
 import static org.junit.Assert.*;
-import st.malike.elastic.report.engine.util.Enums;
+import st.malike.elastic.report.engine.service.Generator;
 
 @RunWith(BlockJUnit4ClassRunner.class)
 public class ElasticReportPluginTest {
@@ -120,7 +120,7 @@ public class ElasticReportPluginTest {
                 .then()
                 .statusCode(200)
                 .body("status", Matchers.is(true))
-                .body("message", Matchers.is(Enums.JSONResponseMessage.SUCCESS.toString()));
+                .body("message", Matchers.is(Generator.JSONResponseMessage.SUCCESS.toString()));
     }
 
     @Test
@@ -136,7 +136,7 @@ public class ElasticReportPluginTest {
                 .then()
                 .statusCode(200)
                 .body("status", Matchers.is(true))
-                .body("message", Matchers.is(Enums.JSONResponseMessage.SUCCESS.toString()));
+                .body("message", Matchers.is(Generator.JSONResponseMessage.SUCCESS.toString()));
     }
 
     @Test
@@ -153,7 +153,7 @@ public class ElasticReportPluginTest {
                 .then()
                 .statusCode(200)
                 .body("status", Matchers.is(true))
-                .body("message", Matchers.is(Enums.JSONResponseMessage.SUCCESS.toString()));
+                .body("message", Matchers.is(Generator.JSONResponseMessage.SUCCESS.toString()));
     }
 
     @Test
@@ -167,7 +167,7 @@ public class ElasticReportPluginTest {
                 .then()
                 .statusCode(500)
                 .body("status", Matchers.is(false))
-                .body("message", Matchers.is(Enums.JSONResponseMessage.MISSING_PARAM.toString()));
+                .body("message", Matchers.is(Generator.JSONResponseMessage.MISSING_PARAM.toString()));
     }
 
     @Test
@@ -181,7 +181,7 @@ public class ElasticReportPluginTest {
                 .then()
                 .statusCode(500)
                 .body("status", Matchers.is(false))
-                .body("message", Matchers.is(Enums.JSONResponseMessage.REPORT_FORMAT_UNKNOWN.toString()));
+                .body("message", Matchers.is(Generator.JSONResponseMessage.REPORT_FORMAT_UNKNOWN.toString()));
     }
 
 }

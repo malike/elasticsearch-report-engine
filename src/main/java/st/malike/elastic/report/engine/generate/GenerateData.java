@@ -6,7 +6,7 @@
 package st.malike.elastic.report.engine.generate;
 
 import java.util.Map;
-import st.malike.elastic.report.engine.util.Enums;
+import st.malike.elastic.report.engine.service.Generator;
 
 /**
  *
@@ -15,14 +15,13 @@ import st.malike.elastic.report.engine.util.Enums;
 public class GenerateData {
 
     private String query;
-    private Enums.ReportFormat format;
+    private Generator.ReportFormat format;
+    private Generator.ReturnAs returnAs;
     private String templateLocation;
     private String fileName;
     private String index;
     private Map mapData;
 
-    public GenerateData() {
-    }
 
     public String getQuery() {
         return query;
@@ -32,12 +31,20 @@ public class GenerateData {
         this.query = query;
     }
 
-    public Enums.ReportFormat getFormat() {
+    public Generator.ReportFormat getFormat() {
         return format;
     }
 
-    public void setFormat(Enums.ReportFormat format) {
+    public void setFormat(Generator.ReportFormat format) {
         this.format = format;
+    }
+
+    public Generator.ReturnAs getReturnAs() {
+        return returnAs;
+    }
+
+    public void setReturnAs(Generator.ReturnAs returnAs) {
+        this.returnAs = returnAs;
     }
 
     public String getTemplateLocation() {

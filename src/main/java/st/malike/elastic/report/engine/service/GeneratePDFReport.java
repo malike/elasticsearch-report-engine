@@ -22,7 +22,7 @@ import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import org.apache.commons.io.IOUtils;
 import st.malike.elastic.report.engine.exception.ReportFormatUnkownException;
-import st.malike.elastic.report.engine.util.Enums.ReportFormat;
+import st.malike.elastic.report.engine.service.Generator.ReportFormat;
 import st.malike.elastic.report.engine.exception.JasperGenerationException;
 import st.malike.elastic.report.engine.exception.TemplateNotFoundException;
 

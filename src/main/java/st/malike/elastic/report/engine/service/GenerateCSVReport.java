@@ -21,7 +21,6 @@ import org.apache.commons.lang.StringUtils;
 import st.malike.elastic.report.engine.exception.JasperGenerationException;
 import st.malike.elastic.report.engine.exception.ReportFormatUnkownException;
 import st.malike.elastic.report.engine.exception.TemplateNotFoundException;
-import st.malike.elastic.report.engine.util.Enums;
 
 /**
  *
@@ -43,7 +42,7 @@ public class GenerateCSVReport implements GenerateReportService {
      */
     @Override
     public File generateReport(Map params, List data, String templateFileLocation,
-            String fileName, Enums.ReportFormat reportFormat) throws TemplateNotFoundException, JasperGenerationException, ReportFormatUnkownException {
+            String fileName, Generator.ReportFormat reportFormat) throws TemplateNotFoundException, JasperGenerationException, ReportFormatUnkownException {
         try {
             if (reportFormat == null) {
                 throw new ReportFormatUnkownException("Report format unknown");

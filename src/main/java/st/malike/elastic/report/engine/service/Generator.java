@@ -1,8 +1,10 @@
-package st.malike.elastic.report.engine.util;
+package st.malike.elastic.report.engine.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -16,22 +18,23 @@ import org.elasticsearch.search.SearchHits;
 import st.malike.elastic.report.engine.exception.JasperGenerationException;
 import st.malike.elastic.report.engine.exception.ReportFormatUnkownException;
 import st.malike.elastic.report.engine.exception.TemplateNotFoundException;
-import st.malike.elastic.report.engine.service.GenerateCSVReport;
-import st.malike.elastic.report.engine.service.GenerateHTMLReport;
-import st.malike.elastic.report.engine.service.GeneratePDFReport;
 
 /**
  * @author malike_st
  */
-public class Enums {
+public class Generator {
 
     public enum JSONResponseMessage {
 
         REPORT_FORMAT_UNKNOWN,
         ERROR_GENERATING_REPORT,
         SUCCESS,
-        MISSING_PARAM,
-        ERROR
+        MISSING_PARAM
+    }
+
+    public enum ReturnAs{
+        BASE64_ENCODED,
+        PLAIN
     }
 
     public enum ReportFormat {
@@ -48,7 +51,7 @@ public class Enums {
                         try {
                             return new GeneratePDFReport().generateReport(dataMap, dataList, templateFileLocation, fileName, PDF);
                         } catch (TemplateNotFoundException | JasperGenerationException | ReportFormatUnkownException ex) {
-                            Logger.getLogger(Enums.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(Generator.class.getName()).log(Level.SEVERE, null, ex);
                         }
                         return null;
                     }
@@ -65,7 +68,7 @@ public class Enums {
                         try {
                             return new GenerateCSVReport().generateReport(dataMap, dataList, templateFileLocation, fileName, CSV);
                         } catch (TemplateNotFoundException | JasperGenerationException | ReportFormatUnkownException ex) {
-                            Logger.getLogger(Enums.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(Generator.class.getName()).log(Level.SEVERE, null, ex);
                         }
                         return null;
                     }
@@ -82,7 +85,7 @@ public class Enums {
                         try {
                             return new GenerateHTMLReport().generateReport(dataMap, dataList, templateFileLocation, fileName, HTML);
                         } catch (TemplateNotFoundException | JasperGenerationException | ReportFormatUnkownException ex) {
-                            Logger.getLogger(Enums.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(Generator.class.getName()).log(Level.SEVERE, null, ex);
                         }
                         return null;
                     }
@@ -123,6 +126,14 @@ public class Enums {
             } catch (Exception e) {
             }
             return data;
+        }
+
+        public  String getContents(File reportFile) throws IOException {
+            if(reportFile ==null){
+                return null;
+            }
+            byte[] reportFileEncoded = Files.readAllBytes(Paths.get(reportFile.getAbsolutePath()));
+            return new String(reportFileEncoded, StandardCharsets.UTF_8);
         }
     }
 

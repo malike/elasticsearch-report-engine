@@ -3,7 +3,6 @@ package st.malike.elastic.report.engine;
 import org.elasticsearch.client.node.NodeClient;
 import org.elasticsearch.common.inject.Inject;
 import org.elasticsearch.common.settings.Settings;
-import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.rest.*;
 
 import java.io.IOException;
@@ -19,7 +18,7 @@ import static org.elasticsearch.rest.RestRequest.Method.POST;
 import org.elasticsearch.search.sort.SortOrder;
 import st.malike.elastic.report.engine.generate.GenerateData;
 import st.malike.elastic.report.engine.generate.GenerateResponseListener;
-import st.malike.elastic.report.engine.util.Enums;
+import st.malike.elastic.report.engine.service.Generator;
 import st.malike.elastic.report.engine.util.JSONResponse;
 
 /**
@@ -42,6 +41,7 @@ public class ReportGenerateRestAction extends BaseRestHandler {
         Map<String, String> sort = new HashMap();
         String query = null;
         String format = null;
+        Generator.ReturnAs returnAs = Generator.ReturnAs.BASE64_ENCODED;
         String templateLocation = null;
         String fileName = null;
         String index = null;
@@ -68,6 +68,12 @@ public class ReportGenerateRestAction extends BaseRestHandler {
             if (map.containsKey("format")) {
                 format = (String) map.get("format");
             }
+            if (map.containsKey("returnAs")) {
+                try {
+                    returnAs = Generator.ReturnAs.valueOf(((String) map.get("returnAs")).toUpperCase());
+                }catch (Exception e){
+                }
+            }
             if (map.containsKey("template")) {
                 templateLocation = (String) map.get("template");
             }
@@ -84,11 +90,12 @@ public class ReportGenerateRestAction extends BaseRestHandler {
                 mapData = (Map) map.get("mapData");
             }
         }
-        if ((format == null || index == null) || (format.toLowerCase().equals("pdf") && templateLocation == null)) {
+        if ((format == null || index == null)
+                || ((format.toLowerCase().equals("pdf") || (format.toLowerCase().equals("html")))&& templateLocation == null)) {
             return channel -> {
                 message.setStatus(false);
                 message.setCount(0L);
-                message.setMessage(Enums.JSONResponseMessage.MISSING_PARAM.toString());
+                message.setMessage(Generator.JSONResponseMessage.MISSING_PARAM.toString());
                 XContentBuilder builder = channel.newBuilder();
                 builder.startObject();
                 message.toXContent(builder, restRequest);
@@ -96,16 +103,16 @@ public class ReportGenerateRestAction extends BaseRestHandler {
                 channel.sendResponse(new BytesRestResponse(RestStatus.INTERNAL_SERVER_ERROR, builder));
             };
         }
-        Enums.ReportFormat reportFormat = null;
+        Generator.ReportFormat reportFormat = null;
         try {
-            reportFormat = Enums.ReportFormat.valueOf(format.toUpperCase());
+            reportFormat = Generator.ReportFormat.valueOf(format.toUpperCase());
         } catch (Exception e) {
         }
         if (reportFormat == null) {
             return channel -> {
                 message.setStatus(false);
                 message.setCount(0L);
-                message.setMessage(Enums.JSONResponseMessage.REPORT_FORMAT_UNKNOWN.toString());
+                message.setMessage(Generator.JSONResponseMessage.REPORT_FORMAT_UNKNOWN.toString());
                 XContentBuilder builder = channel.newBuilder();
                 builder.startObject();
                 message.toXContent(builder, restRequest);
@@ -143,6 +150,7 @@ public class ReportGenerateRestAction extends BaseRestHandler {
         generateData.setMapData(mapData);
         generateData.setQuery(query);
         generateData.setTemplateLocation(templateLocation);
+        generateData.setReturnAs(returnAs);
         return (channel) -> prepareSearch.execute(new GenerateResponseListener(generateData, channel, restRequest));
     }
 

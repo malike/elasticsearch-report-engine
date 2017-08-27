@@ -15,7 +15,7 @@ import org.elasticsearch.rest.BytesRestResponse;
 import org.elasticsearch.rest.RestChannel;
 import org.elasticsearch.rest.RestRequest;
 import org.elasticsearch.rest.RestStatus;
-import st.malike.elastic.report.engine.util.Enums;
+import st.malike.elastic.report.engine.service.Generator;
 import st.malike.elastic.report.engine.util.JSONResponse;
 
 /**
@@ -44,7 +44,7 @@ public class GenerateResponseListener implements ActionListener<SearchResponse> 
             if (reportFile == null) {
                 message.setStatus(false);
                 message.setCount(0L);
-                message.setMessage(Enums.JSONResponseMessage.ERROR_GENERATING_REPORT.toString());
+                message.setMessage(Generator.JSONResponseMessage.ERROR_GENERATING_REPORT.toString());
                 XContentBuilder builder = restChannel.newBuilder();
                 builder.startObject();
                 message.toXContent(builder, restRequest);
@@ -53,8 +53,12 @@ public class GenerateResponseListener implements ActionListener<SearchResponse> 
             }
             message.setStatus(true);
             message.setCount(1L);
-            message.setData(generateData.getFormat().objectToBase64String(reportFile, generateData.getFormat()));
-            message.setMessage(Enums.JSONResponseMessage.SUCCESS.toString());
+            if(generateData.getReturnAs().equals(Generator.ReturnAs.BASE64_ENCODED)) {
+                message.setData(generateData.getFormat().objectToBase64String(reportFile, generateData.getFormat()));
+            }else{
+                message.setData(generateData.getFormat().getContents(reportFile));
+            }
+            message.setMessage(Generator.JSONResponseMessage.SUCCESS.toString());
             XContentBuilder builder = restChannel.newBuilder();
             builder.startObject();
             message.toXContent(builder, restRequest);

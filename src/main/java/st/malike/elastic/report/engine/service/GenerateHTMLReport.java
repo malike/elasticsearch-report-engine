@@ -25,7 +25,6 @@ import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import st.malike.elastic.report.engine.exception.JasperGenerationException;
 import st.malike.elastic.report.engine.exception.ReportFormatUnkownException;
 import st.malike.elastic.report.engine.exception.TemplateNotFoundException;
-import st.malike.elastic.report.engine.util.Enums;
 
 /**
  *
@@ -47,7 +46,7 @@ public class GenerateHTMLReport implements GenerateReportService {
      */
     @Override
     public File generateReport(Map params, List data, String templateFileLocation, String fileName,
-            Enums.ReportFormat reportFormat) throws TemplateNotFoundException, JasperGenerationException, ReportFormatUnkownException {
+            Generator.ReportFormat reportFormat) throws TemplateNotFoundException, JasperGenerationException, ReportFormatUnkownException {
         try {
             if (templateFileLocation == null || templateFileLocation.trim().isEmpty()) {
                 throw new TemplateNotFoundException("Template file not found");
