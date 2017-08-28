@@ -44,13 +44,17 @@ you pass the location of the jrxml and the query to fetch data from ElasticSearc
 
  `` PDF Sample Request ``
 
-    curl -H "Content-Type:application/json" -XPOST "http://localhost:9201/_generate"  -d '{}'
+    curl -H "Content-Type:application/json" -XPOST "http://localhost:9201/_generate"  -d '{"format":"PDF","fileName":"TEST_REPORT","index":"reportindex","template":"/home/username/template.jrxml","from":0,"size":10,"query":"{term:{id:20}}"}'
 
-  `` Parameters `` <br/>
+  `` Parameters ``<br/><br/>
+        i. format : Format of Report _*[Required]*_ <br/>
+       ii. index : ElasticSearch Index _*[Required]*_ <br/>
+      iii. template : Jasper Report Template _*[Required]*_ <br/>
+       iv. from : Offset for querying large data _*[Optional]*_ <br/>
+        v. size : Size for querying large data _*[Optional]*_ <br/>
+       iv. query : Query to search ElasticSearch index _*[Optional : Defaults to '*' if nothing is passed]*_<br/>
+       vi. fileName : File name _*[Optional]*_ <br/>
 
-  i. <br/>
-  ii. <br/>
-  iii. <br/>
 
 
  `` PDF Sample Response ``
@@ -68,12 +72,17 @@ The generates [base64 encoded](https://en.wikipedia.org/wiki/Base64) stream of t
 
  `` HTML Sample Request ``
 
-    curl -H "Content-Type:application/json" -XPOST "http://localhost:9201/_generate"  -d '{}'
+    curl -H "Content-Type:application/json" -XPOST "http://localhost:9201/_generate"  -d '{"format":"PDF","fileName":"TEST_REPORT","index":"reportindex","template":"/home/username/template.jrxml","from":0,"size":10,"query":"{term:{id:20}}"}'
 
-  `` Parameters `` <br/>
-  i. <br/>
-  ii. <br/>
-  iii. <br/>
+ `` Parameters ``<br/><br/>
+       i. format : Format of Report _*[Required]*_ <br/>
+      ii. index : ElasticSearch Index _*[Required]*_ <br/>
+     iii. template : Jasper Report Template _*[Required]*_ <br/>
+      iv. from : Offset for querying large data _*[Optional]*_ <br/>
+       v. size : Size for querying large data _*[Optional]*_ <br/>
+      iv. query : Query to search ElasticSearch index _*[Optional : Defaults to '*' if nothing is passed]*_<br/>
+      vi. fileName : File name _*[Optional]*_ <br/>
+
 
  `` HTML Sample Response ``
 
@@ -90,7 +99,7 @@ Generating a CSV report uses the query and returns a [base64 encoded]() of the f
 
     curl -H "Content-Type:application/json" -XPOST "http://localhost:9201/_generate"  -d '{"format":"PDF","fileName":"TEST_REPORT","index":"reportindex","template":"/home/username/template.jrxml","from":0,"size":10,"query":"{term:{id:20}}"}'
 
-  `` Parameters ``<br/>
+  `` Parameters ``<br/><br/>
       i. format : Format of Report _*[Required]*_ <br/>
      ii. index : ElasticSearch Index _*[Required]*_ <br/>
     iii. template : Jasper Report Template _*[Required]*_ <br/>
