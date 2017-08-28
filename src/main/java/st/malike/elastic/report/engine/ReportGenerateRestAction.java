@@ -41,7 +41,7 @@ public class ReportGenerateRestAction extends BaseRestHandler {
         Map<String, String> sort = new HashMap();
         String query = null;
         String format = null;
-        Generator.ReturnAs returnAs = Generator.ReturnAs.BASE64_ENCODED;
+        Generator.ReturnAs returnAs = Generator.ReturnAs.BASE64;
         String templateLocation = null;
         String fileName = null;
         String index = null;

@@ -53,7 +53,7 @@ public class GenerateResponseListener implements ActionListener<SearchResponse> 
             }
             message.setStatus(true);
             message.setCount(1L);
-            if(generateData.getReturnAs().equals(Generator.ReturnAs.BASE64_ENCODED)) {
+            if(generateData.getReturnAs().equals(Generator.ReturnAs.BASE64)) {
                 message.setData(generateData.getFormat().objectToBase64String(reportFile, generateData.getFormat()));
             }else{
                 message.setData(generateData.getFormat().getContents(reportFile,generateData.getFormat()));

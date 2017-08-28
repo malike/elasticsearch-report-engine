@@ -33,7 +33,7 @@ public class Generator {
     }
 
     public enum ReturnAs{
-        BASE64_ENCODED,
+        BASE64,
         PLAIN
     }
 
