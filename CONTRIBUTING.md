@@ -26,7 +26,7 @@ If you've found a bug in the project. Kindly create a [ticket](). We'll do our b
 
 #### ii. Fix a bug
 
-
+Want to go a step further after finding a bug?
 
 #### iii. Implement a new feature
 

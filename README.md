@@ -72,7 +72,7 @@ The generates [base64 encoded](https://en.wikipedia.org/wiki/Base64) stream of t
 
  `` HTML Sample Request ``
 
-    curl -H "Content-Type:application/json" -XPOST "http://localhost:9201/_generate"  -d '{"format":"PDF","fileName":"TEST_REPORT","index":"reportindex","template":"/home/username/template.jrxml","from":0,"size":10,"query":"{term:{id:20}}"}'
+    curl -H "Content-Type:application/json" -XPOST "http://localhost:9201/_generate"  -d '{"format":"HTML","fileName":"TEST_REPORT","index":"reportindex","template":"/home/username/template.jrxml","from":0,"size":10,"query":"{term:{id:20}}"}'
 
  `` Parameters ``<br/><br/>
        i. *format* : Format of Report _*[Required]*_ <br/>
@@ -82,7 +82,7 @@ The generates [base64 encoded](https://en.wikipedia.org/wiki/Base64) stream of t
        v. *size* : Size for querying large data _*[Optional]*_ <br/>
       iv. *query* : Query to search ElasticSearch index _*[Optional : Defaults to '*' if nothing is passed]*_<br/>
       vi. *fileName* : File name _*[Optional]*_ <br/>
-     vii. *returnAs* : How you want CSV file returned. Possible values _PLAIN_ and _BASE64_  _*[Optional : Defaults to BASE64]*_ <br/>
+     vii. *returnAs* : How you want HTML file returned. Possible values _PLAIN_ and _BASE64_  _*[Optional : Defaults to BASE64]*_ <br/>
 
 
  `` HTML Sample Response ``
@@ -98,7 +98,7 @@ Generating a CSV report uses the query and returns a [base64 encoded]() of the f
 
   `` CSV Sample Request ``
 
-    curl -H "Content-Type:application/json" -XPOST "http://localhost:9201/_generate"  -d '{"format":"PDF","fileName":"TEST_REPORT","index":"reportindex","template":"/home/username/template.jrxml","from":0,"size":10,"query":"{term:{id:20}}"}'
+    curl -H "Content-Type:application/json" -XPOST "http://localhost:9201/_generate"  -d '{"format":"CSV","fileName":"TEST_REPORT","index":"reportindex","template":"/home/username/template.jrxml","from":0,"size":10,"query":"{term:{id:20}}"}'
 
   `` Parameters ``<br/><br/>
       i. *format* : Format of Report _*[Required]*_ <br/>
