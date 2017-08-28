@@ -38,13 +38,13 @@ The plugin uses [Jasper Report](https://community.jaspersoft.com/) as core engin
 PDF templates can be designed using [iReport Designer](https://community.jaspersoft.com/wiki/ireport-designer-getting-started). This
 generates a _jrmxl_ file.
 
-The plugin generates [base64 encoded]() stream of the PDF report generated once
+The plugin generates [base64 encoded](https://en.wikipedia.org/wiki/Base64) stream of the PDF report generated once
 you pass the location of the jrxml and the query to fetch data from ElasticSearch.
 
 
  `` PDF Sample Request ``
 
-    curl -H "Content-Type:applicaition/json" -XPOST "http://localhost:9201/_generate"  -d '{}'
+    curl -H "Content-Type:application/json" -XPOST "http://localhost:9201/_generate"  -d '{}'
 
   `` Parameters `` <br/>
 
@@ -64,11 +64,11 @@ Just like the PDF report,the HTML also uses [Jasper Report](https://community.ja
 
 HTML Reports provides an alternative for use cases where reports should not be sent as an attached file.
 
-The generates [base64 encoded]() stream of the HTML report generated. There's also an option to return the HTML string instead of the base64 encoded string.
+The generates [base64 encoded](https://en.wikipedia.org/wiki/Base64) stream of the HTML report generated. There's also an option to return the HTML string instead of the base64 encoded string.
 
  `` HTML Sample Request ``
 
-    curl -H "Content-Type:applicaition/json" -XPOST "http://localhost:9201/_generate"  -d '{}'
+    curl -H "Content-Type:application/json" -XPOST "http://localhost:9201/_generate"  -d '{}'
 
   `` Parameters `` <br/>
   i. <br/>
@@ -88,12 +88,16 @@ Generating a CSV report uses the query and returns a [base64 encoded]() of the f
 
   `` CSV Sample Request ``
 
-    curl -H "Content-Type:applicaition/json" -XPOST "http://localhost:9201/_generate"  -d '{}'
+    curl -H "Content-Type:application/json" -XPOST "http://localhost:9201/_generate"  -d '{"format":"PDF","fileName":"TEST_REPORT","index":"reportindex","template":"/home/username/template.jrxml","from":0,"size":10,"query":"{term:{id:20}}"}'
 
   `` Parameters ``<br/>
-    i. <br/>
-    ii. <br/>
-    iii. <br/>
+      i. format : Format of Report _*[Required]*_ <br/>
+     ii. index : ElasticSearch Index _*[Required]*_ <br/>
+    iii. template : Jasper Report Template _*[Required]*_ <br/>
+     iv. from : Offset for querying large data _*[Optional]*_ <br/>
+      v. size : Size for querying large data _*[Optional]*_ <br/>
+     iv. query : Query to search ElasticSearch index _*[Optional : Defaults to '*' if nothing is passed]*_<br/>
+     vi. fileName : File name _*[Optional]*_ <br/>
 
 
   `` CSV Sample Response ``
