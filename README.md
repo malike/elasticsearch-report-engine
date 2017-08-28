@@ -82,6 +82,7 @@ The generates [base64 encoded](https://en.wikipedia.org/wiki/Base64) stream of t
        v. *size* : Size for querying large data _*[Optional]*_ <br/>
       iv. *query* : Query to search ElasticSearch index _*[Optional : Defaults to '*' if nothing is passed]*_<br/>
       vi. *fileName* : File name _*[Optional]*_ <br/>
+     vii. *returnAs* : How you want CSV file returned. Possible values _PLAIN_ and _BASE64_  _*[Optional : Defaults to BASE64]*_ <br/>
 
 
  `` HTML Sample Response ``
