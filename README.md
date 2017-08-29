@@ -57,7 +57,7 @@ you pass the location of the jrxml and the query to fetch data from ElasticSearc
 
 
 
- `` PDF Sample Response ``
+ `` Generate PDF  Response ``
 
 When :
 
@@ -93,6 +93,7 @@ iii. System Error Generating Report
          "message":"ERROR_GENERATING_REPORT"
          }
 
+<br/><br/>
 
 ## HTML Report
 
@@ -119,8 +120,46 @@ The generates [base64 encoded](https://en.wikipedia.org/wiki/Base64) stream of t
      vii. *returnAs* : How you want HTML file returned. Possible values _PLAIN_ and _BASE64_  **[Optional : Defaults to BASE64]** <br/>
 
 
- `` HTML Sample Response ``
+ `` Generate HTML Response ``
 
+When :
+
+i. Success
+
+    {"status":true,
+     "count":1,
+     "data": "base 64 encoded string",
+     "message":"SUCCESS"
+     }
+
+ii. Missing Required Param
+
+      {"status":false,
+         "count":0,
+         "data": null,
+         "message":"MISSING_PARAM"
+         }
+
+iii. Report Format Unknown
+
+      {"status":false,
+         "count":0,
+         "data": null,
+         "message":"REPORT_FORMAT_UNKNOWN"
+         }
+
+iii. System Error Generating Report
+
+      {"status":false,
+         "count":0,
+         "data": null,
+         "message":"ERROR_GENERATING_REPORT"
+         }
+
+<br/><br/>
+
+_*Note for HTML reports you want as HTML files instead of dummy services.
+Send this parameter as part of your default parameters_ : _"returnAs":"PLAIN_
 
  ## CSV Report
 
