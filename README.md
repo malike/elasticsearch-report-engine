@@ -59,6 +59,40 @@ you pass the location of the jrxml and the query to fetch data from ElasticSearc
 
  `` PDF Sample Response ``
 
+When :
+
+i. Success
+
+    {"status":true,
+     "count":1,
+     "data": "base 64 encoded string",
+     "message":"SUCCESS"
+     }
+
+ii. Missing Required Param
+
+      {"status":false,
+         "count":0,
+         "data": null,
+         "message":"MISSING_PARAM"
+         }
+
+iii. Report Format Unknown
+
+      {"status":false,
+         "count":0,
+         "data": null,
+         "message":"REPORT_FORMAT_UNKNOWN"
+         }
+
+iii. System Error Generating Report
+
+      {"status":false,
+         "count":0,
+         "data": null,
+         "message":"ERROR_GENERATING_REPORT"
+         }
+
 
 ## HTML Report
 
