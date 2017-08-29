@@ -47,13 +47,13 @@ you pass the location of the jrxml and the query to fetch data from ElasticSearc
     curl -H "Content-Type:application/json" -XPOST "http://localhost:9201/_generate"  -d '{"format":"PDF","fileName":"TEST_REPORT","index":"reportindex","template":"/home/username/template.jrxml","from":0,"size":10,"query":"{term:{id:20}}"}'
 
   `` Parameters ``<br/><br/>
-        i. *format* : Format of Report _*[Required]*_ <br/>
-       ii. *index* : ElasticSearch Index _*[Required]*_ <br/>
-      iii. *template* : Jasper Report Template _*[Required]*_ <br/>
-       iv. *from* : Offset for querying large data _*[Optional]*_ <br/>
-        v. *size* : Size for querying large data _*[Optional]*_ <br/>
-       iv. *query* : Query to search ElasticSearch index _*[Optional : Defaults to '*' if nothing is passed]*_<br/>
-       vi. *fileName* : File name _*[Optional]*_ <br/>
+        i. *format* : Format of Report **[Required]** <br/>
+       ii. *index* : ElasticSearch Index **[Required]** <br/>
+      iii. *template* : Jasper Report Template **[Required]** <br/>
+       iv. *from* : Offset for querying large data **[Optional]** <br/>
+        v. *size* : Size for querying large data **[Optional]** <br/>
+       iv. *query* : Query to search ElasticSearch index **[Optional : Defaults to '*' if nothing is passed]**<br/>
+       vi. *fileName* : File name **[Optional]** <br/>
 
 
 
@@ -75,14 +75,14 @@ The generates [base64 encoded](https://en.wikipedia.org/wiki/Base64) stream of t
     curl -H "Content-Type:application/json" -XPOST "http://localhost:9201/_generate"  -d '{"format":"HTML","fileName":"TEST_REPORT","index":"reportindex","template":"/home/username/template.jrxml","from":0,"size":10,"query":"{term:{id:20}}"}'
 
  `` Parameters ``<br/><br/>
-       i. *format* : Format of Report _*[Required]*_ <br/>
-      ii. *index* : ElasticSearch Index _*[Required]*_ <br/>
-     iii. *template* : Jasper Report Template _*[Required]*_ <br/>
-      iv. *from* : Offset for querying large data _*[Optional]*_ <br/>
-       v. *size* : Size for querying large data _*[Optional]*_ <br/>
-      iv. *query* : Query to search ElasticSearch index _*[Optional : Defaults to '*' if nothing is passed]*_<br/>
-      vi. *fileName* : File name _*[Optional]*_ <br/>
-     vii. *returnAs* : How you want HTML file returned. Possible values _PLAIN_ and _BASE64_  _*[Optional : Defaults to BASE64]*_ <br/>
+       i. *format* : Format of Report **[Required]** <br/>
+      ii. *index* : ElasticSearch Index **[Required]** <br/>
+     iii. *template* : Jasper Report Template **[Required]** <br/>
+      iv. *from* : Offset for querying large data **[Optional]** <br/>
+       v. *size* : Size for querying large data **[Optional]** <br/>
+      iv. *query* : Query to search ElasticSearch index **[Optional : Defaults to '*' if nothing is passed]**<br/>
+      vi. *fileName* : File name **[Optional]** <br/>
+     vii. *returnAs* : How you want HTML file returned. Possible values _PLAIN_ and _BASE64_  **[Optional : Defaults to BASE64]** <br/>
 
 
  `` HTML Sample Response ``
@@ -92,7 +92,7 @@ The generates [base64 encoded](https://en.wikipedia.org/wiki/Base64) stream of t
 
       1. CSV Report
 
-Unlike the PDF and HTML reports,the CSV option doesn't use [Jasper Report](https://community.jaspersoft.com/) as core engine for generating reports.
+Unlike the PDF and HTML reports,the CSV option does not use [Jasper Report](https://community.jaspersoft.com/) as core engine for generating reports.
 Generating a CSV report uses the query and returns a [base64 encoded]() of the file.
 
 
@@ -101,14 +101,14 @@ Generating a CSV report uses the query and returns a [base64 encoded]() of the f
     curl -H "Content-Type:application/json" -XPOST "http://localhost:9201/_generate"  -d '{"format":"CSV","fileName":"TEST_REPORT","index":"reportindex","template":"/home/username/template.jrxml","from":0,"size":10,"query":"{term:{id:20}}"}'
 
   `` Parameters ``<br/><br/>
-      i. *format* : Format of Report _*[Required]*_ <br/>
-     ii. *index* : ElasticSearch Index _*[Required]*_ <br/>
-    iii. *returnAs* : How you want CSV file returned. Possible values _PLAIN_ and _BASE64_  _*[Optional : Defaults to BASE64]*_ <br/>
-     iv. *from* : Offset for querying large data _*[Optional]*_ <br/>
-      v. *size* : Size for querying large data _*[Optional]*_ <br/>
-     iv. *query* : Query to search ElasticSearch index _*[Optional : Defaults to '*' if nothing is passed]*_<br/>
-     vi. *fileName* : File name _*[Optional]*_ <br/>
-
+      i. *format* : Format of Report **[Required]** <br/>
+     ii. *index* : ElasticSearch Index **[Required]** <br/>
+    iii. *returnAs* : How you want CSV file returned. Possible values _PLAIN_ and _BASE64_  **[Optional : Defaults to BASE64]** <br/>
+     iv. *from* : Offset for querying large data **[Optional]** <br/>
+      v. *size* : Size for querying large data **[Optional]** <br/>
+     iv. *query* : Query to search ElasticSearch index **[Optional : Defaults to '*' if nothing is passed]**<br/>
+     vi. *fileName* : File name **[Optional]** <br/>
+``
 
   `` CSV Sample Response ``
 
