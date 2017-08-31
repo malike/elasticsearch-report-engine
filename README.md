@@ -158,7 +158,7 @@ iii. System Error Generating Report
 
 <br/><br/>
 
-_*Note for HTML reports you want as HTML files instead of dummy services.
+_*Note: For HTML reports you want returned as HTML string instead of a base64 encoded string.
 Send this parameter as part of your default parameters_ : _"returnAs":"PLAIN_
 
  ## CSV Report
@@ -171,7 +171,7 @@ Generating a CSV report uses the query and returns a [base64 encoded]() of the f
 
   `` CSV Sample Request ``
 
-    curl -H "Content-Type:application/json" -XPOST "http://localhost:9201/_generate"  -d '{"format":"CSV","fileName":"TEST_REPORT","index":"reportindex","template":"/home/username/template.jrxml","from":0,"size":10,"query":"{term:{id:20}}"}'
+    curl -H "Content-Type:application/json" -XPOST "http://localhost:9201/_generate"  -d '{"format":"CSV","fileName":"TEST_REPORT","index":"reportindex","from":0,"size":10,"query":"{term:{id:20}}"}'
 
   `` Parameters ``<br/><br/>
       i. *format* : Format of Report **[Required]** <br/>
@@ -185,6 +185,44 @@ Generating a CSV report uses the query and returns a [base64 encoded]() of the f
 
   `` CSV Sample Response ``
 
+When :
+
+i. Success
+
+    {"status":true,
+     "count":1,
+     "data": "base 64 encoded string",
+     "message":"SUCCESS"
+     }
+
+ii. Missing Required Param
+
+      {"status":false,
+         "count":0,
+         "data": null,
+         "message":"MISSING_PARAM"
+         }
+
+iii. Report Format Unknown
+
+      {"status":false,
+         "count":0,
+         "data": null,
+         "message":"REPORT_FORMAT_UNKNOWN"
+         }
+
+iii. System Error Generating Report
+
+      {"status":false,
+         "count":0,
+         "data": null,
+         "message":"ERROR_GENERATING_REPORT"
+         }
+
+<br/><br/>
+
+_*Note: For CSV reports you want returned as comma separated values instead of a base64 encoded string.
+Send this parameter as part of your default parameters_ : _"returnAs":"PLAIN_
 
 
 <p>&nbsp;</p>
