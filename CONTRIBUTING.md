@@ -22,14 +22,15 @@ ii. [https://dzone.com/articles/introduction-to-java-tdd](https://dzone.com/arti
 
 #### i. Found a bug
 
-If you've found a bug in the project. Kindly create a [ticket](). We'll do our best to respond and/or fix ASAP.
+If you've found a bug in the project. Kindly create a [ticket](https://github.com/malike/elasticsearch-report-engine/issues/new). We'll do our best to respond and/or fix ASAP.
 
 #### ii. Fix a bug
 
-Want to go a step further after finding a bug?
+Want to go a step further after finding a bug?.  Fix it and submit a [PR](https://github.com/malike/elasticsearch-report-engine/compare)
 
 #### iii. Implement a new feature
 
+Add it and submit a  [PR](https://github.com/malike/elasticsearch-report-engine/compare)
 
 
 

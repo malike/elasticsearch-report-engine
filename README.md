@@ -235,8 +235,8 @@ ElasticSearch versions supported by this plugin include :
 | ElasticSearch Version | Comments |
 | --------------------- | -------- |
 | [5.5]()               | Tested   |
-| [5.0]()               | Tested   |
-| [2.4]()               | Tested   |
+| [5.0]()               |   -      |
+| [2.4]()               |   -      |
 
 <p>&nbsp;</p>
 <p>&nbsp;</p>
@@ -245,9 +245,9 @@ ElasticSearch versions supported by this plugin include :
 
 | ElasticSearch Version | Comments |
 | --------------------- | -------- |
-| [5.0]()               | [zip]()  |
-| [5.0]()               | [zip]()  |
-| [2.4]()               | [zip]()  |
+| [5.5]()               | [zip]()  |
+| [5.0]()               |    -     |
+| [2.4]()               |    -     |
 
 <p>&nbsp;</p>
 <p>&nbsp;</p>
