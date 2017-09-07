@@ -234,9 +234,8 @@ ElasticSearch versions supported by this plugin include :
 
 | ElasticSearch Version | Comments |
 | --------------------- | -------- |
-| [5.5]()               | Tested   |
-| [5.0]()               |   -      |
-| [2.4]()               |   -      |
+| [5.5](https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.5.2.zip)               | Tested   |
+| [2.4](https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/zip/elasticsearch/2.4.0/elasticsearch-2.4.0.zip)               |   -      |
 
 <p>&nbsp;</p>
 <p>&nbsp;</p>
@@ -245,9 +244,8 @@ ElasticSearch versions supported by this plugin include :
 
 | ElasticSearch Version | Comments |
 | --------------------- | -------- |
-| [5.5]()               | [zip]()  |
-| [5.0]()               |    -     |
-| [2.4]()               |    -     |
+| [5.5](https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.5.2.zip)               | [zip]()  |
+| [2.4](https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/zip/elasticsearch/2.4.0/elasticsearch-2.4.0.zip)               |    -     |
 
 <p>&nbsp;</p>
 <p>&nbsp;</p>
