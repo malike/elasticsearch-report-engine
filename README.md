@@ -161,7 +161,7 @@ iii. System Error Generating Report
 _*Note: For HTML reports you want returned as HTML string instead of a base64 encoded string.
 Send this parameter as part of your default parameters_ : _"returnAs":"PLAIN_
 
- ## CSV
+## CSV
 
       1. CSV Report
 
