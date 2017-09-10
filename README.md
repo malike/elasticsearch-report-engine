@@ -7,9 +7,9 @@ Plugin to generate Reports from ElasticSearch Queries.
   - [Basic Overview](#overview)
   - [Install](#install)
   - [Usage](#usage)
-    - [PDF](#pdf_report)
-    - [HTML](#html_report)
-    - [CSV](#csv_report)
+    - [PDF](#pdf)
+    - [HTML](#html)
+    - [CSV](#csv)
  - [Supported](#supported)   
  - [Download](#download)   
  - [Contribute](CONTRIBUTING.md)
@@ -30,7 +30,7 @@ Once this plugin is installed into elasticsearch search,it exposes the url http:
 
 ## Usage
 
-## PDF Report
+## PDF
 
      1. PDF Report
 
@@ -95,7 +95,7 @@ iii. System Error Generating Report
 
 <br/><br/>
 
-## HTML Report
+## HTML
 
      1. HTML Report
 
@@ -161,7 +161,7 @@ iii. System Error Generating Report
 _*Note: For HTML reports you want returned as HTML string instead of a base64 encoded string.
 Send this parameter as part of your default parameters_ : _"returnAs":"PLAIN_
 
- ## CSV Report
+ ## CSV
 
       1. CSV Report
 
