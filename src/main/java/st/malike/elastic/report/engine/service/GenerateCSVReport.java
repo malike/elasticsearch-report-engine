@@ -7,29 +7,20 @@ package st.malike.elastic.report.engine.service;
 
 import com.github.wnameless.json.flattener.JsonFlattener;
 import com.google.gson.Gson;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
 import org.apache.commons.lang.StringUtils;
 import st.malike.elastic.report.engine.exception.JasperGenerationException;
 import st.malike.elastic.report.engine.exception.ReportFormatUnkownException;
 import st.malike.elastic.report.engine.exception.TemplateNotFoundException;
 
+import java.io.*;
+import java.util.*;
+
 /**
- *
  * @author malike_st
  */
 public class GenerateCSVReport implements GenerateReportService {
 
     /**
-     *
      * @param params
      * @param data
      * @param templateFileLocation
@@ -43,7 +34,7 @@ public class GenerateCSVReport implements GenerateReportService {
     @Override
     @SuppressWarnings("unchecked")
     public File generateReport(Map params, List data, String templateFileLocation,
-            String fileName, Generator.ReportFormat reportFormat) throws TemplateNotFoundException, JasperGenerationException, ReportFormatUnkownException {
+                               String fileName, Generator.ReportFormat reportFormat) throws TemplateNotFoundException, JasperGenerationException, ReportFormatUnkownException {
         try {
             if (reportFormat == null) {
                 throw new ReportFormatUnkownException("Report format unknown");

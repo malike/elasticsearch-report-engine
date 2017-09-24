@@ -1,5 +1,13 @@
 package st.malike.elastic.report.engine.service;
 
+import org.apache.commons.codec.binary.Base64;
+import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.search.SearchHit;
+import org.elasticsearch.search.SearchHits;
+import st.malike.elastic.report.engine.exception.JasperGenerationException;
+import st.malike.elastic.report.engine.exception.ReportFormatUnkownException;
+import st.malike.elastic.report.engine.exception.TemplateNotFoundException;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -11,13 +19,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.apache.commons.codec.binary.Base64;
-import org.elasticsearch.action.search.SearchResponse;
-import org.elasticsearch.search.SearchHit;
-import org.elasticsearch.search.SearchHits;
-import st.malike.elastic.report.engine.exception.JasperGenerationException;
-import st.malike.elastic.report.engine.exception.ReportFormatUnkownException;
-import st.malike.elastic.report.engine.exception.TemplateNotFoundException;
 
 /**
  * @author malike_st
@@ -32,7 +33,7 @@ public class Generator {
         MISSING_PARAM
     }
 
-    public enum ReturnAs{
+    public enum ReturnAs {
         BASE64,
         PLAIN
     }
@@ -40,65 +41,55 @@ public class Generator {
     public enum ReportFormat {
 
         /**
-         *
          * PDF Report
-         *
          */
         PDF {
-
-                    @Override
-                    @SuppressWarnings("unchecked")
-                    public File generate(Map dataMap, List dataList, String templateFileLocation, String fileName) {
-                        try {
-                            return new GeneratePDFReport().generateReport(dataMap, dataList, templateFileLocation, fileName, PDF);
-                        } catch (TemplateNotFoundException | JasperGenerationException | ReportFormatUnkownException ex) {
-                            Logger.getLogger(Generator.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        return null;
-                    }
-                },
+            @Override
+            @SuppressWarnings("unchecked")
+            public File generate(Map dataMap, List dataList, String templateFileLocation, String fileName) {
+                try {
+                    return new GeneratePDFReport().generateReport(dataMap, dataList, templateFileLocation, fileName, PDF);
+                } catch (TemplateNotFoundException | JasperGenerationException | ReportFormatUnkownException ex) {
+                    Logger.getLogger(Generator.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                return null;
+            }
+        },
         /**
-         *
          * CSV Report
-         *
          */
         CSV {
-
-                    @Override
-                    @SuppressWarnings("unchecked")
-                    public File generate(Map dataMap, List dataList, String templateFileLocation, String fileName) {
-                        try {
-                            return new GenerateCSVReport().generateReport(dataMap, dataList, templateFileLocation, fileName, CSV);
-                        } catch (TemplateNotFoundException | JasperGenerationException | ReportFormatUnkownException ex) {
-                            Logger.getLogger(Generator.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        return null;
-                    }
-                },
+            @Override
+            @SuppressWarnings("unchecked")
+            public File generate(Map dataMap, List dataList, String templateFileLocation, String fileName) {
+                try {
+                    return new GenerateCSVReport().generateReport(dataMap, dataList, templateFileLocation, fileName, CSV);
+                } catch (TemplateNotFoundException | JasperGenerationException | ReportFormatUnkownException ex) {
+                    Logger.getLogger(Generator.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                return null;
+            }
+        },
         /**
-         *
          * HTML Report
-         *
          */
         HTML {
-
-                    @Override
-                    @SuppressWarnings("unchecked")
-                    public File generate(Map dataMap, List dataList, String templateFileLocation, String fileName) {
-                        try {
-                            return new GenerateHTMLReport().generateReport(dataMap, dataList, templateFileLocation, fileName, HTML);
-                        } catch (TemplateNotFoundException | JasperGenerationException | ReportFormatUnkownException ex) {
-                            Logger.getLogger(Generator.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        return null;
-                    }
-                };
+            @Override
+            @SuppressWarnings("unchecked")
+            public File generate(Map dataMap, List dataList, String templateFileLocation, String fileName) {
+                try {
+                    return new GenerateHTMLReport().generateReport(dataMap, dataList, templateFileLocation, fileName, HTML);
+                } catch (TemplateNotFoundException | JasperGenerationException | ReportFormatUnkownException ex) {
+                    Logger.getLogger(Generator.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                return null;
+            }
+        };
 
         @SuppressWarnings("unchecked")
         public abstract File generate(Map dataMap, List dataList, String templateFileLocation, String fileName);
 
         /**
-         *
          * @param file
          * @param reportFormat
          * @return
@@ -116,7 +107,6 @@ public class Generator {
         }
 
         /**
-         *
          * @param response
          * @return
          */
@@ -135,13 +125,13 @@ public class Generator {
         }
 
         @SuppressWarnings("unchecked")
-        public  Map getContents(File reportFile, ReportFormat reportFormat) throws IOException {
-            if(reportFile ==null){
+        public Map getContents(File reportFile, ReportFormat reportFormat) throws IOException {
+            if (reportFile == null) {
                 return null;
             }
-            if(reportFormat.equals(ReportFormat.PDF)){
+            if (reportFormat.equals(ReportFormat.PDF)) {
                 //default to base64 if report type is PDF
-                return objectToBase64String(reportFile,reportFormat);
+                return objectToBase64String(reportFile, reportFormat);
             }
             byte[] reportFileEncoded = Files.readAllBytes(Paths.get(reportFile.getAbsolutePath()));
             String report = new String(reportFileEncoded, StandardCharsets.UTF_8);

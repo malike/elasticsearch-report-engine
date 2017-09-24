@@ -5,20 +5,7 @@
  */
 package st.malike.elastic.report.engine.service;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import net.sf.jasperreports.engine.JRDataSource;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
@@ -26,14 +13,20 @@ import st.malike.elastic.report.engine.exception.JasperGenerationException;
 import st.malike.elastic.report.engine.exception.ReportFormatUnkownException;
 import st.malike.elastic.report.engine.exception.TemplateNotFoundException;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 /**
- *
  * @author malike_st
  */
 public class GenerateHTMLReport implements GenerateReportService {
 
     /**
-     *
      * @param params
      * @param data
      * @param templateFileLocation
@@ -47,7 +40,7 @@ public class GenerateHTMLReport implements GenerateReportService {
     @Override
     @SuppressWarnings("unchecked")
     public File generateReport(Map params, List data, String templateFileLocation, String fileName,
-            Generator.ReportFormat reportFormat) throws TemplateNotFoundException, JasperGenerationException, ReportFormatUnkownException {
+                               Generator.ReportFormat reportFormat) throws TemplateNotFoundException, JasperGenerationException, ReportFormatUnkownException {
         try {
             if (templateFileLocation == null || templateFileLocation.trim().isEmpty()) {
                 throw new TemplateNotFoundException("Template file not found");

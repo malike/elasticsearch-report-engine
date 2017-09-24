@@ -50,8 +50,8 @@ public class JSONResponse implements ToXContent {
     @Override
     public XContentBuilder toXContent(XContentBuilder xContentBuilder, Params params) throws IOException {
         return xContentBuilder.field("message", message)
-                .field("status",status)
-                .field("count",count)
-                .field("data",data);
+                .field("status", status)
+                .field("count", count)
+                .field("data", data);
     }
 }

@@ -5,8 +5,6 @@
  */
 package st.malike.elastic.report.engine.generate;
 
-import java.io.File;
-import java.util.List;
 import org.elasticsearch.ElasticsearchException;
 import org.elasticsearch.action.ActionListener;
 import org.elasticsearch.action.search.SearchResponse;
@@ -18,8 +16,10 @@ import org.elasticsearch.rest.RestStatus;
 import st.malike.elastic.report.engine.service.Generator;
 import st.malike.elastic.report.engine.util.JSONResponse;
 
+import java.io.File;
+import java.util.List;
+
 /**
- *
  * @author malike_st
  */
 public class GenerateResponseListener implements ActionListener<SearchResponse> {
@@ -53,10 +53,10 @@ public class GenerateResponseListener implements ActionListener<SearchResponse> 
             }
             message.setStatus(true);
             message.setCount(1L);
-            if(generateData.getReturnAs().equals(Generator.ReturnAs.BASE64)) {
+            if (generateData.getReturnAs().equals(Generator.ReturnAs.BASE64)) {
                 message.setData(generateData.getFormat().objectToBase64String(reportFile, generateData.getFormat()));
-            }else{
-                message.setData(generateData.getFormat().getContents(reportFile,generateData.getFormat()));
+            } else {
+                message.setData(generateData.getFormat().getContents(reportFile, generateData.getFormat()));
             }
             message.setMessage(Generator.JSONResponseMessage.SUCCESS.toString());
             XContentBuilder builder = restChannel.newBuilder();

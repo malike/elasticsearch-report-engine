@@ -6,32 +6,36 @@
 package st.malike.elastic.report.engine;
 
 import com.google.gson.Gson;
-import static com.jayway.restassured.RestAssured.given;
-import java.io.File;
 import org.codelibs.elasticsearch.runner.ElasticsearchClusterRunner;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.node.Node;
-import org.junit.*;
+import org.hamcrest.Matchers;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.BlockJUnit4ClassRunner;
+import st.malike.elastic.report.engine.service.Generator;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import org.hamcrest.Matchers;
-import static org.junit.Assert.*;
-import st.malike.elastic.report.engine.service.Generator;
+
+import static com.jayway.restassured.RestAssured.given;
+import static org.junit.Assert.assertEquals;
 
 @RunWith(BlockJUnit4ClassRunner.class)
 public class ElasticReportPluginTest {
 
-    private static Node node;
-    private static ElasticsearchClusterRunner runner;
     private static final String CLUSTER_NAME = "REPORTDATA_CLUSTER";
     private static final String CLUSTER_HOST_ADDRESS = "localhost:9201-9210";
     private static final String INDEX = "reportindex";
     private static final int DOC_SIZE = 100;
+    private static Node node;
+    private static ElasticsearchClusterRunner runner;
     private static String TEMPLATE_NAME = "SampleTemplate.jrxml";
     private static String JASPER_TEMPLATE_FILE_LOCATION = "/";
     private Map param;
@@ -63,9 +67,9 @@ public class ElasticReportPluginTest {
         for (int i = 1; i <= DOC_SIZE; i++) {
             runner.insert(INDEX, type, String.valueOf(i),
                     "{"
-                    + "\"description\":\"Transaction " + i + "\","
-                    + "\"id\":" + i
-                    + "}");
+                            + "\"description\":\"Transaction " + i + "\","
+                            + "\"id\":" + i
+                            + "}");
         }
         runner.refresh();
 

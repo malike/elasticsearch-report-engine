@@ -1,25 +1,25 @@
 package st.malike.elastic.report.engine;
 
+import org.elasticsearch.action.search.SearchRequestBuilder;
+import org.elasticsearch.action.search.SearchType;
 import org.elasticsearch.client.node.NodeClient;
 import org.elasticsearch.common.inject.Inject;
 import org.elasticsearch.common.settings.Settings;
-import org.elasticsearch.rest.*;
-
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import org.elasticsearch.action.search.SearchRequestBuilder;
-import org.elasticsearch.action.search.SearchType;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentHelper;
 import org.elasticsearch.index.query.QueryBuilders;
-
-import static org.elasticsearch.rest.RestRequest.Method.POST;
+import org.elasticsearch.rest.*;
 import org.elasticsearch.search.sort.SortOrder;
 import st.malike.elastic.report.engine.generate.GenerateData;
 import st.malike.elastic.report.engine.generate.GenerateResponseListener;
 import st.malike.elastic.report.engine.service.Generator;
 import st.malike.elastic.report.engine.util.JSONResponse;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.elasticsearch.rest.RestRequest.Method.POST;
 
 /**
  * @author malike_st.
@@ -50,7 +50,7 @@ public class ReportGenerateRestAction extends BaseRestHandler {
 
         if (restRequest.content().length() > 0) {
             // Let's try to find the name from the body
-            Map<String, Object> map = XContentHelper.convertToMap(restRequest.content(), false,null).v2();
+            Map<String, Object> map = XContentHelper.convertToMap(restRequest.content(), false, null).v2();
             if (map.containsKey("query")) {
                 query = (String) map.get("query");
             }
@@ -72,7 +72,7 @@ public class ReportGenerateRestAction extends BaseRestHandler {
             if (map.containsKey("returnAs")) {
                 try {
                     returnAs = Generator.ReturnAs.valueOf(((String) map.get("returnAs")).toUpperCase());
-                }catch (Exception e){
+                } catch (Exception e) {
                 }
             }
             if (map.containsKey("template")) {
@@ -92,7 +92,7 @@ public class ReportGenerateRestAction extends BaseRestHandler {
             }
         }
         if ((format == null || index == null)
-                || ((format.toLowerCase().equals("pdf") || (format.toLowerCase().equals("html")))&& templateLocation == null)) {
+                || ((format.toLowerCase().equals("pdf") || (format.toLowerCase().equals("html"))) && templateLocation == null)) {
             return channel -> {
                 message.setStatus(false);
                 message.setCount(0L);

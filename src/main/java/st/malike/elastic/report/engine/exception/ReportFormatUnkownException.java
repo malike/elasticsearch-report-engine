@@ -6,7 +6,6 @@
 package st.malike.elastic.report.engine.exception;
 
 /**
- *
  * @author malike_st
  */
 public class ReportFormatUnkownException extends Exception {

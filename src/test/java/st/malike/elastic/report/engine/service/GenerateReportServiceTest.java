@@ -11,17 +11,16 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.runners.MockitoJUnitRunner;
+import st.malike.elastic.report.engine.exception.ReportFormatUnkownException;
+import st.malike.elastic.report.engine.exception.TemplateNotFoundException;
 
 import java.io.File;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import st.malike.elastic.report.engine.exception.ReportFormatUnkownException;
-import st.malike.elastic.report.engine.exception.TemplateNotFoundException;
 
 /**
- *
  * @author malike_st
  */
 @RunWith(MockitoJUnitRunner.class)

@@ -5,11 +5,11 @@
  */
 package st.malike.elastic.report.engine.generate;
 
-import java.util.Map;
 import st.malike.elastic.report.engine.service.Generator;
 
+import java.util.Map;
+
 /**
- *
  * @author malike_st
  */
 public class GenerateData {
