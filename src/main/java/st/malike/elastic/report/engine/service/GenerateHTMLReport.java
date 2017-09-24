@@ -45,6 +45,7 @@ public class GenerateHTMLReport implements GenerateReportService {
      * @throws ReportFormatUnkownException
      */
     @Override
+    @SuppressWarnings("unchecked")
     public File generateReport(Map params, List data, String templateFileLocation, String fileName,
             Generator.ReportFormat reportFormat) throws TemplateNotFoundException, JasperGenerationException, ReportFormatUnkownException {
         try {

@@ -33,6 +33,7 @@ public class ReportGenerateRestAction extends BaseRestHandler {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     protected RestChannelConsumer prepareRequest(RestRequest restRequest, NodeClient client) throws IOException {
         JSONResponse message = new JSONResponse();
         GenerateData generateData = new GenerateData();

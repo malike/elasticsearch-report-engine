@@ -47,6 +47,7 @@ public class Generator {
         PDF {
 
                     @Override
+                    @SuppressWarnings("unchecked")
                     public File generate(Map dataMap, List dataList, String templateFileLocation, String fileName) {
                         try {
                             return new GeneratePDFReport().generateReport(dataMap, dataList, templateFileLocation, fileName, PDF);
@@ -64,6 +65,7 @@ public class Generator {
         CSV {
 
                     @Override
+                    @SuppressWarnings("unchecked")
                     public File generate(Map dataMap, List dataList, String templateFileLocation, String fileName) {
                         try {
                             return new GenerateCSVReport().generateReport(dataMap, dataList, templateFileLocation, fileName, CSV);
@@ -81,6 +83,7 @@ public class Generator {
         HTML {
 
                     @Override
+                    @SuppressWarnings("unchecked")
                     public File generate(Map dataMap, List dataList, String templateFileLocation, String fileName) {
                         try {
                             return new GenerateHTMLReport().generateReport(dataMap, dataList, templateFileLocation, fileName, HTML);
@@ -91,6 +94,7 @@ public class Generator {
                     }
                 };
 
+        @SuppressWarnings("unchecked")
         public abstract File generate(Map dataMap, List dataList, String templateFileLocation, String fileName);
 
         /**
@@ -100,6 +104,7 @@ public class Generator {
          * @return
          * @throws java.io.IOException
          */
+        @SuppressWarnings("unchecked")
         public Map objectToBase64String(File file, ReportFormat reportFormat) throws IOException {
             if (file == null) {
                 return null;
@@ -115,6 +120,7 @@ public class Generator {
          * @param response
          * @return
          */
+        @SuppressWarnings("unchecked")
         public List<Map> extractData(SearchResponse response) {
             List<Map> data = new LinkedList<>();
             SearchHits hits = response.getHits();
@@ -128,6 +134,7 @@ public class Generator {
             return data;
         }
 
+        @SuppressWarnings("unchecked")
         public  Map getContents(File reportFile, ReportFormat reportFormat) throws IOException {
             if(reportFile ==null){
                 return null;
