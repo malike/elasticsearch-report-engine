@@ -6,7 +6,7 @@
 
     <groupId>elasticsearch-report-engine</groupId>
     <artifactId>st.malike.elasticsearch.report.engine</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0-RC</version>
     <name>Plugin: Report Engine</name>
     <description>A plugin to generate PDF reports with ElasticSearch</description>
 
