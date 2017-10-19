@@ -12,6 +12,7 @@ Plugin to generate Reports from ElasticSearch Queries.
     - [CSV](#csv)
  - [Supported](#supported)   
  - [Download](#download)   
+ - [Scheduling](#scheduling)   
  - [Contribute](CONTRIBUTING.md)
  - [Code of Conduct](CODE_OF_CONDUCT.md)
  - [License](https://github.com/malike/elasticsearch-report-engine/blob/master/LICENSE)
@@ -247,7 +248,11 @@ ElasticSearch versions supported by this plugin include :
 
 <p>&nbsp;</p>
 <p>&nbsp;</p>
+## Scheduling
 
+This plugin can work with an [alerting system](https://malike.github.io/go-kafka-alert/) and a custom [elasticsearch watcher](https://malike.github.io/elasticsearch-kafka-watch/) to send emailed reports to specific contacts. By creating your watcher events in the [custom elasticsearch watch](https://malike.github.io/elasticsearch-kafka-watch/), events would be pushed to Apache Kafka once there's a _hit_, [go-kafka-alert](https://malike.github.io/go-kafka-alert/) listening on Apache Kafka for events would react by emailing embedded **HTML** reports or attached **CSV** or **PDF** reports.
+
+This requires no updates to this plugin but setuo and configurations in [go-kafka-alert](https://malike.github.io/go-kafka-alert/) and [elasticsearch watcher](https://malike.github.io/elasticsearch-kafka-watch/)
 
 ## Contribute
 
