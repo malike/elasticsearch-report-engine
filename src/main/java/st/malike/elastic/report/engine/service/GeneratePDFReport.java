@@ -72,7 +72,7 @@ public class GeneratePDFReport implements GenerateReportService {
     }
 
     private JRDataSource getDatasource(List data) {
-        if (null != data) {
+        if (data != null) {
             return new JRBeanCollectionDataSource(data);
         }
         return new JRBeanCollectionDataSource(new ArrayList());
