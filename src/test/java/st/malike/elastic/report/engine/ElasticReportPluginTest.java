@@ -26,6 +26,7 @@ import java.util.Map;
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.junit.Assert.assertEquals;
+import static st.malike.elastic.report.engine.ElasticReportPluginTest.CDIndicator.randomCDIndicator;
 
 @RunWith(BlockJUnit4ClassRunner.class)
 public class ElasticReportPluginTest {
@@ -67,9 +68,10 @@ public class ElasticReportPluginTest {
         for (int i = 1; i <= DOC_SIZE; i++) {
             runner.insert(INDEX, type, String.valueOf(i),
                     "{"
-                            + "\"description\":\"Transaction " + i + "\","
-                            + "\"id\":" + i
-                            + "}");
+                    + "\"type\":\"" + randomCDIndicator().toString() + "\","
+                    + "\"description\":\"Transaction " + i + "\","
+                    + "\"id\":" + i
+                    + "}");
         }
         runner.refresh();
 
@@ -110,7 +112,12 @@ public class ElasticReportPluginTest {
         Map sort = new HashMap();
         sort.put("id", "DESC");
 
-        String queryString = "{\"term\":{\"id\":20}}";
+//        String queryString = "{\"term\":{\"id\":20}}";
+        String queryString = "{"                
+                + "    \"match\": {"
+                + "      \"full_text\": \"Desc\""
+                + "    }"                
+                + "}";
 
         ClassLoader classLoader = getClass().getClassLoader();
         File tempFile = new File(classLoader.getResource(TEMPLATE_NAME).getFile());
@@ -123,7 +130,7 @@ public class ElasticReportPluginTest {
         param.put("template", JASPER_TEMPLATE_FILE_LOCATION);
         param.put("mapData", dummy);
         param.put("from", 0);
-        param.put("size", DOC_SIZE + DOC_SIZE);
+        param.put("size",  50);
         param.put("query", queryString);
         param.put("sort", sort);
     }
