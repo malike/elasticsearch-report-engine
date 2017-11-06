@@ -79,6 +79,20 @@ public class ElasticReportPluginTest {
         node = runner.node();
     }
 
+    public enum CDIndicator {
+
+        CREDIT,
+        DEBIT;
+
+        /**
+         *
+         * @return
+         */
+        public static CDIndicator randomCDIndicator() {
+            return values()[(int) (Math.random() * values().length)];
+        }
+    }
+
     @AfterClass
     public static void tearDown() throws IOException {
         runner.close();

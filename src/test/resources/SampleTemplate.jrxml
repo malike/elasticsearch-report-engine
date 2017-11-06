@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="5"/>
 	<parameter name="fullName" class="java.lang.String"/>
 	<parameter name="email" class="java.lang.String"/>
 	<field name="id" class="java.lang.Integer"/>
@@ -23,11 +23,11 @@
 		<band height="430" splitType="Stretch">
 			<elementGroup/>
 			<staticText>
-				<reportElement mode="Opaque" x="-20" y="82" width="595" height="47" backcolor="#2C6BA4"/>
+				<reportElement mode="Opaque" x="-20" y="82" width="595" height="47" backcolor="#C0C0C0" />
 				<text><![CDATA[]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="168" y="95" width="218" height="20" forecolor="#FFFFFF"/>
+				<reportElement x="168" y="95" width="218" height="20" forecolor="#FFFFFF" />
 				<textElement textAlignment="Center">
 					<font size="14"/>
 				</textElement>
@@ -41,7 +41,7 @@
 				<textFieldExpression><![CDATA[$P{fullName}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Opaque" x="0" y="204" width="555" height="4" backcolor="#2C6BA4" />
+				<reportElement mode="Opaque" x="0" y="204" width="555" height="4" backcolor="#ADA9A5"/>
 				<text><![CDATA[]]></text>
 			</staticText>
 			<pieChart>
@@ -108,7 +108,7 @@
 						<text><![CDATA[ID]]></text>
 					</staticText>
 					<staticText>
-						<reportElement x="148" y="13" width="184" height="20" forecolor="#2C6BA4" />
+						<reportElement x="148" y="13" width="184" height="20" forecolor="#2C6BA4"/>
 						<box leftPadding="5"/>
 						<textElement textAlignment="Center">
 							<font size="10"/>
