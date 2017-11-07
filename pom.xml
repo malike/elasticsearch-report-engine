@@ -209,6 +209,15 @@
                     <exclude>*.properties</exclude>
                 </excludes>
             </resource>
+            <resource>
+                <directory>SampleReports</directory>
+                <filtering>false</filtering>
+                <excludes>
+                    <exclude>*.csv</exclude>
+                    <exclude>*.pdf</exclude>
+                    <exclude>*.html</exclude>
+                </excludes>
+            </resource>
         </resources>
         <plugins>
             <plugin>
