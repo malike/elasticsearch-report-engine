@@ -45,7 +45,7 @@ you pass the location of the jrxml and the query to fetch data from ElasticSearc
 
  `` PDF Sample Request ``
 
-    curl -H "Content-Type:application/json" -XPOST "http://localhost:9201/_generate"  -d '{"format":"PDF","fileName":"TEST_REPORT","index":"reportindex","template":"/home/username/template.jrxml","from":0,"size":10,"query":"{term:{id:20}}"}'
+    curl -H "Content-Type:application/json" -XPOST "http://localhost:9201/_generate"  -d '{"format":"PDF","fileName":"TEST_REPORT","index":"reportindex","template":"/home/username/template.jrxml","from":0,"size":10,"query":"{term:{description:Transaction}}"}'
 
   `` Parameters ``<br/><br/>
         i. *format* : Format of Report **[Required]** <br/>
@@ -60,7 +60,7 @@ you pass the location of the jrxml and the query to fetch data from ElasticSearc
 
  `` Generate PDF  Response ``
 
-When :
+ :
 
 i. Success
 
@@ -94,6 +94,7 @@ iii. System Error Generating Report
          "message":"ERROR_GENERATING_REPORT"
          }
 
+[Sample PDF](https://github.com/malike/elasticsearch-report-engine/blob/master/TEST_REPORT.pdf)
 <br/><br/>
 
 ## HTML
@@ -108,7 +109,7 @@ The generates [base64 encoded](https://en.wikipedia.org/wiki/Base64) stream of t
 
  `` HTML Sample Request ``
 
-    curl -H "Content-Type:application/json" -XPOST "http://localhost:9201/_generate"  -d '{"format":"HTML","fileName":"TEST_REPORT","index":"reportindex","template":"/home/username/template.jrxml","from":0,"size":10,"query":"{term:{id:20}}"}'
+    curl -H "Content-Type:application/json" -XPOST "http://localhost:9201/_generate"  -d '{"format":"HTML","fileName":"TEST_REPORT","index":"reportindex","template":"/home/username/template.jrxml","from":0,"size":10,"query":"{term:{description:Transaction}}"}'
 
  `` Parameters ``<br/><br/>
        i. *format* : Format of Report **[Required]** <br/>
@@ -123,7 +124,7 @@ The generates [base64 encoded](https://en.wikipedia.org/wiki/Base64) stream of t
 
  `` Generate HTML Response ``
 
-When :
+ :
 
 i. Success
 
@@ -157,6 +158,7 @@ iii. System Error Generating Report
          "message":"ERROR_GENERATING_REPORT"
          }
 
+[Sample HTML](https://github.com/malike/elasticsearch-report-engine/blob/master/TEST_REPORT.html)
 <br/><br/>
 
 _*Note: For HTML reports you want returned as HTML string instead of a base64 encoded string.
@@ -172,7 +174,7 @@ Generating a CSV report uses the query and returns a [base64 encoded]() of the f
 
   `` CSV Sample Request ``
 
-    curl -H "Content-Type:application/json" -XPOST "http://localhost:9201/_generate"  -d '{"format":"CSV","fileName":"TEST_REPORT","index":"reportindex","from":0,"size":10,"query":"{term:{id:20}}"}'
+    curl -H "Content-Type:application/json" -XPOST "http://localhost:9201/_generate"  -d '{"format":"CSV","fileName":"TEST_REPORT","index":"reportindex","from":0,"size":10,"query":"{term:{description:Transaction}}"}'
 
   `` Parameters ``<br/><br/>
       i. *format* : Format of Report **[Required]** <br/>
@@ -182,11 +184,10 @@ Generating a CSV report uses the query and returns a [base64 encoded]() of the f
       v. *size* : Size for querying large data **[Optional]** <br/>
      iv. *query* : Query to search ElasticSearch index **[Optional : Defaults to '*' if nothing is passed]**<br/>
      vi. *fileName* : File name **[Optional]** <br/>
-``
 
   `` CSV Sample Response ``
 
-When :
+:
 
 i. Success
 
@@ -219,6 +220,8 @@ iii. System Error Generating Report
          "data": null,
          "message":"ERROR_GENERATING_REPORT"
          }
+
+[Sample CSV](https://github.com/malike/elasticsearch-report-engine/blob/master/TEST_REPORT.csv)
 
 <br/><br/>
 
