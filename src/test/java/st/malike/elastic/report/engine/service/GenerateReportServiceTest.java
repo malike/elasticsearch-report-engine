@@ -51,6 +51,7 @@ public class GenerateReportServiceTest {
             Map dataMap = new HashMap();
             dataMap.put("id", i);
             dataMap.put("description", "Item Number " + i);
+            dataMap.put("type", "CREDIT");
             list.add(dataMap);
         }
 

@@ -45,50 +45,50 @@ public class Generator {
          * PDF Report
          */
         PDF {
-                    @Override
-                    @SuppressWarnings("unchecked")
-                    public File generate(Map dataMap, List dataList, String templateFileLocation, String fileName) {
-                        try {
-                            return new GeneratePDFReport().generateReport(dataMap, dataList, templateFileLocation, fileName, PDF);
-                        } catch (TemplateNotFoundException | JasperGenerationException | ReportFormatUnkownException ex) {
-                            Logger.getLogger(Generator.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        return null;
-                    }
-                },
+            @Override
+            @SuppressWarnings("unchecked")
+            public File generate(Map dataMap, List dataList, String templateFileLocation, String fileName) {
+                try {
+                    return new GeneratePDFReport().generateReport(dataMap, dataList, templateFileLocation, fileName, PDF);
+                } catch (TemplateNotFoundException | JasperGenerationException | ReportFormatUnkownException ex) {
+                    Logger.getLogger(Generator.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                return null;
+            }
+        },
         /**
          * CSV Report
          */
         CSV {
-                    @Override
-                    @SuppressWarnings("unchecked")
-                    public File generate(Map dataMap, List dataList, String templateFileLocation, String fileName) {
-                        if (dataList.isEmpty()) {
-                            return null;
-                        }
-                        try {
-                            return new GenerateCSVReport().generateReport(dataMap, dataList, templateFileLocation, fileName, CSV);
-                        } catch (TemplateNotFoundException | JasperGenerationException | ReportFormatUnkownException ex) {
-                            Logger.getLogger(Generator.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        return null;
-                    }
-                },
+            @Override
+            @SuppressWarnings("unchecked")
+            public File generate(Map dataMap, List dataList, String templateFileLocation, String fileName) {
+                if (dataList.isEmpty()) {
+                    return null;
+                }
+                try {
+                    return new GenerateCSVReport().generateReport(dataMap, dataList, templateFileLocation, fileName, CSV);
+                } catch (TemplateNotFoundException | JasperGenerationException | ReportFormatUnkownException ex) {
+                    Logger.getLogger(Generator.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                return null;
+            }
+        },
         /**
          * HTML Report
          */
         HTML {
-                    @Override
-                    @SuppressWarnings("unchecked")
-                    public File generate(Map dataMap, List dataList, String templateFileLocation, String fileName) {
-                        try {
-                            return new GenerateHTMLReport().generateReport(dataMap, dataList, templateFileLocation, fileName, HTML);
-                        } catch (TemplateNotFoundException | JasperGenerationException | ReportFormatUnkownException ex) {
-                            Logger.getLogger(Generator.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        return null;
-                    }
-                };
+            @Override
+            @SuppressWarnings("unchecked")
+            public File generate(Map dataMap, List dataList, String templateFileLocation, String fileName) {
+                try {
+                    return new GenerateHTMLReport().generateReport(dataMap, dataList, templateFileLocation, fileName, HTML);
+                } catch (TemplateNotFoundException | JasperGenerationException | ReportFormatUnkownException ex) {
+                    Logger.getLogger(Generator.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                return null;
+            }
+        };
 
         @SuppressWarnings("unchecked")
         public abstract File generate(Map dataMap, List dataList, String templateFileLocation, String fileName);

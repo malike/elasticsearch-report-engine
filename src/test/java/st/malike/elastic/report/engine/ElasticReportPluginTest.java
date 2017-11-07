@@ -68,10 +68,10 @@ public class ElasticReportPluginTest {
         for (int i = 1; i <= DOC_SIZE; i++) {
             runner.insert(INDEX, type, String.valueOf(i),
                     "{"
-                    + "\"type\":\"" + randomCDIndicator().toString() + "\","
-                    + "\"description\":\"Transaction " + i + "\","
-                    + "\"id\":" + i
-                    + "}");
+                            + "\"type\":\"" + randomCDIndicator().toString() + "\","
+                            + "\"description\":\"Transaction " + i + "\","
+                            + "\"id\":" + i
+                            + "}");
         }
         runner.refresh();
 
@@ -79,20 +79,6 @@ public class ElasticReportPluginTest {
         assertEquals(DOC_SIZE, searchResponse.getHits().getTotalHits());
 
         node = runner.node();
-    }
-
-    public enum CDIndicator {
-
-        CREDIT,
-        DEBIT;
-
-        /**
-         *
-         * @return
-         */
-        public static CDIndicator randomCDIndicator() {
-            return values()[(int) (Math.random() * values().length)];
-        }
     }
 
     @AfterClass
@@ -113,11 +99,19 @@ public class ElasticReportPluginTest {
         sort.put("id", "DESC");
 
 //        String queryString = "{\"term\":{\"id\":20}}";
-        String queryString = "{"                
+
+//        String queryString = "{"
+//                + "    \"match\": {"
+//                + "      \"type\": \"CREDIT\""
+//                + "    }"
+//                + "}";
+
+        String queryString = "{"
                 + "    \"match\": {"
-                + "      \"full_text\": \"Desc\""
-                + "    }"                
+                + "      \"description\": \"Transaction\""
+                + "    }"
                 + "}";
+
 
         ClassLoader classLoader = getClass().getClassLoader();
         File tempFile = new File(classLoader.getResource(TEMPLATE_NAME).getFile());
@@ -130,7 +124,7 @@ public class ElasticReportPluginTest {
         param.put("template", JASPER_TEMPLATE_FILE_LOCATION);
         param.put("mapData", dummy);
         param.put("from", 0);
-        param.put("size",  50);
+        param.put("size", DOC_SIZE);
         param.put("query", queryString);
         param.put("sort", sort);
     }
@@ -244,6 +238,19 @@ public class ElasticReportPluginTest {
                 .statusCode(500)
                 .body("status", Matchers.is(false))
                 .body("message", Matchers.is(Generator.JSONResponseMessage.REPORT_FORMAT_UNKNOWN.toString()));
+    }
+
+    public enum CDIndicator {
+
+        CREDIT,
+        DEBIT;
+
+        /**
+         * @return
+         */
+        public static CDIndicator randomCDIndicator() {
+            return values()[(int) (Math.random() * values().length)];
+        }
     }
 
 }

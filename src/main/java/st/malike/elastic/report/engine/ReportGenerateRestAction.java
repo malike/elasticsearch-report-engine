@@ -139,7 +139,7 @@ public class ReportGenerateRestAction extends BaseRestHandler {
             }
         }
 
-        prepareSearch.setSearchType(SearchType.DEFAULT);
+        prepareSearch.setSearchType(SearchType.DFS_QUERY_THEN_FETCH);
         if (query != null && !query.isEmpty()) {
             prepareSearch.setQuery(QueryBuilders.wrapperQuery(query));
         } else {

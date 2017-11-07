@@ -47,7 +47,7 @@
 				<text><![CDATA[]]></text>
 			</staticText>
 			<pieChart>
-				<chart evaluationTime="Report" renderType="svg" theme="aegean">
+				<chart evaluationTime="Report" renderType="svg">
 					<reportElement x="2" y="220" width="258" height="153" />
 					<chartTitle/>
 					<chartSubtitle/>
@@ -66,7 +66,7 @@
 				</piePlot>
 			</pieChart>
 			<barChart>
-				<chart evaluationTime="Report" renderType="svg" theme="aegean">
+				<chart evaluationTime="Report" renderType="svg">
 					<reportElement x="278" y="220" width="277" height="153" />
 					<chartTitle/>
 					<chartSubtitle/>
