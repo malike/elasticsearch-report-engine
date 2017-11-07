@@ -94,7 +94,7 @@ iii. System Error Generating Report
          "message":"ERROR_GENERATING_REPORT"
          }
 
-[Sample PDF](https://github.com/malike/elasticsearch-report-engine/blob/master/TEST_REPORT.pdf)
+[Sample PDF](https://github.com/malike/elasticsearch-report-engine/blob/master/SampleReports/TEST_REPORT.pdf)
 <br/><br/>
 
 ## HTML
@@ -158,7 +158,7 @@ iii. System Error Generating Report
          "message":"ERROR_GENERATING_REPORT"
          }
 
-[Sample HTML](https://github.com/malike/elasticsearch-report-engine/blob/master/TEST_REPORT.html)
+[Sample HTML](https://github.com/malike/elasticsearch-report-engine/blob/master/SampleReports/TEST_REPORT.html)
 <br/><br/>
 
 _*Note: For HTML reports you want returned as HTML string instead of a base64 encoded string.
@@ -221,7 +221,7 @@ iii. System Error Generating Report
          "message":"ERROR_GENERATING_REPORT"
          }
 
-[Sample CSV](https://github.com/malike/elasticsearch-report-engine/blob/master/TEST_REPORT.csv)
+[Sample CSV](https://github.com/malike/elasticsearch-report-engine/blob/master/SampleReports/TEST_REPORT.csv)
 
 <br/><br/>
 
