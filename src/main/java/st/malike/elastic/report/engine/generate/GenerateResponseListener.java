@@ -68,7 +68,6 @@ public class GenerateResponseListener implements ActionListener<SearchResponse> 
             restChannel.sendResponse(new BytesRestResponse(RestStatus.OK, builder));
         } catch (Exception e) {
             try {
-                onFailure(e);
                 XContentBuilder builder = restChannel.newBuilder();
                 builder.startObject();
                 message.setData(e.getLocalizedMessage());

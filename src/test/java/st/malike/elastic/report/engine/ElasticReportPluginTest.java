@@ -154,8 +154,8 @@ public class ElasticReportPluginTest {
                 .post("http://localhost:9201/_generate")
                 .then()
                 .statusCode(200)
-                .body("status", Matchers.is(true))
-                .body("message", Matchers.is(Generator.JSONResponseMessage.SUCCESS.toString()));
+                .body("message", Matchers.is(Generator.JSONResponseMessage.SUCCESS.toString()))
+                .body("status", Matchers.is(true));
     }
 
     @Test
@@ -172,7 +172,7 @@ public class ElasticReportPluginTest {
                 .then()
                 .statusCode(200)
                 .body("status", Matchers.is(true))
-                .body("data.data", Matchers.startsWith("<html"))
+                .body("data.data", Matchers.startsWith("<!DOCTYPE html PUBLIC"))
                 .body("message", Matchers.is(Generator.JSONResponseMessage.SUCCESS.toString()));
     }
 
