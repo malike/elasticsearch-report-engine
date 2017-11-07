@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" >
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="5"/>
+	<property name="ireport.y" value="0"/>
+	<property name="net.sf.jasperreports.chart.render.type" value="svg"/>
+	<property name="net.sf.jasperreports.export.html.embed.image" value="true"/>
 	<parameter name="fullName" class="java.lang.String"/>
 	<parameter name="email" class="java.lang.String"/>
 	<field name="id" class="java.lang.Integer"/>
@@ -41,11 +43,11 @@
 				<textFieldExpression><![CDATA[$P{fullName}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Opaque" x="0" y="204" width="555" height="4" backcolor="#ADA9A5"/>
+				<reportElement mode="Opaque" x="0" y="204" width="555" height="4" backcolor="#ADA9A5" />
 				<text><![CDATA[]]></text>
 			</staticText>
 			<pieChart>
-				<chart evaluationTime="Report">
+				<chart evaluationTime="Report" renderType="svg" theme="aegean">
 					<reportElement x="2" y="220" width="258" height="153" />
 					<chartTitle/>
 					<chartSubtitle/>
@@ -64,7 +66,7 @@
 				</piePlot>
 			</pieChart>
 			<barChart>
-				<chart evaluationTime="Report">
+				<chart evaluationTime="Report" renderType="svg" theme="aegean">
 					<reportElement x="278" y="220" width="277" height="153" />
 					<chartTitle/>
 					<chartSubtitle/>
@@ -108,7 +110,7 @@
 						<text><![CDATA[ID]]></text>
 					</staticText>
 					<staticText>
-						<reportElement x="148" y="13" width="184" height="20" forecolor="#2C6BA4"/>
+						<reportElement x="148" y="13" width="184" height="20" forecolor="#2C6BA4" />
 						<box leftPadding="5"/>
 						<textElement textAlignment="Center">
 							<font size="10"/>
@@ -139,7 +141,7 @@
 						<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
 					</textField>
 					<textField pattern="" isBlankWhenNull="true">
-						<reportElement x="138" y="14" width="184" height="20" forecolor="#2C6BA4" />
+						<reportElement x="138" y="14" width="184" height="20" forecolor="#2C6BA4"/>
 						<textElement textAlignment="Center"/>
 						<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
 					</textField>
@@ -155,7 +157,7 @@
 	<columnFooter>
 		<band height="34" splitType="Stretch">
 			<frame>
-				<reportElement mode="Opaque" x="-10" y="0" width="575" height="34" backcolor="#F2F1F0" />
+				<reportElement mode="Opaque" x="-10" y="0" width="575" height="34" backcolor="#F2F1F0"/>
 			</frame>
 		</band>
 	</columnFooter>
