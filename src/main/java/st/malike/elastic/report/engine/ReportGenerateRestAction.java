@@ -101,7 +101,7 @@ public class ReportGenerateRestAction extends BaseRestHandler {
                 builder.startObject();
                 message.toXContent(builder, restRequest);
                 builder.endObject();
-                channel.sendResponse(new BytesRestResponse(RestStatus.INTERNAL_SERVER_ERROR, builder));
+                channel.sendResponse(new BytesRestResponse(RestStatus.OK, builder));
             };
         }
         Generator.ReportFormat reportFormat = null;
@@ -118,7 +118,7 @@ public class ReportGenerateRestAction extends BaseRestHandler {
                 builder.startObject();
                 message.toXContent(builder, restRequest);
                 builder.endObject();
-                channel.sendResponse(new BytesRestResponse(RestStatus.INTERNAL_SERVER_ERROR, builder));
+                channel.sendResponse(new BytesRestResponse(RestStatus.OK, builder));
             };
         }
         SearchRequestBuilder prepareSearch = client.prepareSearch(index);
