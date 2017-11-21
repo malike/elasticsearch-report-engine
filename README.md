@@ -2,7 +2,7 @@
 
 
 
-Plugin to generate Reports from ElasticSearch Queries.
+Plugin to generate Reports from Elasticsearch Queries.
 
   - [Basic Overview](#overview)
   - [Install](#install)
@@ -40,7 +40,7 @@ PDF templates can be designed using [iReport Designer](https://community.jaspers
 generates a _jrmxl_ file.
 
 The plugin generates [base64 encoded](https://en.wikipedia.org/wiki/Base64) stream of the PDF report generated once
-you pass the location of the jrxml and the query to fetch data from ElasticSearch.
+you pass the location of the jrxml and the query to fetch data from Elasticsearch.
 
 
  `` PDF Sample Request ``
@@ -49,11 +49,11 @@ you pass the location of the jrxml and the query to fetch data from ElasticSearc
 
   `` Parameters ``<br/><br/>
         i. *format* : Format of Report **[Required]** <br/>
-       ii. *index* : ElasticSearch Index **[Required]** <br/>
+       ii. *index* : Elasticsearch Index **[Required]** <br/>
       iii. *template* : Jasper Report Template **[Required]** <br/>
        iv. *from* : Offset for querying large data **[Optional]** <br/>
         v. *size* : Size for querying large data **[Optional]** <br/>
-       iv. *query* : Query to search ElasticSearch index **[Optional : Defaults to '*' if nothing is passed]**<br/>
+       iv. *query* : Query to search Elasticsearch index **[Optional : Defaults to '*' if nothing is passed]**<br/>
        vi. *fileName* : File name **[Optional]** <br/>
 
 
