@@ -238,7 +238,7 @@ Elasticsearch versions supported by this plugin include :
 
 | Elasticsearch Version | Comments |
 | --------------------- | -------- |
-| [5.4](https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.4.0.zip)               | Tested   |
+| [5.4.1](https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.4.1.zip)               | Tested   |
 
 <p>&nbsp;</p>
 <p>&nbsp;</p>
