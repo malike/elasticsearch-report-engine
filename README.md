@@ -2,7 +2,7 @@
 
 
 
-Plugin to generate Reports from ElasticSearch Queries.
+Plugin to generate Reports from Elasticsearch Queries.
 
   - [Basic Overview](#overview)
   - [Install](#install)
@@ -40,7 +40,7 @@ PDF templates can be designed using [iReport Designer](https://community.jaspers
 generates a _jrmxl_ file.
 
 The plugin generates [base64 encoded](https://en.wikipedia.org/wiki/Base64) stream of the PDF report generated once
-you pass the location of the jrxml and the query to fetch data from ElasticSearch.
+you pass the location of the jrxml and the query to fetch data from Elasticsearch.
 
 
  `` PDF Sample Request ``
@@ -49,11 +49,11 @@ you pass the location of the jrxml and the query to fetch data from ElasticSearc
 
   `` Parameters ``<br/><br/>
         i. *format* : Format of Report **[Required]** <br/>
-       ii. *index* : ElasticSearch Index **[Required]** <br/>
+       ii. *index* : Elasticsearch Index **[Required]** <br/>
       iii. *template* : Jasper Report Template **[Required]** <br/>
        iv. *from* : Offset for querying large data **[Optional]** <br/>
         v. *size* : Size for querying large data **[Optional]** <br/>
-       iv. *query* : Query to search ElasticSearch index **[Optional : Defaults to '*' if nothing is passed]**<br/>
+       iv. *query* : Query to search Elasticsearch index **[Optional : Defaults to '*' if nothing is passed]**<br/>
        vi. *fileName* : File name **[Optional]** <br/>
 
 
@@ -113,11 +113,11 @@ The generates [base64 encoded](https://en.wikipedia.org/wiki/Base64) stream of t
 
  `` Parameters ``<br/><br/>
        i. *format* : Format of Report **[Required]** <br/>
-      ii. *index* : ElasticSearch Index **[Required]** <br/>
+      ii. *index* : Elasticsearch Index **[Required]** <br/>
      iii. *template* : Jasper Report Template **[Required]** <br/>
       iv. *from* : Offset for querying large data **[Optional]** <br/>
        v. *size* : Size for querying large data **[Optional]** <br/>
-      iv. *query* : Query to search ElasticSearch index **[Optional : Defaults to '*' if nothing is passed]**<br/>
+      iv. *query* : Query to search Elasticsearch index **[Optional : Defaults to '*' if nothing is passed]**<br/>
       vi. *fileName* : File name **[Optional]** <br/>
      vii. *returnAs* : How you want HTML file returned. Possible values _PLAIN_ and _BASE64_  **[Optional : Defaults to BASE64]** <br/>
 
@@ -178,11 +178,11 @@ Generating a CSV report uses the query and returns a [base64 encoded]() of the f
 
   `` Parameters ``<br/><br/>
       i. *format* : Format of Report **[Required]** <br/>
-     ii. *index* : ElasticSearch Index **[Required]** <br/>
+     ii. *index* : Elasticsearch Index **[Required]** <br/>
     iii. *returnAs* : How you want CSV file returned. Possible values _PLAIN_ and _BASE64_  **[Optional : Defaults to BASE64]** <br/>
      iv. *from* : Offset for querying large data **[Optional]** <br/>
       v. *size* : Size for querying large data **[Optional]** <br/>
-     iv. *query* : Query to search ElasticSearch index **[Optional : Defaults to '*' if nothing is passed]**<br/>
+     iv. *query* : Query to search Elasticsearch index **[Optional : Defaults to '*' if nothing is passed]**<br/>
      vi. *fileName* : File name **[Optional]** <br/>
 
   `` CSV Sample Response ``
@@ -234,20 +234,22 @@ Send this parameter as part of your default parameters_ : _"returnAs":"PLAIN_
 
 ## Supported
 
-ElasticSearch versions supported by this plugin include :
+Elasticsearch versions supported by this plugin include :
 
-| ElasticSearch Version | Comments |
+| Elasticsearch Version | Comments |
 | --------------------- | -------- |
-| [5.4](https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.4.0.zip)               | Tested   |
+| [5.4.1](https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.4.1.zip)               | Tested   |
+| [5.4.0](https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.4.0.zip)               | Tested   |
 
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 
 ## Download
 
-| ElasticSearch Version | Comments |
+| Elasticsearch Version | Comments |
 | --------------------- | -------- |
-| [5.4](https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.4.0.zip)               | [zip(pre-release tag)](https://github.com/malike/elasticsearch-report-engine/releases/download/v.1.0.0-RC/st.malike.elasticsearch.report.engine-1.0-RC.zip)  |
+| [5.4.1](https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.4.1.zip)               | [zip(pre-release tag)](https://github.com/malike/elasticsearch-report-engine/releases/download/v.1.0.0-RC/st.malike.elasticsearch.report.engine-5.4.1.zip)  |
+| [5.4.0](https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.4.0.zip)               | [zip(pre-release tag)](https://github.com/malike/elasticsearch-report-engine/releases/download/v.1.0.0-RC/st.malike.elasticsearch.report.engine-5.4.0.zip)  |
 
 <p>&nbsp;</p>
 <p>&nbsp;</p>

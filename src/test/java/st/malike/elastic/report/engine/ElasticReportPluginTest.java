@@ -221,7 +221,7 @@ public class ElasticReportPluginTest {
                 .when()
                 .post("http://localhost:9201/_generate")
                 .then()
-                .statusCode(500)
+                .statusCode(200)
                 .body("status", Matchers.is(false))
                 .body("message", Matchers.is(Generator.JSONResponseMessage.MISSING_PARAM.toString()));
     }
@@ -235,7 +235,7 @@ public class ElasticReportPluginTest {
                 .when()
                 .post("http://localhost:9201/_generate")
                 .then()
-                .statusCode(500)
+                .statusCode(200)
                 .body("status", Matchers.is(false))
                 .body("message", Matchers.is(Generator.JSONResponseMessage.REPORT_FORMAT_UNKNOWN.toString()));
     }
