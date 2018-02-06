@@ -2,4 +2,5 @@
 
 grant{
   permission java.io.FilePermission "templates/*", "read,write"
+  permission java.io.FilePermission "reports/*", "read,write"
 }

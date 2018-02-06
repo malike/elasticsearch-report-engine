@@ -25,7 +25,13 @@ Once this plugin is installed into elasticsearch search,it exposes the url http:
 <br>
 
 ## Install
+
+Initial version of this plugin required running Elasticsearch with `` -Dsecurity.manager.enabled=false`` for the plugin to pick template files from the file system. But after realising most people had issues with this configuration the security policy is now
+part of the plugin and would require templates file be places in a specific folder of the the Elasticsearch installation
+to have easy access to the template files and the generated reports can now be accessed over HTTP as CSV,PDF or HTML instead of having it as ``Base64`` encoded text.
+
 ``sudo bin/elasticsearch-plugin install https://github.com/malike/elasticsearch-report-engine/releases/download/5.4.1/st.malike.elasticsearch.report.engine-5.4.1.zip ``
+
 
 <br>
 
