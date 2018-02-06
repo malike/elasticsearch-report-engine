@@ -25,7 +25,7 @@ Once this plugin is installed into elasticsearch search,it exposes the url http:
 <br>
 
 ## Install
-``sudo bin/elasticsearch-plugin install [plugin_name] ``
+``sudo bin/elasticsearch-plugin install https://github.com/malike/elasticsearch-report-engine/releases/download/5.4.1/st.malike.elasticsearch.report.engine-5.4.1.zip ``
 
 <br>
 
@@ -248,8 +248,8 @@ Elasticsearch versions supported by this plugin include :
 
 | Elasticsearch Version | Comments |
 | --------------------- | -------- |
-| [5.4.1](https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.4.1.zip)               | [zip(pre-release tag)](https://github.com/malike/elasticsearch-report-engine/releases/download/v.1.0.0-RC/st.malike.elasticsearch.report.engine-5.4.1.zip)  |
-| [5.4.0](https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.4.0.zip)               | [zip(pre-release tag)](https://github.com/malike/elasticsearch-report-engine/releases/download/v.1.0.0-RC/st.malike.elasticsearch.report.engine-5.4.0.zip)  |
+| [5.4.1](https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.4.1.zip)               | [zip(pre-release tag)](https://github.com/malike/elasticsearch-report-engine/releases/download/5.4.1/st.malike.elasticsearch.report.engine-5.4.1.zip)  |
+| [5.4.0](https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.4.0.zip)               | [zip(pre-release tag)](https://github.com/malike/elasticsearch-report-engine/releases/download/5.4.0/st.malike.elasticsearch.report.engine-5.4.0.zip)  |
 
 <p>&nbsp;</p>
 <p>&nbsp;</p>
