@@ -51,7 +51,7 @@ you pass the location of the jrxml and the query to fetch data from Elasticsearc
 
  `` PDF Sample Request ``
 
-    curl -H "Content-Type:application/json" -XPOST "http://localhost:9201/_generate"  -d '{"format":"PDF","fileName":"TEST_REPORT","index":"reportindex","template":"/home/username/template.jrxml","from":0,"size":10,"query":"{term:{description:Transaction}}"}'
+    curl -H "Content-Type:application/json" -XPOST "http://localhost:9201/_generate"  -d '{"format":"PDF","fileName":"TEST_REPORT","index":"reportindex","template":"{ES_HOME}/plugins/template/filename.jrxml","from":0,"size":10,"query":"{term:{description:Transaction}}"}'
 
   `` Parameters ``<br/><br/>
         i. *format* : Format of Report **[Required]** <br/>
@@ -115,7 +115,7 @@ The generates [base64 encoded](https://en.wikipedia.org/wiki/Base64) stream of t
 
  `` HTML Sample Request ``
 
-    curl -H "Content-Type:application/json" -XPOST "http://localhost:9201/_generate"  -d '{"format":"HTML","fileName":"TEST_REPORT","index":"reportindex","template":"/home/username/template.jrxml","from":0,"size":10,"query":"{term:{description:Transaction}}"}'
+    curl -H "Content-Type:application/json" -XPOST "http://localhost:9201/_generate"  -d '{"format":"HTML","fileName":"TEST_REPORT","index":"reportindex","template":"{ES_HOME}/plugins/template/filename.jrxml","from":0,"size":10,"query":"{term:{description:Transaction}}"}'
 
  `` Parameters ``<br/><br/>
        i. *format* : Format of Report **[Required]** <br/>
