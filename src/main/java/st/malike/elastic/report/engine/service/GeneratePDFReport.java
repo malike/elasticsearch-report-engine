@@ -7,7 +7,7 @@ import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import org.apache.commons.io.IOUtils;
 import st.malike.elastic.report.engine.exception.JasperGenerationException;
-import st.malike.elastic.report.engine.exception.ReportFormatUnkownException;
+import st.malike.elastic.report.engine.exception.ReportFormatUnknownException;
 import st.malike.elastic.report.engine.exception.TemplateNotFoundException;
 import st.malike.elastic.report.engine.service.Generator.ReportFormat;
 
@@ -30,18 +30,18 @@ public class GeneratePDFReport implements GenerateReportService {
      * @return
      * @throws TemplateNotFoundException
      * @throws JasperGenerationException
-     * @throws ReportFormatUnkownException
+     * @throws ReportFormatUnknownException
      */
     @Override
     @SuppressWarnings("unchecked")
     public File generateReport(Map params, List data, String templateFileLocation, String fileName,
-                               ReportFormat reportFormat) throws TemplateNotFoundException, JasperGenerationException, ReportFormatUnkownException {
+                               ReportFormat reportFormat) throws TemplateNotFoundException, JasperGenerationException, ReportFormatUnknownException {
         try {
             if (templateFileLocation == null || templateFileLocation.trim().isEmpty()) {
                 throw new TemplateNotFoundException("Template file not found");
             }
             if (reportFormat == null) {
-                throw new ReportFormatUnkownException("Report format unknown");
+                throw new ReportFormatUnknownException("Report format unknown");
             }
             String generatedFileName = fileName + "." + reportFormat.toString().toLowerCase();
             InputStream reportStream = new FileInputStream(new File(templateFileLocation));

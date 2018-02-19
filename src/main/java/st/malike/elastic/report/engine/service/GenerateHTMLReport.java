@@ -10,7 +10,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import st.malike.elastic.report.engine.exception.JasperGenerationException;
-import st.malike.elastic.report.engine.exception.ReportFormatUnkownException;
+import st.malike.elastic.report.engine.exception.ReportFormatUnknownException;
 import st.malike.elastic.report.engine.exception.TemplateNotFoundException;
 
 import java.io.File;
@@ -35,18 +35,18 @@ public class GenerateHTMLReport implements GenerateReportService {
      * @return
      * @throws TemplateNotFoundException
      * @throws JasperGenerationException
-     * @throws ReportFormatUnkownException
+     * @throws ReportFormatUnknownException
      */
     @Override
     @SuppressWarnings("unchecked")
     public File generateReport(Map params, List data, String templateFileLocation, String fileName,
-                               Generator.ReportFormat reportFormat) throws TemplateNotFoundException, JasperGenerationException, ReportFormatUnkownException {
+                               Generator.ReportFormat reportFormat) throws TemplateNotFoundException, JasperGenerationException, ReportFormatUnknownException {
         try {
             if (templateFileLocation == null || templateFileLocation.trim().isEmpty()) {
                 throw new TemplateNotFoundException("Template file not found");
             }
             if (reportFormat == null) {
-                throw new ReportFormatUnkownException("Report format unknown");
+                throw new ReportFormatUnknownException("Report format unknown");
             }
             String htmlFilePath = System.getProperty("java.io.tmpdir") + File.separator + fileName + "." + reportFormat.toString().toLowerCase();
             InputStream reportStream = new FileInputStream(new File(templateFileLocation));

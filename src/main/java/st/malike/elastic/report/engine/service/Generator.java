@@ -5,7 +5,7 @@ import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import st.malike.elastic.report.engine.exception.JasperGenerationException;
-import st.malike.elastic.report.engine.exception.ReportFormatUnkownException;
+import st.malike.elastic.report.engine.exception.ReportFormatUnknownException;
 import st.malike.elastic.report.engine.exception.TemplateNotFoundException;
 
 import java.io.File;
@@ -50,7 +50,7 @@ public class Generator {
             public File generate(Map dataMap, List dataList, String templateFileLocation, String fileName) {
                 try {
                     return new GeneratePDFReport().generateReport(dataMap, dataList, templateFileLocation, fileName, PDF);
-                } catch (TemplateNotFoundException | JasperGenerationException | ReportFormatUnkownException ex) {
+                } catch (TemplateNotFoundException | JasperGenerationException | ReportFormatUnknownException ex) {
                     Logger.getLogger(Generator.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 return null;
@@ -68,7 +68,7 @@ public class Generator {
                 }
                 try {
                     return new GenerateCSVReport().generateReport(dataMap, dataList, templateFileLocation, fileName, CSV);
-                } catch (TemplateNotFoundException | JasperGenerationException | ReportFormatUnkownException ex) {
+                } catch (TemplateNotFoundException | JasperGenerationException | ReportFormatUnknownException ex) {
                     Logger.getLogger(Generator.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 return null;
@@ -83,7 +83,7 @@ public class Generator {
             public File generate(Map dataMap, List dataList, String templateFileLocation, String fileName) {
                 try {
                     return new GenerateHTMLReport().generateReport(dataMap, dataList, templateFileLocation, fileName, HTML);
-                } catch (TemplateNotFoundException | JasperGenerationException | ReportFormatUnkownException ex) {
+                } catch (TemplateNotFoundException | JasperGenerationException | ReportFormatUnknownException ex) {
                     Logger.getLogger(Generator.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 return null;

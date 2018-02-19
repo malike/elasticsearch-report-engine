@@ -1,4 +1,3 @@
-//permission to access template files from file system
 
 grant{
   permission java.io.FilePermission "templates/*", "read,write"

@@ -9,7 +9,7 @@ import com.github.wnameless.json.flattener.JsonFlattener;
 import com.google.gson.Gson;
 import org.apache.commons.lang.StringUtils;
 import st.malike.elastic.report.engine.exception.JasperGenerationException;
-import st.malike.elastic.report.engine.exception.ReportFormatUnkownException;
+import st.malike.elastic.report.engine.exception.ReportFormatUnknownException;
 import st.malike.elastic.report.engine.exception.TemplateNotFoundException;
 
 import java.io.*;
@@ -29,15 +29,15 @@ public class GenerateCSVReport implements GenerateReportService {
      * @return
      * @throws TemplateNotFoundException
      * @throws JasperGenerationException
-     * @throws ReportFormatUnkownException
+     * @throws ReportFormatUnknownException
      */
     @Override
     @SuppressWarnings("unchecked")
     public File generateReport(Map params, List data, String templateFileLocation,
-                               String fileName, Generator.ReportFormat reportFormat) throws TemplateNotFoundException, JasperGenerationException, ReportFormatUnkownException {
+                               String fileName, Generator.ReportFormat reportFormat) throws TemplateNotFoundException, JasperGenerationException, ReportFormatUnknownException {
         try {
             if (reportFormat == null) {
-                throw new ReportFormatUnkownException("Report format unknown");
+                throw new ReportFormatUnknownException("Report format unknown");
             }
             String filePath = System.getProperty("java.io.tmpdir") + File.separator + fileName + "." + reportFormat.toString().toLowerCase();
             if (data.isEmpty()) {
@@ -60,7 +60,7 @@ public class GenerateCSVReport implements GenerateReportService {
             writeToFile(output, filePath);
             File csvFile = new File(filePath);
             return csvFile;
-        } catch (ReportFormatUnkownException | FileNotFoundException ex) {
+        } catch (ReportFormatUnknownException | FileNotFoundException ex) {
             throw new JasperGenerationException("Error generationg CSV");
         } catch (IOException ex) {
             throw new TemplateNotFoundException("Template not found");

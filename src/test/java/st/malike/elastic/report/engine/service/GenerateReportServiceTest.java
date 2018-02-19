@@ -11,7 +11,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.runners.MockitoJUnitRunner;
-import st.malike.elastic.report.engine.exception.ReportFormatUnkownException;
+import st.malike.elastic.report.engine.exception.ReportFormatUnknownException;
 import st.malike.elastic.report.engine.exception.TemplateNotFoundException;
 
 import java.io.File;
@@ -90,7 +90,7 @@ public class GenerateReportServiceTest {
         generatePDFReport.generateReport(map, list, null, fileName, reportFormat);
     }
 
-    @Test(expected = ReportFormatUnkownException.class)
+    @Test(expected = ReportFormatUnknownException.class)
     public void testGenerateReportThrowsReportFormatUnknowException() throws Exception {
         generatePDFReport.generateReport(map, list, templateFileLocation, fileName, null);
     }
