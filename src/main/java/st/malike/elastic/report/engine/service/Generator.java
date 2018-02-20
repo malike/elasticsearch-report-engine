@@ -5,6 +5,7 @@ import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import st.malike.elastic.report.engine.exception.JasperGenerationException;
+import st.malike.elastic.report.engine.exception.NoDataFoundException;
 import st.malike.elastic.report.engine.exception.ReportFormatUnknownException;
 import st.malike.elastic.report.engine.exception.TemplateNotFoundException;
 
@@ -30,11 +31,13 @@ public class Generator {
         REPORT_FORMAT_UNKNOWN,
         ERROR_GENERATING_REPORT,
         SUCCESS,
+        NO_DATA_EXCEPTION,
         MISSING_PARAM
     }
 
     public enum ReturnAs {
 
+        FILE,
         BASE64,
         PLAIN
     }
@@ -115,16 +118,19 @@ public class Generator {
          * @return
          */
         @SuppressWarnings("unchecked")
-        public List<Map> extractData(SearchResponse response) {
+        public List<Map> extractData(SearchResponse response) throws NoDataFoundException {
             List<Map> data = new LinkedList<>();
             SearchHits hits = response.getHits();
-            try {
-                for (SearchHit hit : hits) {
-                    Map<String, Object> sourceMap = hit.getSourceAsMap();
-                    data.add(sourceMap);
-                }
-            } catch (Exception e) {
+            if(hits.getTotalHits()==0) {
+                throw new NoDataFoundException("No data found");
             }
+                try {
+                    for (SearchHit hit : hits) {
+                        Map<String, Object> sourceMap = hit.getSourceAsMap();
+                        data.add(sourceMap);
+                    }
+                } catch (Exception e) {
+                }
             return data;
         }
 

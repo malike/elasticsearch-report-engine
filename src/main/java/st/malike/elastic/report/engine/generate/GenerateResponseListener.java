@@ -13,6 +13,7 @@ import org.elasticsearch.rest.BytesRestResponse;
 import org.elasticsearch.rest.RestChannel;
 import org.elasticsearch.rest.RestRequest;
 import org.elasticsearch.rest.RestStatus;
+import st.malike.elastic.report.engine.exception.NoDataFoundException;
 import st.malike.elastic.report.engine.service.Generator;
 import st.malike.elastic.report.engine.util.JSONResponse;
 
@@ -66,6 +67,18 @@ public class GenerateResponseListener implements ActionListener<SearchResponse> 
             message.toXContent(builder, restRequest);
             builder.endObject();
             restChannel.sendResponse(new BytesRestResponse(RestStatus.OK, builder));
+        } catch (NoDataFoundException nde) {
+            try {
+                XContentBuilder builder = restChannel.newBuilder();
+                builder.startObject();
+                message.setData(nde.getLocalizedMessage());
+                message.setMessage(Generator.JSONResponseMessage.NO_DATA_EXCEPTION.toString());
+                message.toXContent(builder, restRequest);
+                builder.endObject();
+                restChannel.sendResponse(new BytesRestResponse(RestStatus.OK, builder));
+            } catch (IOException ex) {
+                onFailure(nde);
+            }
         } catch (Exception e) {
             try {
                 XContentBuilder builder = restChannel.newBuilder();
@@ -83,7 +96,6 @@ public class GenerateResponseListener implements ActionListener<SearchResponse> 
     @Override
     public void onFailure(Exception exception) {
         throw new ElasticsearchException("Failed to create a response.", exception.getLocalizedMessage());
-
     }
 
 }
