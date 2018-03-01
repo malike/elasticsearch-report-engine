@@ -17,7 +17,7 @@ public class FileServerTest {
     }
 
     @Test
-    public void testSomeMethod() throws Exception {
+    public void testGetFile() throws Exception {
 
     }
 }

@@ -9,6 +9,7 @@ import java.io.IOException;
  * @autor malike_st
  */
 public class FileServer implements HttpHandler {
+
     @Override
     public void handle(HttpExchange httpExchange) throws IOException {
 
