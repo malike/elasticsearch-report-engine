@@ -10,6 +10,8 @@ import java.io.IOException;
  */
 public class FileServer implements HttpHandler {
 
+    private final String TEMPLATE_PATH="template/";
+
     @Override
     public void handle(HttpExchange httpExchange) throws IOException {
 
