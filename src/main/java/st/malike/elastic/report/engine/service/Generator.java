@@ -4,10 +4,7 @@ import org.apache.commons.codec.binary.Base64;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
-import st.malike.elastic.report.engine.exception.JasperGenerationException;
-import st.malike.elastic.report.engine.exception.NoDataFoundException;
-import st.malike.elastic.report.engine.exception.ReportFormatUnknownException;
-import st.malike.elastic.report.engine.exception.TemplateNotFoundException;
+import st.malike.elastic.report.engine.exception.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -118,9 +115,12 @@ public class Generator {
          * @return
          */
         @SuppressWarnings("unchecked")
-        public List<Map> extractData(SearchResponse response) throws NoDataFoundException {
+        public List<Map> extractData(SearchResponse response) throws NoDataFoundException, ReportGenerationException {
             List<Map> data = new LinkedList<>();
             SearchHits hits = response.getHits();
+            if(response.isTimedOut() || response.isTerminatedEarly()){
+                throw new ReportGenerationException("Report failed to get data. Kindly try again.");
+            }
             if(hits.getTotalHits()==0) {
                 throw new NoDataFoundException("No data found");
             }
