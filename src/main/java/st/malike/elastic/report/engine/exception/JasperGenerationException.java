@@ -10,22 +10,23 @@ package st.malike.elastic.report.engine.exception;
  */
 public class JasperGenerationException extends Exception {
 
-    public JasperGenerationException() {
-    }
+  public JasperGenerationException() {
+  }
 
-    public JasperGenerationException(String message) {
-        super(message);
-    }
+  public JasperGenerationException(String message) {
+    super(message);
+  }
 
-    public JasperGenerationException(String message, Throwable cause) {
-        super(message, cause);
-    }
+  public JasperGenerationException(String message, Throwable cause) {
+    super(message, cause);
+  }
 
-    public JasperGenerationException(Throwable cause) {
-        super(cause);
-    }
+  public JasperGenerationException(Throwable cause) {
+    super(cause);
+  }
 
-    public JasperGenerationException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-        super(message, cause, enableSuppression, writableStackTrace);
-    }
+  public JasperGenerationException(String message, Throwable cause, boolean enableSuppression,
+      boolean writableStackTrace) {
+    super(message, cause, enableSuppression, writableStackTrace);
+  }
 }

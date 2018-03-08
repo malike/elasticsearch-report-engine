@@ -5,20 +5,20 @@
  */
 package st.malike.elastic.report.engine.service;
 
-import st.malike.elastic.report.engine.exception.JasperGenerationException;
-import st.malike.elastic.report.engine.exception.ReportFormatUnknownException;
-import st.malike.elastic.report.engine.exception.TemplateNotFoundException;
-
 import java.io.File;
 import java.util.List;
 import java.util.Map;
+import st.malike.elastic.report.engine.exception.JasperGenerationException;
+import st.malike.elastic.report.engine.exception.ReportFormatUnknownException;
+import st.malike.elastic.report.engine.exception.TemplateNotFoundException;
 
 /**
  * @author malike_st
  */
 public interface GenerateReportService {
 
-    public File generateReport(Map params, List data, String templateFileLocation,
-                               String fileName, Generator.ReportFormat reportFormat) throws TemplateNotFoundException, JasperGenerationException, ReportFormatUnknownException;
+  public File generateReport(Map params, List data, String templateFileLocation,
+      String fileName, Generator.ReportFormat reportFormat)
+      throws TemplateNotFoundException, JasperGenerationException, ReportFormatUnknownException;
 
 }

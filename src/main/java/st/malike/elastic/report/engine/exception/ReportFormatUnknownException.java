@@ -10,23 +10,24 @@ package st.malike.elastic.report.engine.exception;
  */
 public class ReportFormatUnknownException extends Exception {
 
-    public ReportFormatUnknownException() {
-    }
+  public ReportFormatUnknownException() {
+  }
 
-    public ReportFormatUnknownException(String message) {
-        super(message);
-    }
+  public ReportFormatUnknownException(String message) {
+    super(message);
+  }
 
-    public ReportFormatUnknownException(String message, Throwable cause) {
-        super(message, cause);
-    }
+  public ReportFormatUnknownException(String message, Throwable cause) {
+    super(message, cause);
+  }
 
-    public ReportFormatUnknownException(Throwable cause) {
-        super(cause);
-    }
+  public ReportFormatUnknownException(Throwable cause) {
+    super(cause);
+  }
 
-    public ReportFormatUnknownException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-        super(message, cause, enableSuppression, writableStackTrace);
-    }
+  public ReportFormatUnknownException(String message, Throwable cause, boolean enableSuppression,
+      boolean writableStackTrace) {
+    super(message, cause, enableSuppression, writableStackTrace);
+  }
 
 }

@@ -11,13 +11,13 @@ import org.mockito.runners.MockitoJUnitRunner;
 @RunWith(MockitoJUnitRunner.class)
 public class FileServerTest {
 
-    @Before
-    public void setUp() throws Exception {
+  @Before
+  public void setUp() throws Exception {
 
-    }
+  }
 
-    @Test
-    public void testGetFile() throws Exception {
+  @Test
+  public void testGetFile() throws Exception {
 
-    }
+  }
 }
