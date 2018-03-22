@@ -129,7 +129,7 @@ public class Generator {
         throws NoDataFoundException, ReportGenerationException {
       List<Map> data = new LinkedList<>();
       SearchHits hits = response.getHits();
-      if (response.isTimedOut() || response.isTerminatedEarly()) {
+      if (response.isTimedOut() || (response.isTerminatedEarly()!=null && response.isTerminatedEarly()==true)) {
         throw new ReportGenerationException("Report failed to get data. Kindly try again.");
       }
       if (hits.getTotalHits() == 0) {
