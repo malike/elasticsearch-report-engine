@@ -1,4 +1,8 @@
-
-grant{
-  permission java.io.FilePermission "templates/*", "read,write"
-}
+grant {
+  permission java.lang.RuntimePermission "accessDeclaredMembers";
+  permission java.lang.reflect.ReflectPermission "suppressAccessChecks";
+  permission java.io.FilePermission "templates/-", "read,write";
+  permission java.io.FilePermission "reports/-", "read,write";
+  permission java.io.FilePermission "templates\-", "read,write";
+  permission java.io.FilePermission "reports\-", "read,write";
+};
