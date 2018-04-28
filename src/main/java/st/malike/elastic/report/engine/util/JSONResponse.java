@@ -54,4 +54,14 @@ public class JSONResponse implements ToXContent {
         .field("count", count)
         .field("data", data);
   }
+
+  @Override
+  public String toString() {
+    return "{" +
+        "\"message\":\"" + (message).replace("\"", "\'") + "\"" +
+        ",\"status\":" + status +
+        ",\"data\":\"" + ((String)data).replace("\"", "\'") + "\"" +
+        ",\"count\":" + count +
+        "}";
+  }
 }
