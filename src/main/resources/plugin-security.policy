@@ -1,10 +1,13 @@
 grant {
   permission java.lang.RuntimePermission "accessDeclaredMembers";
-  permission java.lang.reflect.ReflectPermission "suppressAccessChecks";
   permission java.lang.RuntimePermission "getClassLoader";
   permission java.lang.RuntimePermission "createClassLoader";
+  permission java.lang.reflect.ReflectPermission "*";
   permission java.io.FilePermission "templates/-", "read,write";
   permission java.io.FilePermission "reports/-", "read,write";
   permission java.io.FilePermission "templates\-", "read,write";
   permission java.io.FilePermission "reports\-", "read,write";
+  permission java.io.FilePermission "net/sf/jasperreports/-", "read,write";
+  permission java.io.FilePermission "net\sf\jasperreports\-", "read,write";
+  permission java.util.PropertyPermission "*", "read, write";
 };

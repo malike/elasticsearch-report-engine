@@ -35,7 +35,6 @@ public class GenerateReportServiceTest {
   List list;
   String fileName;
   String templateFileName;
-  String templateFileLocation;
   Generator.ReportFormat reportFormat;
 
   @Before
@@ -57,24 +56,17 @@ public class GenerateReportServiceTest {
     fileName = "RANDOM_REPORT";
     templateFileName = "SampleTemplate.jrxml";
     reportFormat = Generator.ReportFormat.PDF;
-    ClassLoader classLoader = getClass().getClassLoader();
-    File tempFile = new File(classLoader.getResource(templateFileName).getFile());
-    templateFileLocation = tempFile.getAbsolutePath();
-    try {
-      File f = new File(System.getProperty("java.io.tmpdir") + File.separator + fileName);
-      if (f.exists() && !f.isDirectory()) {
-        f.delete();
-      }
-    } catch (Exception e) {
 
-    }
+
   }
 
   @Test
   public void testGeneratePDFReport() throws Exception {
     generatePDFReport
-        .generateReport(map, list, templateFileLocation, fileName, Generator.ReportFormat.PDF);
-    File f = new File(System.getProperty("java.io.tmpdir") + File.separator + fileName + "."
+        .generateReport(map, list, templateFileName, fileName, Generator.ReportFormat.PDF);
+    File f = new File(System.getProperty("user.dir") +
+        File.separator + "reports" +
+        File.separator + fileName + "."
         + Generator.ReportFormat.PDF.toString().toLowerCase());
     Assert.assertTrue(f.exists() && !f.isDirectory());
   }
@@ -82,8 +74,10 @@ public class GenerateReportServiceTest {
   @Test
   public void testGenerateHTMLReport() throws Exception {
     generateHTMLReport
-        .generateReport(map, list, templateFileLocation, fileName, Generator.ReportFormat.HTML);
-    File f = new File(System.getProperty("java.io.tmpdir") + File.separator + fileName + "."
+        .generateReport(map, list, templateFileName, fileName, Generator.ReportFormat.HTML);
+    File f = new File(System.getProperty("user.dir") +
+        File.separator + "reports" +
+        File.separator + fileName + "."
         + Generator.ReportFormat.HTML.toString().toLowerCase());
     Assert.assertTrue(f.exists() && !f.isDirectory());
   }
@@ -95,14 +89,16 @@ public class GenerateReportServiceTest {
 
   @Test(expected = ReportFormatUnknownException.class)
   public void testGenerateReportThrowsReportFormatUnknowException() throws Exception {
-    generatePDFReport.generateReport(map, list, templateFileLocation, fileName, null);
+    generatePDFReport.generateReport(map, list, templateFileName, fileName, null);
   }
 
   @Test
   public void testGenerateCSVReport() throws Exception {
     generateCSVReport
-        .generateReport(map, list, templateFileLocation, fileName, Generator.ReportFormat.CSV);
-    File f = new File(System.getProperty("java.io.tmpdir") + File.separator + fileName + "."
+        .generateReport(map, list, templateFileName, fileName, Generator.ReportFormat.CSV);
+    File f = new File(System.getProperty("user.dir") +
+        File.separator + "reports" +
+        File.separator + fileName + "."
         + Generator.ReportFormat.CSV.toString().toLowerCase());
     Assert.assertTrue(f.exists() && !f.isDirectory());
   }

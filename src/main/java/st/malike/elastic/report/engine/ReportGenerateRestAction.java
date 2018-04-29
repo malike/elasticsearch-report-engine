@@ -10,7 +10,7 @@ import org.elasticsearch.action.search.SearchType;
 import org.elasticsearch.client.node.NodeClient;
 import org.elasticsearch.common.inject.Inject;
 import org.elasticsearch.common.settings.Settings;
-import org.elasticsearch.common.xcontent.XContentBuilder;
+import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.common.xcontent.XContentHelper;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.rest.BaseRestHandler;
@@ -22,6 +22,7 @@ import org.elasticsearch.search.sort.SortOrder;
 import st.malike.elastic.report.engine.generate.GenerateData;
 import st.malike.elastic.report.engine.generate.GenerateResponseListener;
 import st.malike.elastic.report.engine.service.Generator;
+import st.malike.elastic.report.engine.service.Generator.JSONResponseMessage;
 import st.malike.elastic.report.engine.util.JSONResponse;
 
 /**
@@ -100,14 +101,11 @@ public class ReportGenerateRestAction extends BaseRestHandler {
         || ((format.toLowerCase().equals("pdf") || (format.toLowerCase().equals("html")))
         && templateLocation == null)) {
       return channel -> {
+        message.setMessage(JSONResponseMessage.MISSING_PARAM.toString());
         message.setStatus(false);
         message.setCount(0L);
-        message.setMessage(Generator.JSONResponseMessage.MISSING_PARAM.toString());
-        XContentBuilder builder = channel.newBuilder();
-        builder.startObject();
-        message.toXContent(builder, restRequest);
-        builder.endObject();
-        channel.sendResponse(new BytesRestResponse(RestStatus.OK, builder));
+        channel.sendResponse(new BytesRestResponse(RestStatus.OK,
+            "application/json", message.toString()));
       };
     }
     Generator.ReportFormat reportFormat = null;
@@ -117,14 +115,11 @@ public class ReportGenerateRestAction extends BaseRestHandler {
     }
     if (reportFormat == null) {
       return channel -> {
+        message.setMessage(JSONResponseMessage.REPORT_FORMAT_UNKNOWN.toString());
         message.setStatus(false);
         message.setCount(0L);
-        message.setMessage(Generator.JSONResponseMessage.REPORT_FORMAT_UNKNOWN.toString());
-        XContentBuilder builder = channel.newBuilder();
-        builder.startObject();
-        message.toXContent(builder, restRequest);
-        builder.endObject();
-        channel.sendResponse(new BytesRestResponse(RestStatus.OK, builder));
+        channel.sendResponse(new BytesRestResponse(RestStatus.OK,
+            "application/json", message.toString()));
       };
     }
     SearchRequestBuilder prepareSearch = client.prepareSearch(index);
@@ -145,12 +140,14 @@ public class ReportGenerateRestAction extends BaseRestHandler {
       }
     }
 
-    prepareSearch.setSearchType(SearchType.DFS_QUERY_THEN_FETCH);
+    prepareSearch.setSearchType(SearchType.QUERY_THEN_FETCH);
     if (query != null && !query.isEmpty()) {
       prepareSearch.setQuery(QueryBuilders.wrapperQuery(query));
     } else {
       prepareSearch.setQuery(QueryBuilders.matchAllQuery());
     }
+    prepareSearch.setScroll("3m");
+    prepareSearch.setTimeout(TimeValue.timeValueMinutes(3));
     generateData.setFileName(fileName);
     generateData.setFormat(reportFormat);
     generateData.setIndex(index);

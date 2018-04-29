@@ -26,12 +26,16 @@ Once this plugin is installed into elasticsearch search,it exposes the url http:
 
 ## Install
 
-Initial version of this plugin required running Elasticsearch with `` -Dsecurity.manager.enabled=false`` for the plugin to pick template files from the file system. But after realising most people had issues with this configuration the security policy is now
-part of the plugin and would require templates file be places in a specific folder of the the Elasticsearch installation
-to have easy access to the template files and the generated reports can now be accessed over HTTP as CSV,PDF or HTML as an option as  well as ``Base64`` encoded text.
+1. Install plugin
 
 ``sudo bin/elasticsearch-plugin install https://github.com/malike/elasticsearch-report-engine/releases/download/5.4.1/st.malike.elasticsearch.report.engine-5.4.1.zip ``
 
+2. Grant permissions
+
+
+3. Create folders `templates` and `reports` in `ES_HOME`. Store your  jasper
+templates in the `templates` folder and pass the templateName as the `template`
+parameter for `HTML` and `PDF` reports. 
 
 <br>
 
@@ -51,7 +55,7 @@ you pass the location of the jrxml and the query to fetch data from Elasticsearc
 
  `` PDF Sample Request ``
 
-    curl -H "Content-Type:application/json" -XPOST "http://localhost:9201/_generate"  -d '{"format":"PDF","fileName":"TEST_REPORT","index":"reportindex","template":"{ES_HOME}/plugins/template/filename.jrxml","from":0,"size":10,"query":"{term:{description:Transaction}}"}'
+    curl -H "Content-Type:application/json" -XPOST "http://localhost:9201/_generate"  -d '{"format":"PDF","fileName":"TEST_REPORT","index":"reportindex","template":"filename.jrxml","from":0,"size":10,"query":"{term:{description:Transaction}}"}'
 
   `` Parameters ``
 
@@ -117,7 +121,7 @@ The generates [base64 encoded](https://en.wikipedia.org/wiki/Base64) stream of t
 
  `` HTML Sample Request ``
 
-    curl -H "Content-Type:application/json" -XPOST "http://localhost:9201/_generate"  -d '{"format":"HTML","fileName":"TEST_REPORT","index":"reportindex","template":"{ES_HOME}/plugins/template/filename.jrxml","from":0,"size":10,"query":"{term:{description:Transaction}}"}'
+    curl -H "Content-Type:application/json" -XPOST "http://localhost:9201/_generate"  -d '{"format":"HTML","fileName":"TEST_REPORT","index":"reportindex","template":"filename.jrxml","from":0,"size":10,"query":"{term:{description:Transaction}}"}'
 
  `` Parameters ``<br/><br/>
        i. *format* : Format of Report **[Required]** <br/>
@@ -177,7 +181,7 @@ Send this parameter as part of your default parameters_ : _"returnAs":"PLAIN_
       1. CSV Report
 
 Unlike the PDF and HTML reports,the CSV option does not use [Jasper Report](https://community.jaspersoft.com/) as core engine for generating reports.
-Generating a CSV report uses the query and returns a [base64 encoded]() of the file.
+Generating a CSV report uses the query and returns a [base64 encoded](https://en.wikipedia.org/wiki/Base64) of the file.
 
 
   `` CSV Sample Request ``
@@ -246,7 +250,6 @@ Elasticsearch versions supported by this plugin include :
 
 | Elasticsearch Version | Comments |
 | --------------------- | -------- |
-| [5.4.1](https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.4.1.zip)               | Tested   |
 | [5.4.0](https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.4.0.zip)               | Tested   |
 
 <p>&nbsp;</p>
@@ -256,7 +259,6 @@ Elasticsearch versions supported by this plugin include :
 
 | Elasticsearch Version | Comments |
 | --------------------- | -------- |
-| [5.4.1](https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.4.1.zip)               | [zip(pre-release tag)](https://github.com/malike/elasticsearch-report-engine/releases/download/5.4.1/st.malike.elasticsearch.report.engine-5.4.1.zip)  |
 | [5.4.0](https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.4.0.zip)               | [zip(pre-release tag)](https://github.com/malike/elasticsearch-report-engine/releases/download/5.4.0/st.malike.elasticsearch.report.engine-5.4.0.zip)  |
 
 <p>&nbsp;</p>

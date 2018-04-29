@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.security.AccessController;
+import java.security.PrivilegedActionException;
+import java.security.PrivilegedExceptionAction;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -15,11 +18,8 @@ import org.apache.commons.codec.binary.Base64;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
-import st.malike.elastic.report.engine.exception.JasperGenerationException;
 import st.malike.elastic.report.engine.exception.NoDataFoundException;
-import st.malike.elastic.report.engine.exception.ReportFormatUnknownException;
 import st.malike.elastic.report.engine.exception.ReportGenerationException;
-import st.malike.elastic.report.engine.exception.TemplateNotFoundException;
 
 /**
  * @author malike_st
@@ -37,7 +37,6 @@ public class Generator {
 
   public enum ReturnAs {
 
-    FILE,
     BASE64,
     PLAIN
   }
@@ -50,15 +49,15 @@ public class Generator {
     PDF {
       @Override
       @SuppressWarnings("unchecked")
-      public File generate(Map dataMap, List dataList, String templateFileLocation,
-          String fileName) {
+      public File generate(Map dataMap, List dataList, String templateFile,
+          String fileName) throws Exception {
         try {
           return new GeneratePDFReport()
-              .generateReport(dataMap, dataList, templateFileLocation, fileName, PDF);
-        } catch (TemplateNotFoundException | JasperGenerationException | ReportFormatUnknownException ex) {
-          Logger.getLogger(Generator.class.getName()).log(Level.SEVERE, null, ex);
+              .generateReport(dataMap, dataList, templateFile, fileName, PDF);
+        } catch (Exception ex) {
+          Logger.getLogger(Generator.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+          throw ex;
         }
-        return null;
       }
     },
     /**
@@ -67,18 +66,18 @@ public class Generator {
     CSV {
       @Override
       @SuppressWarnings("unchecked")
-      public File generate(Map dataMap, List dataList, String templateFileLocation,
-          String fileName) {
+      public File generate(Map dataMap, List dataList, String templateFile,
+          String fileName) throws Exception {
         if (dataList.isEmpty()) {
           return null;
         }
         try {
           return new GenerateCSVReport()
-              .generateReport(dataMap, dataList, templateFileLocation, fileName, CSV);
-        } catch (TemplateNotFoundException | JasperGenerationException | ReportFormatUnknownException ex) {
-          Logger.getLogger(Generator.class.getName()).log(Level.SEVERE, null, ex);
+              .generateReport(dataMap, dataList, templateFile, fileName, CSV);
+        } catch (Exception ex) {
+          Logger.getLogger(Generator.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+          throw ex;
         }
-        return null;
       }
     },
     /**
@@ -87,21 +86,21 @@ public class Generator {
     HTML {
       @Override
       @SuppressWarnings("unchecked")
-      public File generate(Map dataMap, List dataList, String templateFileLocation,
-          String fileName) {
+      public File generate(Map dataMap, List dataList, String templateFile,
+          String fileName) throws Exception {
         try {
           return new GenerateHTMLReport()
-              .generateReport(dataMap, dataList, templateFileLocation, fileName, HTML);
-        } catch (TemplateNotFoundException | JasperGenerationException | ReportFormatUnknownException ex) {
-          Logger.getLogger(Generator.class.getName()).log(Level.SEVERE, null, ex);
+              .generateReport(dataMap, dataList, templateFile, fileName, HTML);
+        } catch (Exception ex) {
+          Logger.getLogger(Generator.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+          throw ex;
         }
-        return null;
       }
     };
 
     @SuppressWarnings("unchecked")
-    public abstract File generate(Map dataMap, List dataList, String templateFileLocation,
-        String fileName);
+    public abstract File generate(Map dataMap, List dataList, String templateFile,
+        String fileName) throws Exception;
 
     /**
      * @param file
@@ -110,14 +109,28 @@ public class Generator {
      * @throws java.io.IOException
      */
     @SuppressWarnings("unchecked")
-    public Map objectToBase64String(File file, ReportFormat reportFormat) throws IOException {
+    public Map objectToBase64String(File file, ReportFormat reportFormat)
+        throws IOException, PrivilegedActionException {
       if (file == null) {
         return null;
       }
-      Map data = new HashMap();
-      data.put("reportFormat", reportFormat.toString());
-      data.put("data", Base64.encodeBase64URLSafeString(Files.readAllBytes(file.toPath())));
-      return data;
+      Map mapResponse = AccessController.doPrivileged(
+          new PrivilegedExceptionAction<Map>() {
+
+            @Override
+            public Map run() {
+              Map data = new HashMap();
+              try {
+                data.put("reportFormat", reportFormat.toString());
+                data.put("data", Base64.encodeBase64URLSafeString(
+                    Files.readAllBytes(file.toPath())));
+
+              } catch (Exception e) {
+              }
+              return data;
+            }
+          });
+      return mapResponse;
     }
 
     /**
@@ -129,8 +142,7 @@ public class Generator {
         throws NoDataFoundException, ReportGenerationException {
       List<Map> data = new LinkedList<>();
       SearchHits hits = response.getHits();
-      if (response.isTimedOut() || (response.isTerminatedEarly() != null
-          && response.isTerminatedEarly() == true)) {
+      if (response.getShardFailures().length > 0) {
         throw new ReportGenerationException("Report failed to get data. Kindly try again.");
       }
       if (hits.getTotalHits() == 0) {
@@ -142,12 +154,14 @@ public class Generator {
           data.add(sourceMap);
         }
       } catch (Exception e) {
+        throw new NoDataFoundException("Error extracting data : " + e.getMessage());
       }
       return data;
     }
 
     @SuppressWarnings("unchecked")
-    public Map getContents(File reportFile, ReportFormat reportFormat) throws IOException {
+    public Map getContents(File reportFile, ReportFormat reportFormat)
+        throws IOException, PrivilegedActionException {
       if (reportFile == null) {
         return null;
       }
@@ -155,12 +169,26 @@ public class Generator {
         //default to base64 if report type is PDF
         return objectToBase64String(reportFile, reportFormat);
       }
-      byte[] reportFileEncoded = Files.readAllBytes(Paths.get(reportFile.getAbsolutePath()));
-      String report = new String(reportFileEncoded, StandardCharsets.UTF_8);
-      Map data = new HashMap();
-      data.put("reportFormat", reportFormat.toString());
-      data.put("data", report);
-      return data;
+      Map mapResponse = AccessController.doPrivileged(
+          new PrivilegedExceptionAction<Map>() {
+
+            @Override
+            public Map run() {
+              Map data = new HashMap();
+              try {
+
+                byte[] reportFileEncoded = Files
+                    .readAllBytes(Paths.get(reportFile.getAbsolutePath()));
+                String report = new String(reportFileEncoded, StandardCharsets.UTF_8);
+                data.put("reportFormat", reportFormat.toString());
+                data.put("data", report);
+              } catch (Exception e) {
+              }
+              return data;
+            }
+          });
+      return mapResponse;
+
     }
   }
 

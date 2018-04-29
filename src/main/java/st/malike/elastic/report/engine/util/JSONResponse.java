@@ -60,7 +60,8 @@ public class JSONResponse implements ToXContent {
     return "{" +
         "\"message\":\"" + (message).replace("\"", "\'") + "\"" +
         ",\"status\":" + status +
-        ",\"data\":\"" + ((String)data).replace("\"", "\'") + "\"" +
+        ",\"data\":\"" +((data ==null) ? "\""
+        : ((String) data).replace("\"", "\'") + "\"") +
         ",\"count\":" + count +
         "}";
   }

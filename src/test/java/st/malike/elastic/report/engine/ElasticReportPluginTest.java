@@ -10,7 +10,6 @@ import static org.junit.Assert.assertEquals;
 import static st.malike.elastic.report.engine.ElasticReportPluginTest.CDIndicator.randomCDIndicator;
 
 import com.google.gson.Gson;
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -36,8 +35,7 @@ public class ElasticReportPluginTest {
   private static final int DOC_SIZE = 100;
   private static Node node;
   private static ElasticsearchClusterRunner runner;
-  private static String TEMPLATE_NAME = "SampleTemplate.jrxml";
-  private static String JASPER_TEMPLATE_FILE_LOCATION = "/";
+  private static String TEMPLATE_NAME = "SampleTemplate.jasper";
   private Map param;
 
   @BeforeClass
@@ -111,15 +109,12 @@ public class ElasticReportPluginTest {
         + "    }"
         + "}";
 
-    ClassLoader classLoader = getClass().getClassLoader();
-    File tempFile = new File(classLoader.getResource(TEMPLATE_NAME).getFile());
-    JASPER_TEMPLATE_FILE_LOCATION = tempFile.getAbsolutePath();
 
     param = new HashMap();
     param.put("format", "PDF");
     param.put("fileName", "TEST_REPORT");
     param.put("index", INDEX);
-    param.put("template", JASPER_TEMPLATE_FILE_LOCATION);
+    param.put("template", TEMPLATE_NAME);
     param.put("mapData", dummy);
     param.put("from", 0);
     param.put("size", DOC_SIZE);
@@ -144,6 +139,7 @@ public class ElasticReportPluginTest {
   public void generateReportHTML() {
 
     param.put("format", "HTML");
+    param.remove("query");
 
     given()
         .log().all().contentType("application/json")
@@ -179,6 +175,7 @@ public class ElasticReportPluginTest {
 
     param.put("format", "CSV");
     param.remove("template");
+    param.remove("queryString");
 
     given()
         .log().all().contentType("application/json")
@@ -206,7 +203,7 @@ public class ElasticReportPluginTest {
         .then()
         .statusCode(200)
         .body("status", Matchers.is(true))
-        .body("data.data", Matchers.startsWith("description,"))
+        .body("data.data", Matchers.any(String.class))
         .body("message", Matchers.is(Generator.JSONResponseMessage.SUCCESS.toString()));
   }
 
