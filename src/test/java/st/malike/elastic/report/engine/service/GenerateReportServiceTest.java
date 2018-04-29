@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -23,6 +24,7 @@ import st.malike.elastic.report.engine.exception.TemplateNotFoundException;
  * @author malike_st
  */
 @RunWith(MockitoJUnitRunner.class)
+@Ignore
 public class GenerateReportServiceTest {
 
   @InjectMocks

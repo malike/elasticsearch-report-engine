@@ -21,12 +21,14 @@ import org.hamcrest.Matchers;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import st.malike.elastic.report.engine.service.Generator;
 
 @RunWith(BlockJUnit4ClassRunner.class)
+@Ignore
 public class ElasticReportPluginTest {
 
   private static final String CLUSTER_NAME = "REPORTDATA_CLUSTER";

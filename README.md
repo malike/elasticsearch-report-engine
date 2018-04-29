@@ -29,7 +29,7 @@ Once this plugin is installed into elasticsearch search,it exposes the url http:
 1. Install plugin
 
 ``sudo bin/elasticsearch-plugin install https://github.com/malike/elasticsearch-report-engine/releases/download/5.4.1/st.malike.elasticsearch.report.engine-5.4.1.zip ``
-
+ 
 2. Grant permissions
 
 ![Grant Access](2permissions.png)
@@ -50,10 +50,10 @@ extension) parameter for `HTML` and `PDF` reports.
 
 The plugin uses [Jasper Report](https://community.jaspersoft.com/) as core engine for generating PDF reports.
 PDF templates can be designed using [iReport Designer](https://community.jaspersoft.com/wiki/ireport-designer-getting-started). This
-generates a _jrmxl_ file.
+generates a `jrmxl` file. You can also use the compiled file with the extension `jasper`.
 
 The plugin generates [base64 encoded](https://en.wikipedia.org/wiki/Base64) stream of the PDF report generated once
-you pass the location of the jrxml and the query to fetch data from Elasticsearch.
+you pass the name of the template file and the query to fetch data from Elasticsearch.
 
 
  `` PDF Sample Request ``
@@ -79,35 +79,40 @@ you pass the location of the jrxml and the query to fetch data from Elasticsearc
 
 i. Success
 
-    {"status":true,
+   `` 
+   {"status":true,
      "count":1,
      "data": "base 64 encoded string",
      "message":"SUCCESS"
      }
+     ``
 
 ii. Missing Required Param
 
-      {"status":false,
+     `` {"status":false,
          "count":0,
          "data": null,
          "message":"MISSING_PARAM"
          }
+         ``
 
 iii. Report Format Unknown
 
-      {"status":false,
+      ``{"status":false,
          "count":0,
          "data": null,
          "message":"REPORT_FORMAT_UNKNOWN"
          }
+        `` 
 
 iii. System Error Generating Report
 
-      {"status":false,
+      ``{"status":false,
          "count":0,
          "data": null,
          "message":"ERROR_GENERATING_REPORT"
          }
+        `` 
 
 [Sample PDF](https://github.com/malike/elasticsearch-report-engine/blob/master/SampleReports/TEST_REPORT.pdf)
 <br/><br/>
@@ -120,13 +125,17 @@ Just like the PDF report,the HTML also uses [Jasper Report](https://community.ja
 
 HTML Reports provides an alternative for use cases where reports should not be sent as an attached file.
 
-The generates [base64 encoded](https://en.wikipedia.org/wiki/Base64) stream of the HTML report generated. There's also an option to return the HTML string instead of the base64 encoded string.
+The generates [base64 encoded](https://en.wikipedia.org/wiki/Base64) stream of the HTML report generated.
+There's also an option to return the HTML string instead of the base64 encoded string. This 
+requires passing `returnAs:PLAIN` as part of the request JSON.
 
  `` HTML Sample Request ``
 
     curl -H "Content-Type:application/json" -XPOST "http://localhost:9201/_generate"  -d '{"format":"HTML","fileName":"TEST_REPORT","index":"reportindex","template":"filename.jrxml","from":0,"size":10,"query":"{term:{description:Transaction}}"}'
 
- `` Parameters ``<br/><br/>
+ `` Parameters ``
+ 
+ <br/><br/>
        i. *format* : Format of Report **[Required]** <br/>
       ii. *index* : Elasticsearch Index **[Required]** <br/>
      iii. *template* : Jasper Report Template **[Required]** <br/>
@@ -143,35 +152,39 @@ The generates [base64 encoded](https://en.wikipedia.org/wiki/Base64) stream of t
 
 i. Success
 
-    {"status":true,
+    ``{"status":true,
      "count":1,
      "data": "base 64 encoded string",
      "message":"SUCCESS"
      }
+     ``
 
 ii. Missing Required Param
 
-      {"status":false,
+      ``{"status":false,
          "count":0,
          "data": null,
          "message":"MISSING_PARAM"
          }
+         ``
 
 iii. Report Format Unknown
 
-      {"status":false,
+      ``{"status":false,
          "count":0,
          "data": null,
          "message":"REPORT_FORMAT_UNKNOWN"
          }
+        `` 
 
 iii. System Error Generating Report
 
-      {"status":false,
+      ``{"status":false,
          "count":0,
          "data": null,
          "message":"ERROR_GENERATING_REPORT"
          }
+         ``
 
 [Sample HTML](https://github.com/malike/elasticsearch-report-engine/blob/master/SampleReports/TEST_REPORT.html)
 <br/><br/>
@@ -191,7 +204,9 @@ Generating a CSV report uses the query and returns a [base64 encoded](https://en
 
     curl -H "Content-Type:application/json" -XPOST "http://localhost:9201/_generate"  -d '{"format":"CSV","fileName":"TEST_REPORT","index":"reportindex","from":0,"size":10,"query":"{term:{description:Transaction}}"}'
 
-  `` Parameters ``<br/><br/>
+  `` Parameters ``
+  
+  <br/><br/>
       i. *format* : Format of Report **[Required]** <br/>
      ii. *index* : Elasticsearch Index **[Required]** <br/>
     iii. *returnAs* : How you want CSV file returned. Possible values _PLAIN_ and _BASE64_  **[Optional : Defaults to BASE64]** <br/>
@@ -206,35 +221,36 @@ Generating a CSV report uses the query and returns a [base64 encoded](https://en
 
 i. Success
 
-    {"status":true,
+    ``{"status":true,
      "count":1,
      "data": "base 64 encoded string",
      "message":"SUCCESS"
-     }
+     }``
 
 ii. Missing Required Param
 
-      {"status":false,
+      ``{"status":false,
          "count":0,
          "data": null,
          "message":"MISSING_PARAM"
-         }
+         }``
 
 iii. Report Format Unknown
 
-      {"status":false,
+      ``{"status":false,
          "count":0,
          "data": null,
          "message":"REPORT_FORMAT_UNKNOWN"
          }
+         ``
 
 iii. System Error Generating Report
 
-      {"status":false,
+      ``{"status":false,
          "count":0,
          "data": null,
          "message":"ERROR_GENERATING_REPORT"
-         }
+         }``
 
 [Sample CSV](https://github.com/malike/elasticsearch-report-engine/blob/master/SampleReports/TEST_REPORT.csv)
 
