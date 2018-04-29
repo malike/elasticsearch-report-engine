@@ -32,10 +32,13 @@ Once this plugin is installed into elasticsearch search,it exposes the url http:
 
 2. Grant permissions
 
+![Grant Access](2permissions.png)
 
-3. Create folders `templates` and `reports` in `ES_HOME`. Store your  jasper
-templates in the `templates` folder and pass the templateName as the `template`
-parameter for `HTML` and `PDF` reports. 
+3. Create folders `templates` and `reports` in `ES_HOME`. Store your  `*.jasper` and `*.jrxml`
+files in the `templates` folder and pass the templateName as the `template` (with the right 
+extension) parameter for `HTML` and `PDF` reports. 
+
+
 
 <br>
 
