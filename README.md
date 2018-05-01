@@ -69,7 +69,7 @@ you pass the name of the template file and the query to fetch data from Elastics
        iv. *from* : Offset for querying large data **[Optional]** <br/>
         v. *size* : Size for querying large data **[Optional]** <br/>
        iv. *query* : Query to search Elasticsearch index **[Optional : Defaults to '*' if nothing is passed]**<br/>
-       vi. *fileName* : File name **[Optional]** <br/>
+       vi. *fileName* : File name **[Required]** <br/>
 
 
 
@@ -81,7 +81,7 @@ i. Success
 
    `` 
    {"status":true,
-     "count":1,
+     "count":345,
      "data": "base 64 encoded string",
      "message":"SUCCESS"
      }
@@ -142,7 +142,7 @@ requires passing `returnAs:PLAIN` as part of the request JSON.
       iv. *from* : Offset for querying large data **[Optional]** <br/>
        v. *size* : Size for querying large data **[Optional]** <br/>
       iv. *query* : Query to search Elasticsearch index **[Optional : Defaults to '*' if nothing is passed]**<br/>
-      vi. *fileName* : File name **[Optional]** <br/>
+      vi. *fileName* : File name **[Required]** <br/>
      vii. *returnAs* : How you want HTML file returned. Possible values _PLAIN_ and _BASE64_  **[Optional : Defaults to BASE64]** <br/>
 
 
@@ -153,7 +153,7 @@ requires passing `returnAs:PLAIN` as part of the request JSON.
 i. Success
 
     ``{"status":true,
-     "count":1,
+     "count":456,
      "data": "base 64 encoded string",
      "message":"SUCCESS"
      }
@@ -213,7 +213,7 @@ Generating a CSV report uses the query and returns a [base64 encoded](https://en
      iv. *from* : Offset for querying large data **[Optional]** <br/>
       v. *size* : Size for querying large data **[Optional]** <br/>
      iv. *query* : Query to search Elasticsearch index **[Optional : Defaults to '*' if nothing is passed]**<br/>
-     vi. *fileName* : File name **[Optional]** <br/>
+     vi. *fileName* : File name **[Required]** <br/>
 
   `` CSV Sample Response ``
 
