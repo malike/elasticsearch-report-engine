@@ -111,7 +111,6 @@ public class ElasticReportPluginTest {
         + "    }"
         + "}";
 
-
     param = new HashMap();
     param.put("format", "PDF");
     param.put("fileName", "TEST_REPORT");

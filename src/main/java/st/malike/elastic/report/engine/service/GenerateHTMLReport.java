@@ -101,16 +101,16 @@ public class GenerateHTMLReport implements GenerateReportService {
               } catch (RuntimeException e) {
                 reportResponse.setReportFile(null);
                 reportResponse.setSuccess(false);
-                reportResponse.setResponse("Permission : "+e.getMessage());
+                reportResponse.setResponse("Permission : " + e.getMessage());
               } catch (FileNotFoundException e) {
                 reportResponse.setReportFile(null);
                 reportResponse.setSuccess(false);
-                reportResponse.setResponse("File Not Found : "+e.getMessage()
-                +" [\""+reportFileLocation+"\"]");
+                reportResponse.setResponse("File Not Found : " + e.getMessage()
+                    + " [\"" + reportFileLocation + "\"]");
               } catch (JRException e) {
                 reportResponse.setReportFile(null);
                 reportResponse.setSuccess(false);
-                reportResponse.setResponse("Jasper Report Exception : "+e.getMessage());
+                reportResponse.setResponse("Jasper Report Exception : " + e.getMessage());
               }
               return reportResponse;
             }

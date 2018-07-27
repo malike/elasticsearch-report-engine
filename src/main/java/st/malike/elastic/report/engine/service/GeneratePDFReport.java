@@ -114,8 +114,8 @@ public class GeneratePDFReport implements GenerateReportService {
               } catch (RuntimeException e) {
                 reportResponse.setReportFile(null);
                 reportResponse.setSuccess(false);
-                reportResponse.setResponse("Permission : "+e.getMessage());
-              }  catch (FileNotFoundException e) {
+                reportResponse.setResponse("Permission : " + e.getMessage());
+              } catch (FileNotFoundException e) {
                 reportResponse.setReportFile(null);
                 reportResponse.setSuccess(false);
                 reportResponse.setResponse(e.getMessage());

@@ -28,7 +28,9 @@ Once this plugin is installed into elasticsearch search,it exposes the url http:
 
 1. Install plugin
 
-``sudo bin/elasticsearch-plugin install https://github.com/malike/elasticsearch-report-engine/releases/download/5.4.1/st.malike.elasticsearch.report.engine-5.4.1.zip ``
+```shell
+sudo bin/elasticsearch-plugin install https://github.com/malike/elasticsearch-report-engine/releases/download/5.4.1/st.malike.elasticsearch.report.engine-5.4.1.zip
+```
  
 2. Grant permissions
 
@@ -46,7 +48,7 @@ extension) parameter for `HTML` and `PDF` reports.
 
 ## PDF
 
-     1. PDF Report
+**1. PDF Report**
 
 The plugin uses [Jasper Report](https://community.jaspersoft.com/) as core engine for generating PDF reports.
 PDF templates can be designed using [iReport Designer](https://community.jaspersoft.com/wiki/ireport-designer-getting-started). This
@@ -56,11 +58,13 @@ The plugin generates [base64 encoded](https://en.wikipedia.org/wiki/Base64) stre
 you pass the name of the template file and the query to fetch data from Elasticsearch.
 
 
- `` PDF Sample Request ``
+  _**PDF Sample Request**_ 
 
+  ```shell
     curl -H "Content-Type:application/json" -XPOST "http://localhost:9201/_generate"  -d '{"format":"PDF","fileName":"TEST_REPORT","index":"reportindex","template":"filename.jrxml","from":0,"size":10,"query":"{term:{description:Transaction}}"}'
+   ```
 
-  `` Parameters ``
+  _**Parameters**_ 
 
   <br/><br/>
         i. *format* : Format of Report **[Required]** <br/>
@@ -73,53 +77,56 @@ you pass the name of the template file and the query to fetch data from Elastics
 
 
 
- `` Generate PDF  Response ``
+  _**Generate PDF  Response**_
 
- :
-
+ 
 i. Success
-
-   `` 
+   
+   ```json 
    {"status":true,
      "count":1,
      "data": "base 64 encoded string",
      "message":"SUCCESS"
      }
-     ``
+   ```
 
 ii. Missing Required Param
 
-     `` {"status":false,
-         "count":0,
-         "data": null,
-         "message":"MISSING_PARAM"
-         }
-         ``
+   ```json 
+     {"status":false,
+      "count":0,
+      "data": null,
+      "message":"MISSING_PARAM"
+      }
+   ```
 
+     
 iii. Report Format Unknown
 
-      ``{"status":false,
-         "count":0,
-         "data": null,
-         "message":"REPORT_FORMAT_UNKNOWN"
-         }
-        `` 
+   ```json
+      {"status":false,
+       "count":0,
+       "data": null,
+       "message":"REPORT_FORMAT_UNKNOWN"
+      }
+   ``` 
 
 iii. System Error Generating Report
 
-      ``{"status":false,
-         "count":0,
-         "data": null,
-         "message":"ERROR_GENERATING_REPORT"
-         }
-        `` 
+   ```json
+      {"status":false,
+       "count":0,
+       "data": null,
+       "message":"ERROR_GENERATING_REPORT"
+      }
+   ``` 
 
 [Sample PDF](https://github.com/malike/elasticsearch-report-engine/blob/master/SampleReports/TEST_REPORT.pdf)
 <br/><br/>
 
 ## HTML
 
-     1. HTML Report
+**2. HTML Report**
 
 Just like the PDF report,the HTML also uses [Jasper Report](https://community.jaspersoft.com/) as core engine for generating reports.
 
@@ -129,11 +136,13 @@ The generates [base64 encoded](https://en.wikipedia.org/wiki/Base64) stream of t
 There's also an option to return the HTML string instead of the base64 encoded string. This 
 requires passing `returnAs:PLAIN` as part of the request JSON.
 
- `` HTML Sample Request ``
+_**HTML Sample Request**_
 
-    curl -H "Content-Type:application/json" -XPOST "http://localhost:9201/_generate"  -d '{"format":"HTML","fileName":"TEST_REPORT","index":"reportindex","template":"filename.jrxml","from":0,"size":10,"query":"{term:{description:Transaction}}"}'
+```shell
+  curl -H "Content-Type:application/json" -XPOST "http://localhost:9201/_generate"  -d '{"format":"HTML","fileName":"TEST_REPORT","index":"reportindex","template":"filename.jrxml","from":0,"size":10,"query":"{term:{description:Transaction}}"}'
+```  
 
- `` Parameters ``
+_**Parameters**_
  
  <br/><br/>
        i. *format* : Format of Report **[Required]** <br/>
@@ -146,45 +155,48 @@ requires passing `returnAs:PLAIN` as part of the request JSON.
      vii. *returnAs* : How you want HTML file returned. Possible values _PLAIN_ and _BASE64_  **[Optional : Defaults to BASE64]** <br/>
 
 
- `` Generate HTML Response ``
+_**Generate HTML Response**_
 
- :
-
+ 
 i. Success
 
-    ``{"status":true,
+   ```json
+    {"status":true,
      "count":1,
      "data": "base 64 encoded string",
      "message":"SUCCESS"
      }
-     ``
+   ```
 
 ii. Missing Required Param
 
-      ``{"status":false,
-         "count":0,
-         "data": null,
-         "message":"MISSING_PARAM"
-         }
-         ``
+   ```json
+     {"status":false,
+      "count":0,
+      "data": null,
+      "message":"MISSING_PARAM"
+     }
+   ```
 
 iii. Report Format Unknown
 
-      ``{"status":false,
-         "count":0,
-         "data": null,
-         "message":"REPORT_FORMAT_UNKNOWN"
-         }
-        `` 
+   ```json
+    {"status":false,
+     "count":0,
+     "data": null,
+     "message":"REPORT_FORMAT_UNKNOWN"
+    }
+   ``` 
 
 iii. System Error Generating Report
 
-      ``{"status":false,
-         "count":0,
-         "data": null,
-         "message":"ERROR_GENERATING_REPORT"
-         }
-         ``
+   ```json
+      {"status":false,
+       "count":0,
+       "data": null,
+       "message":"ERROR_GENERATING_REPORT"
+      }
+   ```
 
 [Sample HTML](https://github.com/malike/elasticsearch-report-engine/blob/master/SampleReports/TEST_REPORT.html)
 <br/><br/>
@@ -194,17 +206,19 @@ Send this parameter as part of your default parameters_ : _"returnAs":"PLAIN_
 
 ## CSV
 
-      1. CSV Report
+**3. CSV Report**
 
 Unlike the PDF and HTML reports,the CSV option does not use [Jasper Report](https://community.jaspersoft.com/) as core engine for generating reports.
 Generating a CSV report uses the query and returns a [base64 encoded](https://en.wikipedia.org/wiki/Base64) of the file.
 
 
-  `` CSV Sample Request ``
+**_CSV Sample Request_**
 
+```shell
     curl -H "Content-Type:application/json" -XPOST "http://localhost:9201/_generate"  -d '{"format":"CSV","fileName":"TEST_REPORT","index":"reportindex","from":0,"size":10,"query":"{term:{description:Transaction}}"}'
-
-  `` Parameters ``
+```
+  
+Parameters
   
   <br/><br/>
       i. *format* : Format of Report **[Required]** <br/>
@@ -215,42 +229,48 @@ Generating a CSV report uses the query and returns a [base64 encoded](https://en
      iv. *query* : Query to search Elasticsearch index **[Optional : Defaults to '*' if nothing is passed]**<br/>
      vi. *fileName* : File name **[Optional]** <br/>
 
-  `` CSV Sample Response ``
+_**CSV Sample Response**_
 
-:
 
 i. Success
 
-    ``{"status":true,
+   ```json
+    {"status":true,
      "count":1,
      "data": "base 64 encoded string",
      "message":"SUCCESS"
-     }``
+     }
+   ```
 
 ii. Missing Required Param
 
-      ``{"status":false,
+   ```json
+      {"status":false,
          "count":0,
          "data": null,
          "message":"MISSING_PARAM"
-         }``
+         }
+   ```
 
 iii. Report Format Unknown
 
-      ``{"status":false,
+   ```json
+      {"status":false,
          "count":0,
          "data": null,
          "message":"REPORT_FORMAT_UNKNOWN"
          }
-         ``
+   ```
 
 iii. System Error Generating Report
 
-      ``{"status":false,
+   ```json
+      {"status":false,
          "count":0,
          "data": null,
          "message":"ERROR_GENERATING_REPORT"
-         }``
+         }
+   ```
 
 [Sample CSV](https://github.com/malike/elasticsearch-report-engine/blob/master/SampleReports/TEST_REPORT.csv)
 
@@ -263,22 +283,18 @@ Send this parameter as part of your default parameters_ : _"returnAs":"PLAIN_
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 
-## Supported
+## Download
 
 Elasticsearch versions supported by this plugin include :
 
-| Elasticsearch Version | Comments |
-| --------------------- | -------- |
-| [5.4.0](https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.4.0.zip)               | Tested   |
+| Elasticsearch Version| Report Plugin Version | Comments |
+| --------------------- | -------- |-------- |
+| 5.4.0|[zip](https://github.com/malike/elasticsearch-report-engine/releases/download/5.4.0/st.malike.elasticsearch.report.engine-5.4.0.zip)| Tested   |
+| 5.6.1|[zip](https://github.com/malike/elasticsearch-report-engine/releases/download/5.6.1/st.malike.elasticsearch.report.engine-5.6.1.zip)| Tested   |
 
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 
-## Download
-
-| Elasticsearch Version | Comments |
-| --------------------- | -------- |
-| [5.4.0](https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.4.0.zip)               | [zip(pre-release tag)](https://github.com/malike/elasticsearch-report-engine/releases/download/5.4.0/st.malike.elasticsearch.report.engine-5.4.0.zip)  |
 
 <p>&nbsp;</p>
 <p>&nbsp;</p>
