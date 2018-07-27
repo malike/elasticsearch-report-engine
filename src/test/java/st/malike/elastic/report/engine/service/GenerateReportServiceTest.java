@@ -59,7 +59,6 @@ public class GenerateReportServiceTest {
     templateFileName = "SampleTemplate.jrxml";
     reportFormat = Generator.ReportFormat.PDF;
 
-
   }
 
   @Test

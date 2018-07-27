@@ -10,7 +10,6 @@ Plugin to generate Reports from Elasticsearch Queries.
     - [PDF](#pdf)
     - [HTML](#html)
     - [CSV](#csv)
- - [Supported](#supported)   
  - [Download](#download)   
  - [Scheduling](#scheduling)   
  - [Contribute](CONTRIBUTING.md)
@@ -26,17 +25,20 @@ Once this plugin is installed into elasticsearch search,it exposes the url http:
 
 ## Install
 
-1. Install plugin
+_1. Install plugin_
 
 ```shell
 sudo bin/elasticsearch-plugin install https://github.com/malike/elasticsearch-report-engine/releases/download/5.4.1/st.malike.elasticsearch.report.engine-5.4.1.zip
 ```
  
-2. Grant permissions
+_2. Grant permissions_
 
 ![Grant Access](2permissions.png)
 
-3. Create folders `templates` and `reports` in `ES_HOME`. Store your  `*.jasper` and `*.jrxml`
+
+_3. Folder Structure_ 
+ 
+Create folders `templates` and `reports` in `ES_HOME`. Store your  `*.jasper` and `*.jrxml`
 files in the `templates` folder and pass the templateName as the `template` (with the right 
 extension) parameter for `HTML` and `PDF` reports. 
 
