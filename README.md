@@ -292,8 +292,7 @@ Elasticsearch versions supported by this plugin include :
 | Elasticsearch Version| Report Plugin Version | Comments |
 | --------------------- | -------- |-------- |
 | 5.4.0|[zip](https://github.com/malike/elasticsearch-report-engine/releases/download/5.4.0/st.malike.elasticsearch.report.engine-5.4.0.zip)| Tested   |
-| 5.6.10|[zip](https://github.com/malike/elasticsearch-report-engine/releases/download/5.6.1/st
-.malike.elasticsearch.report.engine-5.6.10.zip)| Tested   |
+| 5.6.10|[zip](https://github.com/malike/elasticsearch-report-engine/releases/download/5.6.10/st.malike.elasticsearch.report.engine-5.6.10.zip)| Tested   |
 
 <p>&nbsp;</p>
 <p>&nbsp;</p>
