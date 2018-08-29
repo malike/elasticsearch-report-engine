@@ -28,7 +28,7 @@ Once this plugin is installed into elasticsearch search,it exposes the url http:
 _1. Install plugin_
 
 ```shell
-sudo bin/elasticsearch-plugin install https://github.com/malike/elasticsearch-report-engine/releases/download/5.4.1/st.malike.elasticsearch.report.engine-5.4.1.zip
+sudo bin/elasticsearch-plugin install https://github.com/malike/elasticsearch-report-engine/releases/download/5.4.0/st.malike.elasticsearch.report.engine-5.4.0.zip
 ```
  
 _2. Grant permissions_
